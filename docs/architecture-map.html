@@ -226,7 +226,8 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
     <span class="tag on">nothing blocks v0.1</span>
-    <span class="tag">40 raised &#183; 8 open</span>
+    <span class="tag">40 raised &#183; 7 open</span>
+    <span class="tag on">calibrated against a real save</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -3042,6 +3043,122 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     v0.2 stays small or becomes the large build. Averaging capitals sounds like you are answering a
     different and also useful question: <em>how large the world absorbed into a cradle should be</em>.
     I can do the second from a save. The first is still open.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;24</span><h2>What the save says</h2></div>
+  <p class="lead">A 63 MB gamestate from 2539, parsed rather than guessed at. It confirms the target
+  environment, answers G9 outright, calibrates G30's second reading &#8212; and quietly removes most
+  of the invention from &#167;5.</p>
+
+  <h3>Confirmed, not assumed</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Fact</th><th>From the save</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">Version</td><td><code>Pegasus v4.4.6</code> &#8212; exactly the target.</td></tr>
+      <tr class="sev-def"><td class="id">DLC</td><td><code>Apocalypse</code>, <code>Federations</code>, <code>Nemesis</code>. No Ancient Relics, no Nomads. The notes were right, and every DLC caution in this document stands.</td></tr>
+      <tr class="sev-def"><td class="id">Scale</td><td>6,452 planets &#183; 299 colonies &#183; 6,216 pop groups totalling ~1.37M pop units &#183; 3,287 fleets. &#167;4's caching discipline is not theoretical.</td></tr>
+      <tr class="sev-low"><td class="id">Note</td><td>You run <code>Tech Tree Exposed (UI)</code>, so you personally <em>can</em> see a tech tree. Constraint C still holds for anyone else &#8212; design for the card draw.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>&#167;5 was less invention than we thought</h3>
+  <p>The notes treated a shipborne inhibitor aura as something to build from scratch. The save
+  disagrees. Object names present in this very game:</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Object</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">SHIP_AURA_TARGETING_GRID</td><td><b>Ship-mounted auras are vanilla.</b> Not a starbase-only concept. The framework exists.</td></tr>
+      <tr class="sev-def"><td class="id">SHIP_AURA_STRIKE_CRAFT</td><td>A second vanilla ship aura &#8212; so the pattern is established, not a one-off.</td></tr>
+      <tr class="sev-def"><td class="id">STARBASE_AURA_FTL_INHIBITOR</td><td>The FTL-inhibition <em>effect</em> already exists as an aura, on starbases.</td></tr>
+      <tr class="sev-def"><td class="id">NSC_SUPPORTSHIP_AURA_EMPTY<br>NSC_TITAN_AURA_EMPTY</td><td>NSC3 has gone further and added dedicated <b>aura slots</b> to support ships and titans.</td></tr>
+      <tr class="sev-def"><td class="id">tech_ftl_inhibitor</td><td>Vanilla technology, already researched in this save.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>So the containment mechanic is a <strong>recombination of two things that already exist</strong>
+  &#8212; the ship-aura framework and the FTL-inhibitor effect &#8212; rather than a new primitive.
+  That is the single largest risk reduction the save provides, and it lands on the mechanic &#167;13
+  leaned hardest on.</p>
+
+  <div class="verdict solved">
+    <p class="k">G9 &#183; ANSWERED, AND THE NEWS IS GOOD</p>
+    <h3>The collision is entirely in phase 2, and phase 1 is clear</h3>
+    <p>NSC3 and EFCF both define ship content &#8212; the save contains
+    <code>EFCF_Dreadnought_Bow</code>, <code>_Mid</code> and <code>_Stern</code>, which are section
+    templates, alongside 102 distinct EFCF objects and NSC3's own classes and aura slots. They own
+    <code>ship_sizes</code>, <code>section_templates</code> and <code>component_templates</code>
+    between them.</p>
+    <p>Those are exactly the three directories the Ark's hull needs &#8212; and exactly the three you
+    already pushed into phase 2. The phase-1 mechanics live in
+    <code>situations</code>, <code>script_values</code>, <code>scripted_triggers</code>,
+    <code>on_actions</code> and <code>events</code>, none of which either mod contests.</p>
+  </div>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 300" role="img" aria-label="Two zones. The uncontested zone holds situations, script values, scripted triggers, on actions and events, which phase one needs. The contested zone holds ship sizes, section templates and component templates, owned by NSC3 and EFCF, which phase two needs.">
+      <rect x="40" y="52" width="530" height="180" rx="4" fill="none" stroke="var(--ok)" stroke-width="1.6"/>
+      <text class="dg-h t-ok" x="60" y="80">UNCONTESTED &#183; PHASE 1 LIVES HERE</text>
+      <text class="dg-s" x="60" y="110" style="fill:var(--ink)">common/situations/</text>
+      <text class="dg-s" x="60" y="132" style="fill:var(--ink)">common/script_values/</text>
+      <text class="dg-s" x="60" y="154" style="fill:var(--ink)">common/scripted_triggers/</text>
+      <text class="dg-s" x="60" y="176" style="fill:var(--ink)">common/on_actions/</text>
+      <text class="dg-s" x="60" y="198" style="fill:var(--ink)">events/</text>
+      <text class="dg-s t-ok" x="330" y="110">neither NSC3 nor EFCF</text>
+      <text class="dg-s t-ok" x="330" y="128">defines objects here</text>
+      <text class="dg-s t-ok" x="330" y="160">write freely &#8212; load order</text>
+      <text class="dg-s t-ok" x="330" y="178">is not a concern for these</text>
+
+      <rect x="610" y="52" width="530" height="180" rx="4" fill="none" stroke="var(--danger)" stroke-width="1.6" stroke-dasharray="6 4"/>
+      <text class="dg-h t-bad" x="630" y="80">CONTESTED &#183; PHASE 2 LIVES HERE</text>
+      <text class="dg-s" x="630" y="110" style="fill:var(--ink)">common/ship_sizes/</text>
+      <text class="dg-s" x="630" y="132" style="fill:var(--ink)">common/section_templates/</text>
+      <text class="dg-s" x="630" y="154" style="fill:var(--ink)">common/component_templates/</text>
+      <text class="dg-s" x="630" y="186">NSC3 &#183; new classes, aura slots</text>
+      <text class="dg-s" x="630" y="204">EFCF &#183; 102 objects, bow/mid/stern sections</text>
+      <text class="dg-s t-bad" x="900" y="110">read both before</text>
+      <text class="dg-s t-bad" x="900" y="128">adding a hull here</text>
+      <text class="dg-s t-bad" x="900" y="160">additive names only,</text>
+      <text class="dg-s t-bad" x="900" y="178">never overwrite theirs</text>
+
+      <text class="dg-s" x="590" y="270" text-anchor="middle">Scoping visuals out of v0.1 moved the compatibility risk out of it too. That was not the reason for the decision, but it is a consequence of it.</text>
+    </svg>
+    </div>
+    <figcaption><b>The phase split turns out to be a compatibility boundary as well as a scope one.</b>
+    Everything phase 1 touches is uncontested, so the first build can be written without reading a
+    line of NSC3 or EFCF. Phase 2 needs both read carefully first &#8212; a hull added blindly next to
+    a ship-class overhaul is the classic multi-mod failure.</figcaption>
+  </figure>
+
+  <h3>G30, second reading: what an average capital actually looks like</h3>
+  <p>Across the 24 empires holding a capital in this save:</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Measure</th><th>Median</th><th>Range</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">planet_size</td><td>19</td><td>6 &#8211; 25</td><td>Size the cradle world at <b>19</b>; it is also a sane size for the Ark's own carried slots</td></tr>
+      <tr class="sev-def"><td class="id">districts</td><td>4</td><td>1 &#8211; 4</td><td>Capitals are district-saturated at this date</td></tr>
+      <tr class="sev-def"><td class="id">pop units</td><td>7,624</td><td>1,000 &#8211; 10,445</td><td>A capital is roughly <b>1.8&#215;</b> the median colony, which sits at 4,279</td></tr>
+      <tr class="sev-def"><td class="id">stability</td><td>97</td><td>&#8212;</td><td>Established capitals are stable; a world torn into a cradle should not stay that way</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The ratio is the durable number here. Absolute pop units are on this version's internal scale and
+  will drift between patches; <strong>a capital being about 1.8&#215; a typical colony</strong> will
+  not. Size the absorbed world against the colony median rather than against a fixed figure.</p>
+
+  <div class="note">
+    <p class="sig">STILL OPEN</p>
+    <h3>G30's first reading is untouched by any of this</h3>
+    <p>Whether the acquiring empire <em>keeps its capital at all</em> is a scope decision, not a
+    measurement &#8212; and it is the one that decides whether v0.2 stays a small branch or becomes
+    the large build. The save can tell us how big a capital is. It cannot tell us whether the player
+    should lose theirs.</p>
   </div>
 </section>
 

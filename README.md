@@ -128,7 +128,29 @@ consolidates all of them. Current state:
   `G6` and `G19` closed by later sections.
 - **Closed by decision** (13): recorded in `§22`, each overridable.
 - **Still yours** (4): `G30` capital, `G38` naming, `G11` scope, `G4` reveal-chain content.
-- **Needs the game** (6): `U1`-`U4`, `G9` EFCF audit, `G10` your iteration loop.
+- **Needs the game** (5): `U1`-`U4`, `G10` your iteration loop. `G9` is answered below.
+
+## Verified against a real save
+
+A 2539 save was parsed directly (`§24`). It confirms `Pegasus v4.4.6` and exactly
+`Apocalypse` + `Federations` + `Nemesis`, and gives scale: 6,452 planets, 299 colonies,
+~1.37M pop units, 3,287 fleets.
+
+**`G9` answered.** `NSC3` and `EFCF` between them own `ship_sizes`, `section_templates`
+and `component_templates` - the save contains `EFCF_Dreadnought_Bow/_Mid/_Stern` section
+templates and 102 distinct EFCF objects, plus NSC3 classes and aura slots. Those are
+exactly the three directories phase 2 needs, and **none of the directories phase 1 needs**
+(`situations`, `script_values`, `scripted_triggers`, `on_actions`, `events`). Scoping
+visuals out of v0.1 moved the compatibility risk out of it too.
+
+**§5 is largely a recombination, not an invention.** Ship-mounted auras are vanilla
+(`SHIP_AURA_TARGETING_GRID`, `SHIP_AURA_STRIKE_CRAFT`), the inhibition effect already
+exists as `STARBASE_AURA_FTL_INHIBITOR`, `tech_ftl_inhibitor` is a vanilla technology, and
+NSC3 adds dedicated aura slots (`NSC_SUPPORTSHIP_AURA_EMPTY`, `NSC_TITAN_AURA_EMPTY`).
+
+**Capital calibration** (`G30`, second reading): median `planet_size` 19 (range 6-25), 4
+districts, stability 97. A capital holds ~1.8x the pop of a median colony. Use the ratio,
+not the absolute - pop scale drifts between patches.
 
 **Nothing blocks v0.1.** `U1` was the last blocker and it only ever blocked *rendering*
 the carried worlds - scoping visuals out of v0.1 moves it to phase 2.
