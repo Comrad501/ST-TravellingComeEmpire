@@ -124,3 +124,70 @@ country_event = {   # event arktest.13
 	is_triggered_only = yes
 	immediate = { ark_debug_reset = yes }
 }
+
+# =============================================================================
+# arktest.5 - WHERE DO VARIABLES ACTUALLY STICK?
+# =============================================================================
+# The first suite run failed every equality assertion while passing every
+# inequality. That is the signature of a variable that was never created: a
+# missing variable reads as 0 for "> 0" but fails "= 0".
+#
+# The containment counter lives on solar_system scope. If variables do not
+# persist there, the whole caching design in the architecture map needs a
+# different home - so this probes three scopes with identical operations and
+# reports which ones hold a value.
+#
+#   event arktest.5     (deselect first)
+# =============================================================================
+
+country_event = {
+	id = arktest.5
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		log = "[ARK PROBE] ===== variable scope probe ====="
+
+		# --- country scope ---
+		set_variable = { which = ark_probe value = 7 }
+		if = {
+			limit = { check_variable = { which = ark_probe value = 7 } }
+			log = "[ARK PROBE] COUNTRY  holds a variable (= 7 matched)"
+		}
+		else = { log = "[ARK PROBE] COUNTRY  FAILED to hold a variable" }
+
+		capital_scope = {
+			# --- planet scope ---
+			set_variable = { which = ark_probe value = 7 }
+			if = {
+				limit = { check_variable = { which = ark_probe value = 7 } }
+				log = "[ARK PROBE] PLANET   holds a variable (= 7 matched)"
+			}
+			else = { log = "[ARK PROBE] PLANET   FAILED to hold a variable" }
+
+			solar_system = {
+				# --- solar system scope: the one the design depends on ---
+				set_variable = { which = ark_probe value = 7 }
+				if = {
+					limit = { check_variable = { which = ark_probe value = 7 } }
+					log = "[ARK PROBE] SYSTEM   holds a variable (= 7 matched)"
+				}
+				else = { log = "[ARK PROBE] SYSTEM   FAILED to hold a variable" }
+
+				# Ladder: reveals what is actually stored without printing it.
+				if = { limit = { check_variable = { which = ark_probe value > 6 } }
+					log = "[ARK PROBE] SYSTEM   reads > 6" }
+				if = { limit = { check_variable = { which = ark_probe value > 0 } }
+					log = "[ARK PROBE] SYSTEM   reads > 0" }
+				if = { limit = { check_variable = { which = ark_probe value >= 0 } }
+					log = "[ARK PROBE] SYSTEM   reads >= 0" }
+			}
+		}
+
+		# --- is it equality itself that is broken, on a scope known to work? ---
+		if = {
+			limit = { check_variable = { which = ark_probe value >= 7 } }
+			log = "[ARK PROBE] COUNTRY  >= 7 also matched (equality is fine here)"
+		}
+		log = "[ARK PROBE] ===== probe ends ====="
+	}
+}
