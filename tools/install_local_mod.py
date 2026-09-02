@@ -20,15 +20,49 @@ MOD_DIR_NAME = "ark_of_destruction"
 MOD_SRC = REPO / MOD_DIR_NAME
 
 def stellaris_user_dir():
+    """Find the Stellaris user directory.
+
+    The Documents folder is LOCALISED on Windows - Dokumenty, Dokumente,
+    Documentos, ... - so hardcoding "Documents" only works in English. Glob one
+    level under home and under OneDrive instead, then prefer whichever hit
+    actually looks like a Stellaris install.
+    """
     home = Path.home()
-    for c in (
-        home / "Documents" / "Paradox Interactive" / "Stellaris",
-        home / "OneDrive" / "Documents" / "Paradox Interactive" / "Stellaris",
-        home / ".local" / "share" / "Paradox Interactive" / "Stellaris",
-    ):
-        if c.is_dir():
-            return c
-    return None
+    seen, hits = set(), []
+
+    def consider(p):
+        try:
+            if p.is_dir() and p not in seen:
+                seen.add(p)
+                hits.append(p)
+        except OSError:
+            pass
+
+    roots = [home, home / "OneDrive"]
+    # Some OneDrive setups use a company-named folder: OneDrive - Something
+    roots += sorted(home.glob("OneDrive*"))
+
+    for root in roots:
+        if not root.is_dir():
+            continue
+        consider(root / "Paradox Interactive" / "Stellaris")
+        try:
+            for child in root.iterdir():          # Documents / Dokumenty / ...
+                if child.is_dir():
+                    consider(child / "Paradox Interactive" / "Stellaris")
+        except OSError:
+            pass
+
+    consider(home / ".local" / "share" / "Paradox Interactive" / "Stellaris")
+
+    if not hits:
+        return None
+    # Prefer one that actually looks used.
+    def score(p):
+        return ((p / "settings.txt").is_file(), (p / "mod").is_dir(), (p / "logs").is_dir())
+    hits.sort(key=score, reverse=True)
+    return hits[0]
+
 
 def check_mod_source():
     problems = []
@@ -56,7 +90,9 @@ def pointer_text(path_value):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
-    ap.add_argument("--stellaris-dir", help="override auto-detection")
+    ap.add_argument("--stellaris-dir",
+                    help='override auto-detection. QUOTE IT - the path contains spaces: '
+                         '--stellaris-dir "C:/Users/you/Documents/Paradox Interactive/Stellaris"')
     a = ap.parse_args()
 
     print(f"repo:        {REPO}")
@@ -72,7 +108,8 @@ def main():
     sd = Path(a.stellaris_dir) if a.stellaris_dir else stellaris_user_dir()
     if sd is None:
         print("\nCould not find the Stellaris user directory.")
-        print("Re-run with --stellaris-dir \"<path to Paradox Interactive/Stellaris>\"")
+        print('Re-run with --stellaris-dir "<path>" - and keep the quotes, the path')
+        print('contains a space in "Paradox Interactive" which will otherwise be split.')
         print("\nThe file to create by hand, if you prefer:")
         print(f"  <that dir>/mod/{MOD_DIR_NAME}.mod\n")
         print(pointer_text(MOD_SRC.as_posix()))

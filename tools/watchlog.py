@@ -20,11 +20,26 @@ if os.name == "nt":                       # enable ANSI on Windows terminals
 DEFAULT_PATTERN = r"\[ARK|ark_|arktest"
 
 def candidate_dirs():
+    """Yield plausible Stellaris log folders.
+
+    The Documents folder is LOCALISED on Windows - Dokumenty, Dokumente,
+    Documentos - so globbing one level under home and OneDrive beats
+    hardcoding "Documents", which only ever worked in English.
+    """
     home = Path.home()
-    yield home / "Documents" / "Paradox Interactive" / "Stellaris" / "logs"
-    yield home / "OneDrive" / "Documents" / "Paradox Interactive" / "Stellaris" / "logs"
+    roots = [home] + sorted(home.glob("OneDrive*"))
+    for root in roots:
+        if not root.is_dir():
+            continue
+        yield root / "Paradox Interactive" / "Stellaris" / "logs"
+        try:
+            for child in sorted(root.iterdir()):
+                if child.is_dir():
+                    yield child / "Paradox Interactive" / "Stellaris" / "logs"
+        except OSError:
+            pass
     yield home / ".local" / "share" / "Paradox Interactive" / "Stellaris" / "logs"
-    yield (home / "Documents" / "Paradox Interactive" / "Stellaris" / "logs")
+
 
 def find_logs(explicit):
     if explicit:

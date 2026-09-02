@@ -14,6 +14,16 @@ See `Installing it locally` in the README - `tools/install_local_mod.py --write`
 version: the `ugc_*.mod` files already in your mod folder are Workshop pointers, not data,
 and a local mod needs its own.
 
+**On Windows, quote any path you pass.** `Paradox Interactive` contains a space, so an
+unquoted `--stellaris-dir` gets split by the shell and argparse rejects the remainder:
+
+```powershell
+py tools\install_local_mod.py --stellaris-dir "C:\Users\you\OneDrive\Dokumenty\Paradox Interactive\Stellaris"
+```
+
+Auto-detection handles localised Documents folders (`Dokumenty`, `Dokumente`, `Documentos`)
+and OneDrive redirection, so you should not normally need the override at all.
+
 **If the mod does not appear in the launcher after writing the pointer:**
 
 1. Close the launcher entirely (check the tray) and reopen. It reads its mod list once at
