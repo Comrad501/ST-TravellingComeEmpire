@@ -225,7 +225,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">2 blocking unknowns</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">22 information gaps</span>
+    <span class="tag">25 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -1546,6 +1546,155 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     &#8212; incremented from <code>on_actions</code>, cached, never totalled by scanning. It can
     likely share plumbing with G18's damage counter, since both are measuring the same events from
     opposite sides.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;14</span><h2>The reward is the shot itself</h2></div>
+
+  <div class="verdict">
+    <p class="k">DECISION &#183; SUPERSEDES G20</p>
+    <h3>Cooperation is rewarded, not gated. What it buys is cannon yield.</h3>
+    <p>No hard threshold, no "you may not attempt this alone". Contribution converts into how hard
+    the shell-stripping shot lands &#8212; and because &#167;4 already establishes that conventional
+    fire cannot touch the shell, cannon yield is the only thing "more firepower to shed it" can mean.
+    The two halves of the design were already pointing at each other.</p>
+  </div>
+
+  <p>This reward has a property worth naming, because it is the reason it works where a generic one
+  would not: <strong>it is only spendable on the Ark.</strong> Fleet capacity, research bonuses or
+  resource grants can all be banked and turned into winning the campaign some other way, which makes
+  helping just another investment to compare against expansion. Yield against a shell that exists for
+  one purpose cannot leak out of the crisis. You either spend it on the Ark or you never spend it.</p>
+
+  <h3>The chain, and where a thin coalition actually breaks</h3>
+  <p>Yield does not kill anything by itself. It sets <em>how long the shell stays down</em>, and the
+  window is what stage 2 spends: ground armies need time to land and fight inward. So a weak shot
+  does not fail at stage 1 &#8212; it fails at stage 2, halfway through a boarding action, when the
+  shell comes back with your armies aboard.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 400" role="img" aria-label="Two scenarios compared. A thin coalition of two empires produces two capped contribution segments, low cannon yield, a short shell-down window, and a failed boarding. A broad coalition of six empires produces six segments, high yield, a long window, and a completed boarding.">
+      <defs>
+        <marker id="m10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="40" y="30">CONTRIBUTORS</text>
+      <text class="dg-h" x="440" y="30">YIELD</text>
+      <text class="dg-h" x="600" y="30">SHELL-DOWN WINDOW</text>
+      <text class="dg-h" x="920" y="30">STAGE 2</text>
+
+      <text class="dg-s" x="40" y="72">two empires</text>
+      <rect x="40" y="84" width="340" height="34" rx="2" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <rect x="40" y="84" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <rect x="94" y="84" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+
+      <line class="dg-line" x1="392" y1="101" x2="432" y2="101" marker-end="url(#m10)"/>
+      <text class="dg-t" x="470" y="108" text-anchor="middle" style="font-size:22px">18%</text>
+      <line class="dg-line" x1="512" y1="101" x2="592" y2="101" marker-end="url(#m10)"/>
+
+      <rect x="600" y="84" width="280" height="34" rx="2" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <rect x="600" y="84" width="66" height="34" rx="2" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.2"/>
+      <text class="dg-s" x="676" y="105">about 2 years</text>
+
+      <line class="dg-line" x1="888" y1="101" x2="912" y2="101" marker-end="url(#m10)"/>
+      <rect x="920" y="74" width="220" height="54" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="938" y="97">Shell returns</text>
+      <text class="dg-s" x="938" y="115">with your armies aboard</text>
+
+      <line class="dg-rule" x1="40" y1="170" x2="1140" y2="170"/>
+
+      <text class="dg-s" x="40" y="212">six empires</text>
+      <rect x="40" y="224" width="340" height="34" rx="2" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <rect x="40" y="224" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <rect x="94" y="224" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <rect x="148" y="224" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <rect x="202" y="224" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <rect x="256" y="224" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <rect x="310" y="224" width="48" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+
+      <line class="dg-line" x1="392" y1="241" x2="432" y2="241" marker-end="url(#m10)"/>
+      <text class="dg-t t-acc" x="470" y="248" text-anchor="middle" style="font-size:22px">72%</text>
+      <line class="dg-line" x1="512" y1="241" x2="592" y2="241" marker-end="url(#m10)"/>
+
+      <rect x="600" y="224" width="280" height="34" rx="2" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <rect x="600" y="224" width="180" height="34" rx="2" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+      <text class="dg-s" x="870" y="245" text-anchor="end">about 9 years</text>
+
+      <line class="dg-line" x1="888" y1="241" x2="912" y2="241" marker-end="url(#m10)"/>
+      <rect class="dg-acc" x="920" y="214" width="220" height="54" rx="3"/>
+      <text class="dg-t2" x="938" y="237">Boarding completes</text>
+      <text class="dg-s" x="938" y="255">the throne room is reached</text>
+
+      <path class="dg-line acc" d="M64 300 L64 316 L118 316 L118 300"/>
+      <text class="dg-l t-acc" x="91" y="336" text-anchor="middle">every empire contributes at most one segment,</text>
+      <text class="dg-l t-acc" x="91" y="352" text-anchor="middle">however large it is</text>
+
+      <text class="dg-s" x="600" y="336">Numbers are illustrative. Nothing in this design is quantified yet &#8212; see G5.</text>
+      <text class="dg-s" x="600" y="352">What matters is the shape: the bar grows by adding empires, not by adding tonnage.</text>
+    </svg>
+    </div>
+    <figcaption><b>The capped segment is the whole mechanic.</b> If yield scaled linearly with raw
+    contribution, the galaxy's strongest empire could simply out-spend the coalition and solo the
+    crisis &#8212; which is the free-rider problem again, wearing the winner's colours. Capping each
+    empire's usable share means the bar can only be filled by <em>more empires</em>, and a superpower
+    that shows up alone gets a short window just like anyone else.</figcaption>
+  </figure>
+
+  <div class="verdict solved">
+    <p class="k">A CONSTRAINT THAT DOES NOT FEEL LIKE ONE</p>
+    <h3>The per-empire cap delivers L3's guarantee without L3's hard gate</h3>
+    <p>A solo empire is never told no. It builds the cannon, it fires, the shell drops &#8212; for
+    about two years, which is not enough to finish a boarding action. It fails at a step it could see
+    coming, for a reason it can name, and the fix is obvious and available: bring more people.</p>
+    <p>That is a far better failure than a threshold refusing the attempt. The coalition requirement
+    is still there, mathematically, but the player discovers it by playing rather than by reading an
+    error message.</p>
+  </div>
+
+  <h3>Two things this changes upstream</h3>
+  <p><strong>L3 should soften to match.</strong> A hard containment floor now contradicts the stance:
+  if the cannon degrades gracefully for a thin coalition, containment should too. &#167;5 already
+  wants this &#8212; containment strength as a function of live inhibitor count degrades on its own,
+  so the fix is to leave it degrading rather than adding a minimum.</p>
+  <p><strong>L5 needs two readings of one counter.</strong> Awarding the Golem to the largest
+  contributor stops discriminating if everyone caps out. So the contribution counter is read twice:
+  <em>capped</em> when it feeds cannon yield, <em>raw</em> when it ranks empires for the prize. One
+  counter, two consumers &#8212; the same pattern as the containment trigger in &#167;4.</p>
+
+  <div class="gap" id="g23">
+    <span class="g">G23</span>
+    <h4>The yield curve and the cap value</h4>
+    <p>What one empire's maximum share is worth, and how segments combine. Straight summation is
+    simplest; a curve with diminishing returns past some contributor count stops a twelve-empire
+    galaxy trivialising the shot.</p>
+    <p class="why">Also unsettled: whether yield sets window length only, or also how much shell comes
+    off, and whether a partial strip leaves the Ark partly vulnerable rather than being binary.</p>
+  </div>
+
+  <div class="gap" id="g24">
+    <span class="g">G24</span>
+    <h4>What counts as contributing</h4>
+    <p>Damage dealt and resources committed to the cannon are obvious. Inhibitor ships held in
+    containment should probably count, since that is the other thing the design wants people doing.
+    Whether <em>suffering</em> counts &#8212; worlds lost to the Ark &#8212; is a genuine choice: it
+    is a catch-up mechanic for empires hit early, but it pays out for being a victim rather than a
+    participant.</p>
+  </div>
+
+  <div class="gap" id="g25">
+    <span class="g">G25</span>
+    <h4>Who fires it, and is a wasted shot recoverable?</h4>
+    <p>If the cannon is a shared build with any owner able to fire, one impatient empire can discharge
+    it at 18% and spend the coalition's whole investment. If it is single-use, that is unrecoverable
+    and the crisis is decided by the least patient participant.</p>
+    <p class="why">The sharpest of the three. A recharge period is the obvious answer &#8212; long
+    enough that a premature shot hurts, short enough that it is not campaign-ending &#8212; but the
+    firing authority still needs an owner, and in a Galactic Community build that is a political
+    question the game already has machinery for.</p>
   </div>
 </section>
 
