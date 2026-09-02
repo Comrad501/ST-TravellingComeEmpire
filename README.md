@@ -39,6 +39,9 @@ So acquisition needs two keys rarely in one hand: a machine empire to hold it, a
 living humanoid to start it. A Determined Exterminator disqualifies itself by purging
 every hand that could have turned the key.
 
+**Start here: `CLAUDE.md`** - orientation for picking this up, the pending in-game probe,
+and the rules that are load-bearing. A local Claude Code session reads it automatically.
+
 **Status: phase 1 in progress.** The mod skeleton and the mechanics that live in
 uncontested directories are written; see `Deploying` below.
 

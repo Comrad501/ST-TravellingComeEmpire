@@ -228,7 +228,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag on">nothing blocks v0.1</span>
     <span class="tag">40 raised &#183; 6 open</span>
     <span class="tag on">calibrated against a real save</span>
-    <span class="tag on">phase 1 begun</span>
+    <span class="tag on">first live run done</span>
   </div>
 </header>
 
@@ -3219,6 +3219,52 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     on_action names and modifier keys all still want checking against
     <code>script_documentation/</code> in your local data folder. That file is written by the game and
     is the only version-accurate source; every wiki, including the ones I read, is downstream of it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;26</span><h2>Where this thread ends</h2></div>
+  <p class="lead">The mod loads, the harness runs, and the first live test produced a result
+  specific enough to act on. This section closes the planning record; the operational handoff is
+  <code>CLAUDE.md</code> at the repository root, which a local session reads automatically.</p>
+
+  <h3>What the first live run actually proved</h3>
+  <p>Two of the risks this document has carried since &#167;16 &#8212; that names might not exist in
+  4.4.6, and that Stellaris skips unknown ones silently &#8212; were partly retired by a single
+  error message. <code>Wrong scope for effect</code> rather than <code>unknown effect</code> means
+  the name resolved and only the calling context was wrong.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Now confirmed in 4.4.6</th><th>How</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">every_owned_fleet<br>random_owned_fleet</td><td>Errored on <em>scope</em>, not on the name. Both exist and are country-scoped.</td></tr>
+      <tr class="sev-def"><td class="id">country_event from console</td><td>Fired and ran the full suite once nothing was selected.</td></tr>
+      <tr class="sev-def"><td class="id">log, flags, scripted effects</td><td>All produced output through several call layers.</td></tr>
+      <tr class="sev-high"><td class="id">Names in a log</td><td><b>Do not work</b> for countries or fleets &#8212; localisation-composed names resolve to empty. Solar systems print. Log fixed strings.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>The one open question, and why it is not a test bug</h3>
+  <p>Every equality assertion failed while every inequality passed, against the same variable in
+  consecutive lines. That is what a variable that was never created looks like: absent reads as zero
+  for <code>&gt; 0</code> but fails <code>= 0</code>.</p>
+  <p>Which matters because the containment counter is stored on <strong>solar_system scope</strong>.
+  If variables do not persist there, the caching design in &#167;4 has a hole and needs a different
+  home &#8212; most likely country-scoped and keyed by system. If they do persist, the assertion
+  helper is simply wrong and the design stands. <code>event arktest.5</code> distinguishes them by
+  setting the same variable on country, planet and system scope and reporting which hold it.</p>
+
+  <div class="note">
+    <p class="sig">A NOTE ON WHERE THIS WAS BUILT</p>
+    <h3>The remaining work suits a local session better than this one</h3>
+    <p>Everything through &#167;25 was design, which a cloud session does well. What is left is a
+    read-run-read loop against a running game, and every iteration of it so far has gone through a
+    human copying log lines by hand. A session on the machine that has Stellaris on it can read
+    <code>error.log</code> directly and close that loop itself.</p>
+    <p>The repository is the handoff and it is complete: mod, tooling, testing procedure, this
+    document, and <code>CLAUDE.md</code> for orientation. Nothing needs re-deriving.</p>
   </div>
 </section>
 
