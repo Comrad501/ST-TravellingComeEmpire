@@ -159,6 +159,20 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
 .steps .gate{display:inline-block;margin:8px 0 0;justify-self:start}
 .steps li.blocked h3{color:var(--ink)}
 
+/* ---- decision ---- */
+.dec{display:grid;grid-template-columns:repeat(auto-fit,minmax(242px,1fr));gap:2px;margin:30px 0 0;
+  background:var(--line-2);border:1px solid var(--line-2);border-radius:3px;overflow:hidden}
+.dec>div{background:var(--surface);padding:20px 22px}
+.dec .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;margin:0}
+.dec .k.ok{color:var(--ok)} .dec .k.up{color:var(--danger)} .dec .k.off{color:var(--muted)}
+.dec h3{margin:8px 0 0;font-size:18px}
+.dec p{margin:7px 0 0;font-size:14px;max-width:44ch}
+.verdict{border-left:3px solid var(--accent);background:var(--accent-soft);padding:20px 24px;
+  margin:28px 0 0;border-radius:0 3px 3px 0}
+.verdict .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--accent-ink);margin:0}
+.verdict h3{margin:7px 0 0;font-size:20px}
+.verdict p{margin:9px 0 0;font-size:14.5px;max-width:66ch}
+
 /* ---- gaps ---- */
 .tier{margin:36px 0 0}
 .tier-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding:0 0 9px}
@@ -200,7 +214,8 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag on">Base + Apocalypse + Federations + Nemesis</span>
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">2 blocking unknowns</span>
-    <span class="tag">12 information gaps</span>
+    <span class="tag on">v0.1 = AI crisis</span>
+    <span class="tag">16 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -833,7 +848,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
       the thing that just stopped existing.</p>
     </div>
 
-    <div class="gap">
+    <div class="gap" id="g4">
       <span class="g">G4</span>
       <h4>How the defender learns the kill sequence</h4>
       <p>There is a staged kill and a losing condition, but no event chain, research path, or advisor
@@ -994,6 +1009,176 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     less risk than ripped ones. This is your call to make &#8212; it just costs less to make it
     before the pipeline in &#167;8 of the notes gets built out.</p>
   </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;11</span><h2>G1, decided: an AI crisis first</h2></div>
+
+  <div class="verdict">
+    <p class="k">DECISION &#183; SUPERSEDES G1</p>
+    <h3>v0.1 ships the Ark as an AI crisis. Playable is deferred, not dropped.</h3>
+    <p>A playable displaced empire is the more interesting version and stays on the roadmap &#8212;
+    but it is the harder build, and it is the one that most needs playtesting to justify. Crisis
+    first means the mechanics get tested before the scope gets spent on them.</p>
+  </div>
+
+  <p>The saving is real but uneven. This is what actually moves:</p>
+
+  <div class="dec">
+    <div>
+      <p class="k off">LARGELY DEFERRED</p>
+      <h3>G2 &#183; the economy</h3>
+      <p>Crises conventionally sidestep an economy: fleets arrive by event rather than being built,
+      so no income model, no capital chain, no build UI. The largest gap in the list mostly stops
+      mattering &#8212; for now.</p>
+    </div>
+    <div>
+      <p class="k up">PROMOTED TO CRITICAL</p>
+      <h3>G8 &#183; AI behaviour</h3>
+      <p>It was the gap you could ignore while G1 was open. It is now the whole opposing player.
+      Target selection, jump timing, escalation, scaling &#8212; and it still has zero coverage in
+      the notes.</p>
+    </div>
+    <div>
+      <p class="k up">NOW MANDATORY</p>
+      <h3>G4 &#183; teaching the counter</h3>
+      <p>Against an AI crisis the player is purely on the receiving end and has no other route to the
+      rules. Without a reveal chain the kill sequence is unreachable by design.</p>
+    </div>
+    <div>
+      <p class="k ok">UNCHANGED</p>
+      <h3>Build steps 1&#8211;6</h3>
+      <p>Hull, shell, stub seam, containment, capture, situation layer. All sit in the shared core,
+      so none of them are wasted if the playable branch is built later.</p>
+    </div>
+  </div>
+
+  <h3>The race the crisis actually is</h3>
+  <p>A crisis is a pacing problem before it is a combat problem: the Ark collects on one clock and
+  the defenders arm on another. Everything the AI layer has to decide is a question about where on
+  this line something happens.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 400" role="img" aria-label="A campaign timeline with the Ark's escalation above the spine and the defenders' response below it, running through three phases into a fork between the Ark being destroyed and the galaxy being collected.">
+      <defs>
+        <marker id="m7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+        <marker id="m7a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+        <marker id="m7b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="60" y="28">ARK ESCALATION</text>
+      <text class="dg-h" x="60" y="386">DEFENDER RESPONSE</text>
+
+      <rect class="dg-box" x="65" y="96" width="230" height="58" rx="3"/>
+      <text class="dg-t2" x="85" y="120">Ark enters the galaxy</text>
+      <text class="dg-s" x="85" y="139">spawn trigger undecided</text>
+      <a href="#g14"><circle class="ub" cx="277" cy="112" r="12"/><text class="ub-t" x="277" y="116" text-anchor="middle">14</text></a>
+
+      <rect class="dg-box" x="330" y="96" width="230" height="58" rx="3"/>
+      <text class="dg-t2" x="350" y="120">First world taken</text>
+      <text class="dg-s" x="350" y="139">target policy undecided</text>
+      <a href="#g15"><circle class="ub" cx="542" cy="112" r="12"/><text class="ub-t" x="542" y="116" text-anchor="middle">15</text></a>
+
+      <rect class="dg-box" x="595" y="96" width="230" height="58" rx="3"/>
+      <text class="dg-t2" x="615" y="120">The cage fills</text>
+      <text class="dg-s" x="615" y="139">cap of 4, or unbounded?</text>
+      <a href="#g13"><circle class="ub crit" cx="807" cy="112" r="12"/><text class="ub-t crit" x="807" y="116" text-anchor="middle">13</text></a>
+
+      <line class="dg-rule" x1="60" y1="210" x2="1114" y2="210" marker-end="url(#m7)"/>
+      <text class="dg-s" x="60" y="230">MID-GAME</text>
+      <text class="dg-s" x="590" y="230" text-anchor="middle">the window to prepare</text>
+      <text class="dg-s" x="1120" y="230" text-anchor="end">ENDGAME</text>
+
+      <rect class="dg-box" x="65" y="266" width="230" height="58" rx="3"/>
+      <text class="dg-t2" x="85" y="290">First contact event</text>
+      <text class="dg-s" x="85" y="309">the crisis announces itself</text>
+
+      <rect class="dg-box2" x="330" y="266" width="230" height="58" rx="3" stroke-dasharray="5 4"/>
+      <text class="dg-t2" x="350" y="290">Counter revealed</text>
+      <text class="dg-s" x="350" y="309">no reveal chain written</text>
+      <a href="#g4"><circle class="ub crit" cx="542" cy="282" r="12"/><text class="ub-t crit" x="542" y="286" text-anchor="middle">G4</text></a>
+
+      <rect class="dg-box" x="595" y="266" width="230" height="58" rx="3"/>
+      <text class="dg-t2" x="615" y="290">Cannon built and held</text>
+      <text class="dg-s" x="615" y="309">the mid-game objective</text>
+
+      <line class="dg-line dash" x1="180" y1="154" x2="180" y2="260" marker-end="url(#m7)"/>
+      <text class="dg-l" x="192" y="184">announces</text>
+      <line class="dg-line dash" x1="445" y1="154" x2="445" y2="260" marker-end="url(#m7)"/>
+      <text class="dg-l" x="457" y="184">should reveal</text>
+
+      <path class="dg-line acc" d="M825 288 L880 288 Q900 288 908 258 L926 138" marker-end="url(#m7a)"/>
+      <path class="dg-line bad" d="M825 132 L880 132 Q900 132 908 162 L926 282" marker-end="url(#m7b)"/>
+
+      <rect class="dg-acc" x="932" y="96" width="188" height="58" rx="3"/>
+      <text class="dg-t2" x="1026" y="120" text-anchor="middle">Ark destroyed</text>
+      <text class="dg-s" x="1026" y="139" text-anchor="middle">stages 1&#8211;3 completed</text>
+
+      <rect x="932" y="266" width="188" height="58" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="1026" y="290" text-anchor="middle">Galaxy collected</text>
+      <text class="dg-s" x="1026" y="309" text-anchor="middle">the losing condition</text>
+    </svg>
+    </div>
+    <figcaption><b>Both crossing lines are the same decision seen twice.</b> The defenders reaching
+    the cannon before the Ark reaches its threshold is the entire crisis; every AI-behaviour number
+    is really a question about how much slack that leaves. Note the two dashed boxes &#8212; the
+    reveal chain that makes the whole thing learnable does not exist yet, and neither does an answer
+    to what "filling the cage" means once four slots are used.</figcaption>
+  </figure>
+
+  <h3>What choosing crisis newly opens</h3>
+
+  <div class="gap" id="g13">
+    <span class="g">G13</span>
+    <h4>Four slots, or indefinite collection?</h4>
+    <p>&#167;1 caps the Planet Catcher at roughly four worlds. &#167;4 defines the losing condition
+    as the Ark "collecting worlds indefinitely". Under a crisis reading these cannot both hold: a
+    four-slot cage has a natural stopping point and therefore no escalation.</p>
+    <p class="why">Four shapes to pick from: slots free as worlds are drained; four is only what
+    renders while the tally is unbounded; the loss condition is time-based rather than count-based;
+    or the Ark shatters worlds it cannot carry. Each implies a different escalation curve, so this
+    is upstream of every number in G5.</p>
+  </div>
+
+  <div class="gap" id="g14">
+    <span class="g">G14</span>
+    <h4>Spawn trigger and timing</h4>
+    <p>Endgame-year like the vanilla crises, or mid-game? The notes want the cannon to be a
+    <em>mid-game</em> objective, which pulls the Ark's arrival earlier than a standard crisis and
+    lengthens the campaign it occupies.</p>
+    <p class="why">Also unanswered: where it enters, whether the galaxy gets warning, and whether
+    difficulty or galaxy size move the date.</p>
+  </div>
+
+  <div class="gap" id="g15">
+    <span class="g">G15</span>
+    <h4>Target selection and jump policy</h4>
+    <p>Which worlds does it want &#8212; highest pop, nearest, weakest defender, best deposits? And
+    when does it choose to leave a system: on containment breaking, on a timer, on damage taken, on
+    having filled a slot?</p>
+    <p class="why">Jump policy is where containment either becomes interesting or becomes noise. If
+    the Ark leaves the moment containment weakens, holding it is meaningful; if it leaves on a timer,
+    the inhibitor ships are decoration.</p>
+  </div>
+
+  <div class="gap" id="g16">
+    <span class="g">G16</span>
+    <h4>Escorts and reinforcement</h4>
+    <p>Does the Ark travel alone or with a fleet, and if so, where do replacements come from? Crises
+    conventionally spawn reinforcements by event on a schedule rather than building them, which keeps
+    G2 deferred &#8212; but that schedule is itself an escalation curve nobody has drawn.</p>
+  </div>
+
+  <p>None of these block build steps 1&#8211;6, which is the point of having sequenced it that way.
+  They block step 8 and the tuning pass, and G13 in particular is worth answering before any number
+  in G5 gets picked, because it decides what those numbers are measuring.</p>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

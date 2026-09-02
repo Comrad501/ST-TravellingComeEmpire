@@ -7,6 +7,10 @@ attrition.
 
 **Status: planning only. No mod code has been written yet.**
 
+**v0.1 scope: the Ark is an AI crisis.** A playable "displaced empire" version is the
+more interesting build and stays on the roadmap, but it is deferred until the mechanics
+have been playtested. Build steps 1-6 sit in the shared core and are not wasted either way.
+
 Target version: Stellaris 4.4.6 (Pegasus).
 Owned DLC: Apocalypse, Federations, Nemesis. **Nomads is not owned** — the mechanics that
 would use it sit behind a stub seam so the backing implementation can be swapped later.
@@ -43,12 +47,17 @@ Separate from `U1`-`U5`. The unknowns are questions the notes ask and cannot yet
 the gaps (`G1`-`G12`, in the architecture map) are areas the notes never reach. Four are
 architectural and cannot be deferred:
 
-- **G1** - is the Ark an AI crisis, a playable empire, or both? The notes read both ways.
-  This sizes every other question; the two branches are not the same mod.
-- **G2** - the economy of an empire with no homeworld. One parenthetical about energy
-  upkeep is the entire coverage.
+- ~~**G1**~~ - **decided: AI crisis for v0.1.** See `§11` of the architecture map.
+- **G2** - economy with no homeworld. Largely deferred by the G1 decision, since crises
+  conventionally spawn fleets by event rather than building them.
 - **G3** - what happens when the Ark dies, to the empire and to its carried colonies.
-- **G4** - how a defender ever learns the kill sequence exists.
+- **G4** - how a defender ever learns the kill sequence exists. **Now mandatory**: against
+  an AI crisis the player has no other route to the rules.
+- **G8** - AI behaviour. **Promoted to critical** by the G1 decision; still zero coverage.
+
+Choosing crisis opened four more (`G13`-`G16`), including a contradiction between the
+notes' four-slot Planet Catcher cap and a losing condition defined as collecting worlds
+indefinitely. `G13` is upstream of every balance number.
 
 ## Build order
 
