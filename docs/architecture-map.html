@@ -172,6 +172,16 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
 .verdict .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--accent-ink);margin:0}
 .verdict h3{margin:7px 0 0;font-size:20px}
 .verdict p{margin:9px 0 0;font-size:14.5px;max-width:66ch}
+.verdict.solved{border-left-color:var(--ok);background:var(--ok-soft)}
+.verdict.solved .k{color:var(--ok)}
+.fork{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;margin:28px 0 0;
+  background:var(--line-2);border:1px solid var(--line-2);border-radius:3px;overflow:hidden}
+.fork>div{background:var(--surface);padding:22px 24px}
+.fork .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--accent-ink);margin:0}
+.fork h3{margin:8px 0 0;font-size:19px}
+.fork p{margin:8px 0 0;font-size:14px;max-width:46ch}
+.fork .risk{font-size:13px;color:var(--danger);margin:10px 0 0;max-width:46ch;
+  border-left:2px solid var(--danger);padding-left:11px}
 
 /* ---- gaps ---- */
 .tier{margin:36px 0 0}
@@ -215,7 +225,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">2 blocking unknowns</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">16 information gaps</span>
+    <span class="tag">19 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -1179,6 +1189,187 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
   <p>None of these block build steps 1&#8211;6, which is the point of having sequenced it that way.
   They block step 8 and the tuning pass, and G13 in particular is worth answering before any number
   in G5 gets picked, because it decides what those numbers are measuring.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;12</span><h2>Worthiness: which worlds are taken, and which are broken</h2></div>
+  <p class="lead">The Planet Catcher stops being indiscriminate. Every candidate world is scored, and
+  the score produces one of three verdicts &#8212; not two. That third verdict is what makes the
+  crisis's escalation coherent.</p>
+
+  <div class="verdict solved">
+    <p class="k">RESOLVES G13</p>
+    <h3>A shattered world costs no slot, so the cage can hold four forever</h3>
+    <p>The contradiction was that a four-slot cap gives the Ark a natural stopping point, leaving
+    nothing to escalate toward and therefore nothing to lose to. Worthiness dissolves it: worlds that
+    fail assessment are destroyed rather than carried, consuming nothing. The Ark advances through the
+    galaxy indefinitely while never holding more than four. Both halves of the notes hold at once.</p>
+  </div>
+
+  <h3>Two tiers, because "which empire" and "which world" are different questions</h3>
+  <p>Empire-level score decides <em>who</em> the Ark preys on. Planet-level score decides <em>which
+  of their worlds</em> it wants. Keeping them separate matters: a strong empire's worst colony
+  shouldn't automatically outrank a weak empire's crown jewel, and collapsing both into one number
+  makes that impossible to express.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 420" role="img" aria-label="Three scoring inputs feed a worthiness score, which combined with cage occupancy produces one of three verdicts: assimilate, displace, or shatter. A feedback loop runs from the verdicts back to the damage-dealt input.">
+      <defs>
+        <marker id="m8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+        <marker id="m8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+        <marker id="m8b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="50" y="34">SCORING INPUTS</text>
+      <text class="dg-h" x="390" y="34">EVALUATION</text>
+      <text class="dg-h" x="800" y="34">VERDICT</text>
+
+      <rect class="dg-box" x="50" y="70" width="260" height="58" rx="3"/>
+      <text class="dg-t2" x="68" y="94">Empire strength</text>
+      <text class="dg-s" x="68" y="113">which comparator? unverified</text>
+      <a href="#g17"><circle class="ub" cx="292" cy="88" r="12"/><text class="ub-t" x="292" y="92" text-anchor="middle">17</text></a>
+
+      <rect class="dg-box" x="50" y="150" width="260" height="58" rx="3"/>
+      <text class="dg-t2" x="68" y="174">Damage dealt to the Ark</text>
+      <text class="dg-s" x="68" y="193">no native tracker exists</text>
+      <a href="#g18"><circle class="ub" cx="292" cy="168" r="12"/><text class="ub-t" x="292" y="172" text-anchor="middle">18</text></a>
+
+      <rect class="dg-box" x="50" y="230" width="260" height="58" rx="3"/>
+      <text class="dg-t2" x="68" y="254">Planet value</text>
+      <text class="dg-s" x="68" y="273">pops &#183; deposits &#183; species</text>
+
+      <line class="dg-line" x1="310" y1="99" x2="384" y2="126" marker-end="url(#m8)"/>
+      <line class="dg-line" x1="310" y1="179" x2="384" y2="146" marker-end="url(#m8)"/>
+      <line class="dg-line" x1="310" y1="259" x2="384" y2="166" marker-end="url(#m8)"/>
+
+      <rect class="dg-acc" x="390" y="110" width="270" height="68" rx="3"/>
+      <text class="dg-t2" x="525" y="136" text-anchor="middle">ark_worthiness_score</text>
+      <text class="dg-s" x="525" y="155" text-anchor="middle">common/script_values/</text>
+      <text class="dg-s" x="525" y="170" text-anchor="middle">cached, never recomputed</text>
+
+      <rect class="dg-box" x="390" y="220" width="270" height="68" rx="3"/>
+      <text class="dg-t2" x="525" y="246" text-anchor="middle">Cage occupancy</text>
+      <text class="dg-s" x="525" y="265" text-anchor="middle">n of 4 slots used</text>
+
+      <line class="dg-line" x1="660" y1="132" x2="794" y2="88" marker-end="url(#m8a)"/>
+      <text class="dg-l" x="726" y="100" text-anchor="middle">worthy, slot free</text>
+      <line class="dg-line" x1="660" y1="150" x2="794" y2="182" marker-end="url(#m8)"/>
+      <text class="dg-l" x="712" y="142" text-anchor="middle">beats the weakest held</text>
+      <line class="dg-line" x1="660" y1="168" x2="794" y2="276" marker-end="url(#m8b)"/>
+      <text class="dg-l" x="700" y="232" text-anchor="middle">unworthy</text>
+
+      <path class="dg-line dash" d="M660 254 L742 254 L742 196" marker-end="url(#m8)"/>
+      <text class="dg-l" x="705" y="246" text-anchor="middle">slot pressure</text>
+
+      <rect class="dg-acc" x="800" y="56" width="330" height="64" rx="3"/>
+      <text class="dg-t2" x="822" y="82">ASSIMILATE</text>
+      <text class="dg-s" x="822" y="102">carried as a colony &#183; consumes a slot</text>
+
+      <rect class="dg-box2" x="800" y="150" width="330" height="64" rx="3"/>
+      <text class="dg-t2" x="822" y="176">DISPLACE</text>
+      <text class="dg-s" x="822" y="196">the weakest held world is jettisoned</text>
+
+      <rect x="800" y="244" width="330" height="64" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="822" y="270">SHATTER</text>
+      <text class="dg-s" x="822" y="290">destroyed in place &#183; costs no slot</text>
+
+      <path class="dg-line bad" d="M965 308 L965 374 Q965 382 957 382 L188 382 Q180 382 180 374 L180 214" marker-end="url(#m8b)"/>
+      <text class="dg-l t-bad" x="573" y="374" text-anchor="middle">the survivors fight back, and fighting back raises the score</text>
+    </svg>
+    </div>
+    <figcaption><b>The red loop is the mechanic's central risk, drawn deliberately.</b> If damage
+    dealt raises worthiness, then resisting the Ark makes you its next target &#8212; and the optimal
+    play becomes staying quiet while someone else dies. That is precisely the behaviour a crisis must
+    not reward, and it is why the scoring inputs need a decision rather than a default.</figcaption>
+  </figure>
+
+  <h3>The fork you named, and why it isn't a free choice</h3>
+  <p>You offered two bases for worthiness. They are not interchangeable &#8212; they produce opposite
+  incentives in the case that matters most, which is a weak empire that fights hard.</p>
+
+  <div class="fork">
+    <div>
+      <p class="k">OPTION A</p>
+      <h3>Strength &#183; the Ark covets the impressive</h3>
+      <p>Worthiness tracks how formidable an empire is. The galaxy leader becomes the target, which
+      gives the crisis a natural antagonist and puts pressure where the resources to answer it
+      already are.</p>
+      <p class="risk">Deterministic. The Ark beelines the leader every campaign, so the mechanic
+      stops being a decision after the first playthrough &#8212; and a runaway player is punished for
+      playing well, which some will read as arbitrary.</p>
+    </div>
+    <div>
+      <p class="k">OPTION B</p>
+      <h3>Damage &#183; the Ark respects what hurt it</h3>
+      <p>Worthiness tracks what an empire has cost the Ark. Far more dramatic: the empire that
+      resists earns its own destruction, which fits the source material's logic much better than a
+      pure power ranking does.</p>
+      <p class="risk">Alone, it rewards turtling. If the only consequence of fighting is becoming the
+      target, the correct play is to let your neighbours die &#8212; which directly undermines G4, the
+      whole point of which is getting players to engage the kill sequence.</p>
+    </div>
+    <div>
+      <p class="k">OPTION C &#183; RECOMMENDED</p>
+      <h3>Strength sets the floor, damage escalates it</h3>
+      <p>Empire strength establishes a baseline ranking, and damage dealt acts as a multiplier on top.
+      A strong quiet empire is a standing target; a weak defiant one climbs the list fast. Both of
+      your instincts survive, and neither dominates.</p>
+      <p class="risk">Still needs an offsetting reward for being marked, or B's turtling incentive
+      returns in weaker form. Worth pairing with something the player gains &#8212; warning time,
+      intel, or a route to the Golem.</p>
+    </div>
+  </div>
+
+  <h3>Implementation shape</h3>
+  <p>The same rule from &#167;4 applies and for the same reason: worthiness is <strong>maintained,
+  not measured</strong>. A score recomputed by walking empires and their planets on a timer is the
+  6,000-ship problem wearing a different hat. Damage dealt in particular has no native tracker, so it
+  becomes a country-scoped counter incremented from <code>on_actions</code> &#8212; Ark ships
+  destroyed, hull damage taken, the cannon completed &#8212; and read, never totalled.</p>
+  <p>That keeps the whole thing inside the shared script layer already drawn in &#167;2: one
+  <code>script_value</code> for the score, one <code>scripted_trigger</code> for the verdict, and the
+  same caching discipline as the containment count.</p>
+
+  <div class="gap" id="g17">
+    <span class="g">G17</span>
+    <h4>Which empire-strength comparator, and does it exist in script?</h4>
+    <p>"Victory points" is the right instinct, but the exact scriptable handle needs confirming
+    against the installed version &#8212; relative power ratings, victory score, fleet power, or a
+    composite the mod computes itself.</p>
+    <p class="why">I cannot verify this from here. It is a fast check in the game files, and it
+    decides whether Option A and C are implementable as written or need a hand-rolled substitute.</p>
+  </div>
+
+  <div class="gap" id="g18">
+    <span class="g">G18</span>
+    <h4>Damage dealt has no native tracker</h4>
+    <p>Nothing in the base game records what a given empire has cost a given fleet. Option B and C
+    both require the mod to maintain that counter itself: which events increment it, by how much,
+    and whether it decays over time so an old grudge fades.</p>
+    <p class="why">Decay is not a detail. Without it, an empire that fought the Ark in 2300 is still
+    top of the list in 2400, and the mechanic stops responding to anything the player does.</p>
+  </div>
+
+  <div class="gap" id="g19">
+    <span class="g">G19</span>
+    <h4>Can the player see their own worthiness?</h4>
+    <p>A hidden score that decides which of your worlds gets eaten is indistinguishable from
+    arbitrary AI behaviour. If it is visible &#8212; as an opinion-style readout, a situation stage,
+    or an event when you cross a threshold &#8212; it becomes a dial the player can act on.</p>
+    <p class="why">This is G4 again in a different costume. The mechanic only produces decisions if
+    the player knows it exists.</p>
+  </div>
+
+  <p>One consequence worth stating plainly: DISPLACE means a world the Ark already carries can be
+  jettisoned. That is a live question for &#167;10's G3 &#8212; whatever happens to carried colonies
+  when the Ark dies is now also what happens when one is evicted, so the two want a single answer.</p>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

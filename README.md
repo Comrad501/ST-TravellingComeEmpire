@@ -55,9 +55,30 @@ architectural and cannot be deferred:
   an AI crisis the player has no other route to the rules.
 - **G8** - AI behaviour. **Promoted to critical** by the G1 decision; still zero coverage.
 
-Choosing crisis opened four more (`G13`-`G16`), including a contradiction between the
-notes' four-slot Planet Catcher cap and a losing condition defined as collecting worlds
-indefinitely. `G13` is upstream of every balance number.
+Choosing crisis opened four more (`G13`-`G16`). Three more (`G17`-`G19`) came from the
+worthiness mechanic below.
+
+## Planet Catcher worthiness
+
+Captured worlds are not taken indiscriminately. Each candidate is scored on two tiers -
+empire-level (*who* the Ark preys on) and planet-level (*which of their worlds*) - and
+the score yields one of three verdicts:
+
+| Verdict | Effect |
+| --- | --- |
+| `ASSIMILATE` | Carried as a colony. Consumes one of the four slots. |
+| `DISPLACE` | Beats the weakest held world, which is jettisoned to make room. |
+| `SHATTER` | Destroyed in place. **Consumes no slot.** |
+
+**This resolves `G13`.** A shattered world costs nothing, so the Ark can advance through
+the galaxy indefinitely while never holding more than four worlds. The four-slot cap and
+the "collects worlds indefinitely" losing condition stop contradicting each other.
+
+Scoring inputs are an open decision (`§12` of the architecture map): empire strength alone
+is deterministic, damage-dealt alone rewards turtling, and the recommended blend uses
+strength as a baseline with damage as a multiplier. Worthiness is **maintained via
+`on_actions`, never recomputed by scanning** - the same discipline as the containment
+count.
 
 ## Build order
 
