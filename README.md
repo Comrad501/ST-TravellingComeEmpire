@@ -87,6 +87,9 @@ The mod lives in `ark_of_destruction/`. Symlink or copy that folder into
 `Documents/Paradox Interactive/Stellaris/mod/`, and copy `ark_of_destruction.mod`
 alongside it, then enable it in the launcher.
 
+Run `python3 tools/watchlog.py` while testing in-game - it tails the Stellaris logs and
+shows only this mod's lines, colour-coded. Stdlib only, no dependencies, no network.
+
 Run `python3 tools/validate.py` before every commit. It checks brace balance, quote
 parity, the localisation BOM and key form, that every `ark_*` effect and trigger called is
 also defined, and that every event an `on_action` points at exists. All of those fail

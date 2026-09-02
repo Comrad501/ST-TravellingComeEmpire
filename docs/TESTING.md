@@ -102,21 +102,46 @@ mentioning `ark_`, and confirm the names against `script_documentation/` in the 
 folder. The game writes that directory itself; it is the only version-accurate source, and
 every wiki is downstream of it.
 
-## Existing tooling worth having
+## Watching the log
 
-None of this replaces the harness - it does the surrounding work.
+`game.log` carries thousands of lines from the base game and every other mod. With seven
+mods loaded, finding ours by eye does not scale.
 
-| Tool | What it is |
+```
+python3 tools/watchlog.py
+```
+
+It tails `game.log` and `error.log`, shows only lines matching `ark_`, colours `FAIL` and
+errors red and `PASS` green, survives the truncation Stellaris does on launch, and prints a
+tally when you Ctrl-C. Pass `--dir` if it cannot find the logs folder, `--all` to drop the
+filter.
+
+Stdlib only. No install, no dependencies, no network calls, about a hundred lines. Read it
+before you run it - that is rather the point.
+
+## A note on third-party tooling
+
+There are Workshop mods and GitHub tools that cover similar ground. **They are not the same
+kind of risk, and the difference matters:**
+
+| Kind | What it can do |
 | --- | --- |
-| [A Debug Mod for Modders](https://steamcommunity.com/sharedfiles/filedetails/?id=1920276468) | Cheat/testing layer, load order 99999 so it sits on top of most mods |
-| [Developer Tool Kit](https://steamcommunity.com/sharedfiles/filedetails/?id=904179341) | Adds edicts intended for play-testing a mod quickly |
-| [Sandbox testing guide](https://steamcommunity.com/sharedfiles/filedetails/?id=907837096) | A community recipe for a reusable test galaxy - tiny, 1 AI, no advanced start, no FE, crisis off. Independently the same shape as the table above. |
-| [stelmod-debug](https://github.com/Swords206/stelmod-debug) | Real-time log watcher. Filters to *your* mod's messages, colour-codes errors, alerts on new ones. Windows/Linux/macOS. |
-| [Stellaris-Error-Log-Inspector](https://github.com/non-npc/Stellaris-Error-Log-Inspector) | Reads `error.log` and guesses which mod is responsible. Useful with seven mods loaded. |
+| **Workshop mods** (Debug Mod for Modders, Developer Tool Kit, Cheat Panel) | Script and data files the *game* interprets. They cannot execute code on your machine. Low risk. |
+| **Standalone tools** (`.bat`, `.exe`, or a script you run yourself) | Run with your user privileges. They can read, write and send anything you can. A README is not evidence of safety, and neither is a star count. |
+
+An earlier version of this file recommended a GitHub log-watcher with a `.bat` installer on
+the strength of its README. That was the wrong basis for a recommendation - nobody had read
+its source, including me. `tools/watchlog.py` above replaces it and is short enough to
+audit in one sitting, which is the only reason to trust it either.
+
+If you do want the Workshop debug mods, they are the safer category:
+[A Debug Mod for Modders](https://steamcommunity.com/sharedfiles/filedetails/?id=1920276468),
+[Developer Tool Kit](https://steamcommunity.com/sharedfiles/filedetails/?id=904179341), and
+a [sandbox recipe](https://steamcommunity.com/sharedfiles/filedetails/?id=907837096) whose
+galaxy settings independently match the table above.
 
 **There is no debug *save* on the Workshop**, and that is not an oversight - saves are
-version- and mod-locked, so a shared one would break on the next patch or the next mod
-change. The community answer is the same as ours: a small galaxy plus console setup.
+version- and mod-locked, so a shared one breaks on the next patch or the next mod change.
 
 ## Before release
 
