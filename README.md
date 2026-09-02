@@ -8,6 +8,21 @@ attrition.
 Built by the **Archelias**, a precursor civilisation. **Zemuria** is one of the worlds
 the Planet Catcher captures, not its builders.
 
+The Archelias were humanoid, and concluded that humanoid form intrinsically tends to
+violence and chaos. The Ark is therefore not a conquest engine but a **correction** -
+built to end the flawed legacy they left behind. Two consequences follow, and they are
+the spine of the acquisition design:
+
+- **A machine empire is not that legacy**, so it is never evaluated by worthiness. It can
+  approach and hold the Ark - and can never be `ASSIMILATE`d, only `SHATTER`ed. The only
+  empires that can hold it are the only ones with nothing held in escrow if they fail.
+- **Only a human can activate it.** The correction requires the consent of the flawed.
+  A machine empire can own the Ark and still not switch it on.
+
+So acquisition needs two keys rarely in one hand: a machine empire to hold it, and a
+living humanoid to start it. A Determined Exterminator disqualifies itself by purging
+every hand that could have turned the key.
+
 **Status: planning only. No mod code has been written yet.**
 
 **v0.1 scope: the Ark is an AI crisis.** Build steps 1-6 sit in the shared core.
@@ -18,7 +33,11 @@ costing nothing - and only instantiates when something wakes it. It is not spawn
 crisis system on a schedule; the crisis is what happens if nobody reaches it first.
 
 **v0.2 proposal: the Ark is acquirable by a machine empire** via a precursor event chain,
-racing the wake date. Finish first and it is yours; fail and it wakes on its own.
+racing the wake date. Finish first and it is yours; fail and it wakes on its own. The
+chain unlocks at mid-game (`mid_game_years_passed >= 0`, so it respects the player's own
+galaxy setup). **AI empires can win the race too** - and the machine-empire restriction
+keeps the eligible field to however many machine empires the galaxy generated, typically
+none to three.
 Crucially this is *acquisition, not displacement* - the player keeps their empire and
 gains a fortress - so `G2`'s economy problem does not arise, and Nemesis' Become the
 Crisis supplies the galaxy's response. The branch reduces to one new system (the chain)
