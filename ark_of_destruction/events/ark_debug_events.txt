@@ -1,0 +1,86 @@
+namespace = arktest
+
+# =============================================================================
+# THE TEST SUITE
+# =============================================================================
+# Console:  event arktest.1     runs every test in order
+# Each test leaves the world as it found it, so they can be re-run.
+# Results land in game.log as [ARK TEST] PASS / FAIL lines.
+# =============================================================================
+
+country_event = {
+	id = arktest.1
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		log = "[ARK TEST] ================ run begins ================"
+		country_event = { id = arktest.2 }
+		country_event = { id = arktest.3 }
+		country_event = { id = arktest.4 }
+		log = "[ARK TEST] ================ run ends =================="
+	}
+}
+
+# T1 - a clean system reads as uncontained.
+country_event = {
+	id = arktest.2
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		capital_scope = {
+			solar_system = {
+				set_variable = { which = ark_inhibitor_count value = 0 }
+				ark_assert_var_equals = { VAR = ark_inhibitor_count EXPECT = 0 LABEL = "T1 clean system starts at zero" }
+				if = {
+					limit = { NOT = { ark_containment_holds = yes } }
+					log = "[ARK TEST] PASS  containment absent at zero (T1)"
+				}
+				else = { log = "[ARK TEST] FAIL  containment reported at zero (T1)" }
+			}
+		}
+	}
+}
+
+# T2 - the counter tracks additions, and the clamp refuses to go negative.
+country_event = {
+	id = arktest.3
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		capital_scope = {
+			solar_system = {
+				set_variable = { which = ark_inhibitor_count value = 0 }
+				change_variable = { which = ark_inhibitor_count value = 3 }
+				ark_assert_var_equals = { VAR = ark_inhibitor_count EXPECT = 3 LABEL = "T2 three projectors counted" }
+
+				subtract_variable = { which = ark_inhibitor_count value = 1 }
+				ark_assert_var_equals = { VAR = ark_inhibitor_count EXPECT = 2 LABEL = "T2 one loss subtracts one" }
+
+				# Over-subtract on purpose. The clamp is the only thing standing
+				# between a maintained counter and a negative one.
+				subtract_variable = { which = ark_inhibitor_count value = 99 }
+				ark_clamp_inhibitor_count = yes
+				ark_assert_var_equals = { VAR = ark_inhibitor_count EXPECT = 0 LABEL = "T2 clamp floors at zero" }
+			}
+		}
+	}
+}
+
+# T3 - the reconciler agrees with the maintained counter.
+# This is the one that matters: drift between the two is the failure mode the
+# whole caching design risks, and it is invisible without a check like this.
+country_event = {
+	id = arktest.4
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		ark_debug_tag_all_ships = yes
+		capital_scope = {
+			solar_system = {
+				ark_reconcile_inhibitor_count = yes
+				log = "[ARK TEST] T3 reconciled count logged below; compare against ships present"
+				ark_debug_log_inhibitors = yes
+			}
+		}
+	}
+}

@@ -1,0 +1,79 @@
+# =============================================================================
+# DEBUG HARNESS - remove or guard before any public release
+# =============================================================================
+# Stellaris has no test runner, but it does have a console that can run script
+# in scope. These effects are the closest thing to unit tests the engine allows:
+# each sets up a known state, asserts against it, and logs PASS or FAIL to
+# game.log. Run them in a small throwaway galaxy, not in a real campaign.
+# =============================================================================
+
+# --- assertion helper ------------------------------------------------------
+# Scope: anything holding the variable. Logs PASS/FAIL, never mutates.
+ark_assert_var_equals = {
+	if = {
+		limit = { check_variable = { which = $VAR$ value = $EXPECT$ } }
+		log = "[ARK TEST] PASS  $VAR$ == $EXPECT$  ($LABEL$)"
+	}
+	else = {
+		log = "[ARK TEST] FAIL  $VAR$ != $EXPECT$  ($LABEL$)"
+	}
+}
+
+# --- state dump ------------------------------------------------------------
+# Scope: a country. Select your own empire and run: effect ark_debug_dump = yes
+ark_debug_dump = {
+	log = "[ARK DEBUG] ---- state dump ----"
+	log = "[ARK DEBUG] holder flag: [This.GetName]"
+	every_owned_fleet = {
+		limit = { has_fleet_flag = ark_hull }
+		log = "[ARK DEBUG] ark fleet found: [This.GetName]"
+		solar_system = {
+			log = "[ARK DEBUG] system: [This.GetName]"
+			ark_debug_log_inhibitors = yes
+		}
+	}
+}
+
+# Scope: a solar system.
+ark_debug_log_inhibitors = {
+	if = {
+		limit = { check_variable = { which = ark_inhibitor_count value > 0 } }
+		log = "[ARK DEBUG] containment holds in this system"
+	}
+	else = {
+		log = "[ARK DEBUG] containment absent in this system"
+	}
+}
+
+# --- setup -----------------------------------------------------------------
+# Scope: a country. Tags every ship it owns, so counting can be exercised
+# without building a dedicated fleet first.
+ark_debug_tag_all_ships = {
+	every_owned_fleet = {
+		every_owned_ship = { set_ship_flag = ark_inhibitor_fitted }
+	}
+	log = "[ARK DEBUG] all owned ships tagged as inhibitor-fitted"
+}
+
+# Scope: a country. Marks a fleet as the Ark for testing, without needing the
+# real hull to exist yet.
+ark_debug_make_ark = {
+	random_owned_fleet = {
+		limit = { NOT = { has_fleet_flag = ark_hull } }
+		set_fleet_flag = ark_hull
+		prev = { set_country_flag = ark_holder }
+		log = "[ARK DEBUG] fleet marked as the Ark: [This.GetName]"
+	}
+}
+
+ark_debug_reset = {
+	remove_country_flag = ark_holder
+	every_owned_fleet = {
+		remove_fleet_flag = ark_hull
+		remove_fleet_flag = ark_shell_down
+		remove_fleet_flag = ark_capture_complete
+		every_owned_ship = { remove_ship_flag = ark_inhibitor_fitted }
+		solar_system = { set_variable = { which = ark_inhibitor_count value = 0 } }
+	}
+	log = "[ARK DEBUG] reset complete"
+}
