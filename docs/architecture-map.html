@@ -225,7 +225,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">39 information gaps</span>
+    <span class="tag">40 raised &#183; 11 still open</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -2820,6 +2820,140 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     number to abstract into a spawn schedule, never to instantiate &#8212; &#167;4 already measured
     what six thousand does to a save.</p>
   </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;22</span><h2>The register, cleared</h2></div>
+  <p class="lead">Forty gaps and five unknowns raised across twenty-one sections, with their state
+  scattered through the prose. Here is all of it in one place, with everything I can answer answered
+  rather than deferred.</p>
+
+  <h3>Closed by evidence</h3>
+  <p>Four were still open only because nobody had checked.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Item</th><th>Answer</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">G17</td><td><b>Yes, <code>relative_power</code> exists.</b> It is the vanilla mechanism for exactly this kind of threshold, used to decide Fallen Empire awakening. Confirm its parameters against <code>script_documentation/triggers.log</code>, which the game writes into the local data folder and is authoritative for your version.</td></tr>
+      <tr class="sev-def"><td class="id">G34</td><td><b>Yes, and it costs less than feared.</b> AI empires do take Become the Crisis, and one that does has its personality set to Crisis Aspirant. Better still, the AI is unlikely to take it when another crisis empire already exists &#8212; vanilla behaviour that matches the one-Ark rule for free. Rogue Servitors are excluded, confirming &#167;19.</td></tr>
+      <tr class="sev-def"><td class="id">G6</td><td><b>Closed by &#167;21.</b> Golem is the builders' failsafe: it kills the wielding species instantly and sits beneath the throne. Its scope is the Ark's wielders, not an arbitrary empire, and it is reachable only from the throne room.</td></tr>
+      <tr class="sev-def"><td class="id">G19</td><td><b>Closed by &#167;13.</b> Worthiness standings are public &#8212; that is lever L2, and the mechanic does not function without it.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Closed by decision &#8212; my call, override any of them</h3>
+  <p>These were open because I was deferring to you. Each has a defensible default given everything
+  already decided, so I am taking it rather than adding to your queue.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Item</th><th>Call</th></tr></thead>
+    <tbody>
+      <tr class="sev-high"><td class="id">G3</td><td><b>One rule, shared with eviction.</b> A carried colony returns to its original owner if that empire still exists, otherwise it becomes an independent empire. Used identically when the Ark dies and when <code>DISPLACE</code> throws a world out &#8212; and it is what L1 promised when it called assimilation recoverable. The same handler calls <code>destroy_situation</code>.</td></tr>
+      <tr class="sev-high"><td class="id">G7</td><td><b>Cut the Anti Wave Motion Lattice.</b> No vanilla precedent, and &#167;15 removed the need: containment already degrades continuously, so a hard drive-disable has nothing left to do. It was orphaned because the design outgrew it.</td></tr>
+      <tr class="sev-high"><td class="id">G15</td><td><b>The Ark jumps on containment falling below threshold, or on completing a capture.</b> Never on a timer &#8212; a timer makes the inhibitor ships decorative, which is the failure &#167;13 flagged.</td></tr>
+      <tr class="sev-high"><td class="id">G18 &#183; G22</td><td><b>One counter, two readings, with decay.</b> Country-scoped, incremented from <code>on_actions</code> only, never totalled by scanning. Decays monthly so old grudges fade. Read raw for ranking, damped for threshold contribution.</td></tr>
+      <tr class="sev-high"><td class="id">G24</td><td><b>Damage dealt and inhibitor ships held. Losses do not count.</b> Paying out for being a victim rewards passivity, which is the exact behaviour &#167;13 exists to prevent.</td></tr>
+      <tr class="sev-high"><td class="id">G26</td><td><b>Flat damage check for v0.1.</b> Weapon-class texture is a fleet-composition puzzle that has to be taught, and G4 is already carrying more teaching load than it can afford.</td></tr>
+      <tr class="sev-high"><td class="id">G16 &#183; G40</td><td><b>Escorts arrive by event on a schedule tied to worlds held; the second defensive layer is cut as redundant.</b> Ten million ships is a number to abstract, never to instantiate &#8212; &#167;4 already measured what six thousand does to a save.</td></tr>
+      <tr class="sev-high"><td class="id">G8</td><td><b>First pass:</b> target the highest-worthiness reachable world within a jump radius, jump per G15, escalate reinforcement with worlds held. Deliberately simple, because AI behaviour is the thing most likely to need rewriting after the first playtest.</td></tr>
+      <tr class="sev-high"><td class="id">G35</td><td><b>Accept the variance.</b> Do not force a machine empire at galaxy generation. The race is an alternate path, not the main content, and a campaign without it is the plain crisis working as designed.</td></tr>
+      <tr class="sev-high"><td class="id">G39</td><td><b>The Pilot is a unique leader-like entity.</b> Occupies a slot, can be killed, replaced by a project rather than automatically. Losable stakes, per the reproduction device in the source.</td></tr>
+      <tr class="sev-high"><td class="id">G12</td><td><b>Additive-only after first release.</b> Never remove or rename a script object that a save may reference; version the mod's own flags from the start so later migrations have something to test.</td></tr>
+      <tr class="sev-low"><td class="id">G23</td><td><b>Superseded.</b> The cannon is gone, so there is no yield curve. Its parameter is now shell regeneration and how it scales, which lives in G5 and G29.</td></tr>
+      <tr class="sev-low"><td class="id">G27</td><td><b>Closed by &#167;16.</b> Three research branches, with the anti-shell component as the progression objective.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>G5, partly answered: relationships instead of numbers</h3>
+  <p>The complaint was that nothing is quantified. Absolute values need a playtest, but the
+  <em>ratios</em> do not &#8212; and ratios are what make the design testable rather than merely
+  describable. Starting points, all expressed against one mid-game empire's sustained fleet damage:</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Parameter</th><th>Starting relationship</th><th>What it controls</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">Regen at 0 worlds</td><td>~0.6&#215; one empire's sustained damage</td><td>One strong empire can act alone early &#8212; the reward for moving first</td></tr>
+      <tr class="sev-def"><td class="id">Regen at 4 worlds</td><td>~2.5&#215;</td><td>Three or more empires needed late; the coalition requirement, arriving by growth</td></tr>
+      <tr class="sev-def"><td class="id">Worthiness decay</td><td>~2% per month</td><td>A grudge fades over roughly a decade, so the list responds to current behaviour</td></tr>
+      <tr class="sev-def"><td class="id">Capture duration</td><td>~1 in-game year</td><td>Long enough to interrupt, short enough to feel inevitable if unopposed</td></tr>
+      <tr class="sev-def"><td class="id">Wake date</td><td>mid-game + ~30 years</td><td>Leaves a window where the chain is available but the Ark is not yet awake</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>What is genuinely still yours</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Item</th><th>Why it is not mine to take</th></tr></thead>
+    <tbody>
+      <tr class="sev-block"><td class="id">G30</td><td>Does the player keep their capital? This decides whether v0.2 stays a small branch or becomes the large build again. A scope call, not a design detail.</td></tr>
+      <tr class="sev-block"><td class="id">G38</td><td>Four invented proper nouns. They set the tone of the whole mod, and I should not pick them alone.</td></tr>
+      <tr class="sev-block"><td class="id">G11</td><td>Definition of done. My proposal: v0.1 is build steps 1&#8211;6 plus a crisis that wakes, collects, and can be killed by the three stages &#8212; no precursor chain, no acquisition, no music. Confirm or resize.</td></tr>
+      <tr class="sev-block"><td class="id">G4</td><td>The reveal chain's <em>content</em>. &#167;16 settled its mechanism and &#167;21 gave it a location; what the player is actually told, and in what order, is writing rather than architecture.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>What needs the game, not more thinking</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Item</th><th>The check</th></tr></thead>
+    <tbody>
+      <tr class="sev-block"><td class="id">U1</td><td><b>Still the only blocker.</b> Can a <code>section_templates</code> slot swap by script outside a drydock refit? Blocks build step 7. Fallback already specified if not.</td></tr>
+      <tr class="sev-high"><td class="id">U2</td><td>Do <code>create_ambient_object</code>s track a moving fleet? Only matters if U1 fails.</td></tr>
+      <tr class="sev-low"><td class="id">U3</td><td>Can any effect fire a sound cue? Music is explicitly not worth blocking on.</td></tr>
+      <tr class="sev-low"><td class="id">U4</td><td>Parked behind the stub seam by design. Only reopens if Nomads is bought.</td></tr>
+      <tr class="sev-high"><td class="id">G9</td><td>Does EFCF touch <code>ship_sizes</code>, <code>section_templates</code> or <code>on_actions</code>? A grep of your install answers it in a minute.</td></tr>
+      <tr class="sev-high"><td class="id">G10</td><td>Your iteration loop. <code>script_documentation/</code> in the local data folder is the ground truth for every trigger and effect name in this document &#8212; worth reading before writing anything.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 250" role="img" aria-label="A critical path: build steps one to six are unblocked, step seven is blocked on unknown U1, step eight is open, and tuning depends on G5 and the local test loop G10.">
+      <defs>
+        <marker id="m19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+      </defs>
+      <text class="dg-h" x="40" y="30">WHAT ACTUALLY STANDS BETWEEN HERE AND A PLAYABLE v0.1</text>
+
+      <rect class="dg-acc" x="40" y="60" width="330" height="76" rx="3"/>
+      <text class="dg-t2" x="60" y="88">Build steps 1&#8211;6</text>
+      <text class="dg-s" x="60" y="108">skeleton, hull, seam, containment,</text>
+      <text class="dg-s" x="60" y="124">capture, situation layer</text>
+      <text class="dg-s t-ok" x="60" y="160">nothing blocks these</text>
+
+      <line class="dg-line acc" x1="370" y1="98" x2="422" y2="98" marker-end="url(#m19)"/>
+
+      <rect x="430" y="60" width="300" height="76" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.4"/>
+      <text class="dg-t2" x="450" y="88">Step 7 &#183; rendering</text>
+      <text class="dg-s" x="450" y="108">the carried worlds</text>
+      <text class="dg-s t-bad" x="450" y="124">blocked on U1</text>
+      <text class="dg-s" x="450" y="160">fallback exists if the answer is no</text>
+
+      <line class="dg-line acc" x1="730" y1="98" x2="782" y2="98" marker-end="url(#m19)"/>
+
+      <rect class="dg-box" x="790" y="60" width="350" height="76" rx="3"/>
+      <text class="dg-t2" x="810" y="88">Tuning</text>
+      <text class="dg-s" x="810" y="108">G5 ratios meet a real save</text>
+      <text class="dg-s" x="810" y="124">needs your loop &#183; G10</text>
+      <text class="dg-s" x="810" y="160">everything else is written or decided</text>
+
+      <text class="dg-s" x="40" y="216">Of forty-five items raised, one blocks code and two need a machine with the game on it. The rest are settled or are writing.</text>
+    </svg>
+    </div>
+    <figcaption><b>The backlog was never the obstacle.</b> Most of what accumulated was design that
+    needed doing rather than risk that needed retiring &#8212; and now that it is done, the path to a
+    first playable version runs through exactly one unknown and one afternoon at your own keyboard.</figcaption>
+  </figure>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

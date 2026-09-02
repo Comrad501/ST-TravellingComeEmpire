@@ -118,6 +118,25 @@ engineering (anti-shell weapons), physics (inhibitor components), society (board
 doctrine). The third unlocks from an archaeology site on a world the Ark shattered
 (`create_archaeological_site`) — so the Ark's own destruction teaches its counter.
 
+## Register status
+
+Forty gaps and five unknowns were raised during design. `§22` of the architecture map
+consolidates all of them. Current state:
+
+- **Closed by evidence** (4): `G17` `relative_power` exists and is the vanilla mechanism;
+  `G34` AI empires do take Become the Crisis and avoid competing when one already exists;
+  `G6` and `G19` closed by later sections.
+- **Closed by decision** (13): recorded in `§22`, each overridable.
+- **Still yours** (4): `G30` capital, `G38` naming, `G11` scope, `G4` reveal-chain content.
+- **Needs the game** (6): `U1`-`U4`, `G9` EFCF audit, `G10` your iteration loop.
+
+One item blocks code (`U1`). Everything else is settled, is writing, or needs a machine
+with Stellaris on it.
+
+**`script_documentation/` in the local data folder is the ground truth** for every trigger
+and effect name in these documents - the game writes it, and it is version-accurate in a
+way no wiki is.
+
 ## Open unknowns
 
 Tracked in the architecture map as `U1`–`U5`. Two are blocking:
