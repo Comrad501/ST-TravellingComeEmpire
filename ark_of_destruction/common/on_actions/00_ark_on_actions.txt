@@ -1,0 +1,23 @@
+# =============================================================================
+# THE ONLY PLACES THE COUNTER CHANGES
+# =============================================================================
+# VERIFY every on_action name below against script_documentation/on_actions.log
+# in the local data folder before trusting them. The game writes that file and
+# it is version-accurate for 4.4.6 in a way no wiki is.
+# =============================================================================
+
+on_entering_system = {
+	events = { ark.100 }   # fleet enters -> add its tagged ships to the system
+}
+
+on_leaving_system = {
+	events = { ark.101 }   # fleet leaves -> subtract them again
+}
+
+on_ship_destroyed_victim = {
+	events = { ark.102 }   # a tagged ship dies -> subtract one
+}
+
+on_monthly_pulse_country = {
+	events = { ark.110 }   # decay the damage counter; reconcile the Ark's system
+}

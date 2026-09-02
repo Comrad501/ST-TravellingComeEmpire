@@ -1,0 +1,31 @@
+﻿l_english:
+
+ # ---------------------------------------------------------------------------
+ # Names are keyed by ROLE, never by name (see architecture map, section 23).
+ # The G38 naming pass changes only the values below; nothing above them moves.
+ # ---------------------------------------------------------------------------
+ ARK_BUILDER_RACE:0 "Archelias"
+ ARK_BUILDER_RACE_ADJ:0 "Archelian"
+ ARK_WIELDER_RACE:0 "Gatlantis"
+ ARK_WIELDER_RACE_ADJ:0 "Gatlantean"
+ ARK_FORMER_MASTERS:0 "Zemuria"
+ ARK_FIRST_TAKEN_WORLD:0 "Zemuria"
+ ARK_SOVEREIGN_TITLE:0 "Great Emperor"
+
+ # The vessel
+ ARK_VESSEL_NAME:0 "Ark of Destruction"
+ ARK_VESSEL_SHORT:0 "the Ark"
+ ARK_SHELL_NAME:0 "Comet Shell"
+ ARK_CATCHER_NAME:0 "Planet Catcher"
+ ARK_FAILSAFE_NAME:0 "Golem"
+
+ # Ship size
+ ark_hull:0 "$ARK_VESSEL_NAME$"
+ ark_hull_plural:0 "$ARK_VESSEL_NAME$"
+ ark_hull_desc:0 "A mobile capital hull wrapped in a regenerating shell of high-pressure gas. It carries what it judges worthy and breaks what it does not."
+
+ # Components
+ ark_shell_component:0 "$ARK_SHELL_NAME$"
+ ark_shell_component_desc:0 "A layered cloud of high-temperature gas. It is both the vessel's shield and its area weapon: what burns it away also takes its reach."
+ ship_inhibitor_aura:0 "Containment Field Projector"
+ ship_inhibitor_aura_desc:0 "Projects a subspace anchor. Containment strength is a function of how many projectors survive in the system, and degrades as they are lost."

@@ -1,0 +1,82 @@
+# =============================================================================
+# CONTAINMENT COUNTING
+# =============================================================================
+# The rule from the architecture map (S4): the inhibitor count is MAINTAINED,
+# never MEASURED. Nothing here iterates the galaxy's ships. Each effect does
+# work bounded by one fleet, and only when an on_action says something changed.
+#
+# The measured save this was designed against holds 3,287 fleets and 6,452
+# planets. A per-tick scan at that scale is the late-game stall.
+# =============================================================================
+
+# Ships are TAGGED when built, never inspected for components at runtime.
+# Scope: a ship.
+ark_tag_inhibitor_ship = {
+	if = {
+		limit = { has_component = "SHIP_AURA_ARK_CONTAINMENT" }
+		set_ship_flag = ark_inhibitor_fitted
+	}
+}
+
+# Scope: a fleet. Adds this fleet's tagged ships to its current system's count.
+ark_inhibitors_enter_system = {
+	set_variable = { which = ark_fleet_inhibitors value = 0 }
+	every_owned_ship = {
+		limit = { has_ship_flag = ark_inhibitor_fitted }
+		prev = { change_variable = { which = ark_fleet_inhibitors value = 1 } }
+	}
+	if = {
+		limit = { check_variable = { which = ark_fleet_inhibitors value > 0 } }
+		solar_system = {
+			change_variable = { which = ark_inhibitor_count value = prev.ark_fleet_inhibitors }
+		}
+	}
+}
+
+# Scope: a fleet. Mirror of the above.
+ark_inhibitors_leave_system = {
+	set_variable = { which = ark_fleet_inhibitors value = 0 }
+	every_owned_ship = {
+		limit = { has_ship_flag = ark_inhibitor_fitted }
+		prev = { change_variable = { which = ark_fleet_inhibitors value = 1 } }
+	}
+	if = {
+		limit = { check_variable = { which = ark_fleet_inhibitors value > 0 } }
+		solar_system = {
+			subtract_variable = { which = ark_inhibitor_count value = prev.ark_fleet_inhibitors }
+			ark_clamp_inhibitor_count = yes
+		}
+	}
+}
+
+# Scope: a ship that just died.
+ark_inhibitor_ship_destroyed = {
+	if = {
+		limit = { has_ship_flag = ark_inhibitor_fitted }
+		solar_system = {
+			subtract_variable = { which = ark_inhibitor_count value = 1 }
+			ark_clamp_inhibitor_count = yes
+		}
+	}
+}
+
+# Scope: a solar system. A maintained counter can drift; this is the floor.
+ark_clamp_inhibitor_count = {
+	if = {
+		limit = { check_variable = { which = ark_inhibitor_count value < 0 } }
+		set_variable = { which = ark_inhibitor_count value = 0 }
+	}
+}
+
+# Scope: a solar system. The safety valve for drift.
+# This DOES iterate ships - which is why it runs only in the one system that
+# currently holds the Ark, and only on a slow pulse. One system is not 3,287.
+ark_reconcile_inhibitor_count = {
+	set_variable = { which = ark_inhibitor_count value = 0 }
+	every_fleet_in_system = {
+		every_owned_ship = {
+			limit = { has_ship_flag = ark_inhibitor_fitted }
+			prev = { prev = { change_variable = { which = ark_inhibitor_count value = 1 } } }
+		}
+	}
+}

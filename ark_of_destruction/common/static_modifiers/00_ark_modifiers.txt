@@ -1,0 +1,13 @@
+# The shell, as a first approximation: very high capacity, aggressive regen.
+# S15's real model has regeneration proportional to damage sustained, which
+# needs custom logic. This gets the threshold behaviour approximately so the
+# rest of phase 1 has something to test against.
+ark_shell_intact = {
+	ship_shield_add = 500000
+	ship_shield_regen_add_perc = 4.0
+}
+
+# What is left once the shell is down. The window is open while this holds.
+ark_shell_stripped = {
+	ship_shield_mult = -1.0
+}

@@ -1,0 +1,40 @@
+# =============================================================================
+# CACHED VALUES
+# =============================================================================
+# Every value here READS a maintained variable. None of them count anything.
+# =============================================================================
+
+# Scope: a solar system.
+ark_inhibitors_present = {
+	base = 0
+	modifier = {
+		add = value:ark_inhibitor_count
+		desc = ark_value_inhibitors_present
+	}
+}
+
+# Scope: a country being judged. Option C: strength sets the floor, damage
+# escalates it (architecture map S12). Losses do not count - paying out for
+# being a victim rewards passivity, which is what S13 exists to prevent.
+ark_worthiness_score = {
+	base = 0
+
+	# Floor: how formidable the empire is.
+	modifier = {
+		add = 20
+		desc = ark_value_strength_high
+		relative_power = { who = event_target:ark_country category = military value >= superior }
+	}
+	modifier = {
+		add = 10
+		desc = ark_value_strength_mid
+		relative_power = { who = event_target:ark_country category = military value >= equivalent }
+	}
+
+	# Escalator: what this empire has cost the Ark. Maintained by on_actions,
+	# decays monthly so an old grudge fades over roughly a decade (S22).
+	modifier = {
+		add = value:ark_damage_dealt
+		desc = ark_value_damage_dealt
+	}
+}

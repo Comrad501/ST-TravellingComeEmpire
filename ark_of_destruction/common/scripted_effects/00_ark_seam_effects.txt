@@ -1,0 +1,39 @@
+# =============================================================================
+# THE STUB SEAM
+# =============================================================================
+# Callers bind to these four names and nothing else. The backing implementation
+# is swappable without touching a single call site.
+#
+# Backing A (Nomads):    arkship colony primitive.        NOT OWNED - unwritten.
+# Backing B (base game): Colossus planet_class change
+#                        plus a colony transplant.        <- the live backing.
+#
+# Shell stripping no longer needs a seam: with the cannon dropped it is plain
+# combat maths. ark_shell_strip survives only as the hook that flips the flag
+# and opens the exposed window, so the situation layer has one place to listen.
+# =============================================================================
+
+# Scope: the Ark's fleet.  THIS = ark fleet,  FROM = the target planet.
+ark_attach_colony = {
+	# TODO backing B: strip the source world, then transplant the colony into
+	# a free cradle. Both halves have vanilla precedent (architecture map S3).
+	log = "[ARK] ark_attach_colony called - not yet implemented"
+}
+
+# Scope: the Ark's fleet.  FROM = the carried colony being released.
+# One rule serves three callers: Ark destroyed, DISPLACE eviction, and a
+# deliberate release. Returns the colony to its original owner if that empire
+# still exists, otherwise it becomes independent (architecture map S22, G3).
+ark_detach_colony = {
+	# TODO backing B.
+	log = "[ARK] ark_detach_colony called - not yet implemented"
+}
+
+# Scope: the Ark's fleet. Flips the shell down and opens the exposed window.
+# Called when sustained fire has driven shell integrity to zero.
+ark_shell_strip = {
+	remove_modifier = ark_shell_intact
+	set_fleet_flag = ark_shell_down
+	# The window is not a timer. It closes when fire slackens - see
+	# ark_shell_regenerating in the triggers file.
+}

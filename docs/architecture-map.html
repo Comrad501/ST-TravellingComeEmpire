@@ -226,9 +226,9 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
     <span class="tag on">nothing blocks v0.1</span>
-    <span class="tag">40 raised &#183; 7 open</span>
+    <span class="tag">40 raised &#183; 6 open</span>
     <span class="tag on">calibrated against a real save</span>
-    <span class="tag">0 lines written</span>
+    <span class="tag on">phase 1 begun</span>
   </div>
 </header>
 
@@ -3159,6 +3159,66 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     measurement &#8212; and it is the one that decides whether v0.2 stays a small branch or becomes
     the large build. The save can tell us how big a capital is. It cannot tell us whether the player
     should lose theirs.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;25</span><h2>Phase 1 begins</h2></div>
+
+  <div class="verdict">
+    <p class="k">DECISION &#183; SUPERSEDES G30</p>
+    <h3>The capital is kept, and carried &#8212; it becomes one of the four worlds</h3>
+    <p>Not lost, not left behind: transferred into a cradle. The empire keeps its economy, its
+    starbases and its capital building chain, so G2 never reopens, and &#167;20's activation rule pays
+    off exactly as written &#8212; <strong>the player's own capital is the first door into their own
+    fortress.</strong></p>
+    <p>One rule this needs: the activator's capital is <b>pinned</b>. It occupies its cradle
+    permanently and <code>DISPLACE</code> can never evict it, which would otherwise be absurd. Three
+    slots remain for conquest, so the Planet Catcher stays a scarce resource rather than becoming a
+    fifth slot in disguise.</p>
+  </div>
+
+  <h3>What now exists</h3>
+  <p>Written against the uncontested directories from &#167;24, so none of it needs NSC3 or EFCF read
+  first. Two files sit in contested directories and say so at the top of themselves &#8212; both are
+  additive with prefixed keys, because the risk there is <em>overwriting</em> those mods, not
+  coexisting with them.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>File</th><th>State</th></tr></thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">descriptor.mod</td><td>Loads, targets <code>4.4.*</code>.</td></tr>
+      <tr class="sev-def"><td class="id">localisation</td><td>UTF-8 with BOM. <b>Keyed by role, never by name</b> &#8212; the G38 pass changes values only.</td></tr>
+      <tr class="sev-def"><td class="id">scripted_effects</td><td>The stub seam (three names), and containment maintenance: enter, leave, ship destroyed, clamp, reconcile.</td></tr>
+      <tr class="sev-def"><td class="id">scripted_triggers</td><td>One shared definition of contained. Jump eligibility. The judgment and activation-key tests.</td></tr>
+      <tr class="sev-def"><td class="id">script_values</td><td>Worthiness on Option C: <code>relative_power</code> sets the floor, the decaying damage counter escalates it.</td></tr>
+      <tr class="sev-def"><td class="id">on_actions &#183; events</td><td>Four hidden events. The only places the counter changes.</td></tr>
+      <tr class="sev-high"><td class="id">ship_sizes</td><td><b>Placeholder hull</b> borrowing a vanilla entity so mechanics are testable. Phase 3 replaces it.</td></tr>
+      <tr class="sev-high"><td class="id">component_templates</td><td>The containment aura, built on the vanilla ship-aura framework &#167;24 found.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Drift insurance, and why it is allowed to scan</h3>
+  <p>A maintained counter can desynchronise. The reconciler does iterate ships &#8212; which is
+  exactly what &#167;4 forbids &#8212; so it runs <strong>only in the single system holding the Ark,
+  and only on a monthly pulse</strong>. One system is not 3,287 fleets. The rule was never "never
+  iterate"; it was "never iterate the galaxy every tick", and the difference is what makes a safety
+  valve affordable.</p>
+
+  <div class="note">
+    <p class="sig">WHAT I CANNOT VERIFY, AND WHAT I CAN</p>
+    <h3>There is no Stellaris here, so I wrote a validator instead</h3>
+    <p><code>tools/validate.py</code> checks brace balance, quote parity, the localisation BOM and
+    key form, every <code>ark_*</code> effect and trigger that is called against those actually
+    defined, and every event an <code>on_action</code> points at against those declared. It passes
+    &#8212; and I proved it is worth something by breaking the mod three ways and confirming it
+    caught each: a dangling event reference, a stripped BOM, an unclosed brace.</p>
+    <p>What it cannot tell you is whether any of the <em>names</em> are real in 4.4.6. Field names,
+    on_action names and modifier keys all still want checking against
+    <code>script_documentation/</code> in your local data folder. That file is written by the game and
+    is the only version-accurate source; every wiki, including the ones I read, is downstream of it.</p>
   </div>
 </section>
 

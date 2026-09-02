@@ -1,0 +1,38 @@
+# =============================================================================
+# PHASE 2 DIRECTORY - additive only, and this is a PLACEHOLDER hull
+# =============================================================================
+# ship_sizes is the most contested directory in this install: NSC3 is a ship
+# class overhaul and EFCF adds its own line. This file's name and every key in
+# it are ARK_-prefixed and additive, so it coexists rather than overwriting.
+#
+# The entity below borrows a vanilla model so phase 1 has something spawnable
+# to test mechanics against. The real hull, its sections and the Planet Catcher
+# cradles are phase 3 (author's own modelling).
+#
+# VERIFY: entity name, and whether NSC3 alters is_designable handling.
+# =============================================================================
+
+ark_hull = {
+	graphical_culture = { "generic_01" }
+	entity = "juggernaut_entity"          # TODO placeholder - phase 3 replaces
+	max_speed = 40.0
+	acceleration = 0.05
+	rotation_speed = 0.05
+	collision_radius = 24.0
+	modifier = { ship_evasion_mult = -1.0 }
+	max_hitpoints = 400000
+	base_buildtime = 3600
+	combat_size_multiplier = 40
+	is_designable = no
+	components_add_to_cost = no
+
+	class = shipclass_military
+	is_space_station = no
+	icon = ship_size_military_5
+	is_civilian = no
+
+	prerequisites = { }
+	combat_disengage_chance = 0.0
+
+	potential_construction = { always = no }   # never buildable; it is found
+}

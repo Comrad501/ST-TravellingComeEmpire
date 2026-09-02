@@ -1,0 +1,31 @@
+# =============================================================================
+# PHASE 2 DIRECTORY - additive only
+# =============================================================================
+# component_templates is contested: NSC3 and EFCF both define objects here.
+# The risk is OVERWRITING their files, not coexisting with them. This file has
+# a name neither mod uses and every key is ARK_-prefixed, so it is additive and
+# safe to load alongside both. Never edit their files; only ever add our own.
+#
+# Ship-mounted auras are VANILLA - SHIP_AURA_TARGETING_GRID and
+# SHIP_AURA_STRIKE_CRAFT both ship with the game, and the inhibition effect
+# already exists as STARBASE_AURA_FTL_INHIBITOR. This is a recombination of two
+# existing things, not a new primitive (architecture map S24).
+# =============================================================================
+
+utility_component_template = {
+	key = "SHIP_AURA_ARK_CONTAINMENT"
+	size = aux
+	icon = "GFX_ship_part_aura_targeting_grid"
+	icon_frame = 1
+	power = -50
+	cost = 40
+
+	# The ship carries the tag from the moment it exists. Nothing inspects
+	# components at runtime (architecture map S4).
+	ship_modifier = {
+		ship_disengage_chance_mult = -0.25
+	}
+
+	component_set = "SHIP_AURA_ARK_CONTAINMENT"
+	prerequisites = { "tech_ftl_inhibitor" }
+}

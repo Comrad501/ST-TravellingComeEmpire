@@ -1,0 +1,70 @@
+# =============================================================================
+# ONE DEFINITION OF "CONTAINED"
+# =============================================================================
+# Both the situation's monthly_progress and the Ark's jump eligibility call this
+# trigger. They cannot disagree about whether the Ark is held, because there is
+# only one definition of held (architecture map S4).
+#
+# Containment DEGRADES, it does not gate (S14). Losing projectors weakens the
+# field progressively; there is no minimum below which nothing happens.
+# =============================================================================
+
+# Scope: a solar system.
+ark_containment_strength_at_least = {
+	OPTIMIZE_MEMORY
+	check_variable = { which = ark_inhibitor_count value >= $COUNT$ }
+}
+
+# Scope: a solar system. The shared test.
+ark_containment_holds = {
+	OPTIMIZE_MEMORY
+	check_variable = { which = ark_inhibitor_count value > 0 }
+}
+
+# Scope: the Ark's fleet. Jump eligibility.
+# The Ark leaves on containment failing or on a capture completing - never on a
+# timer, because a timer makes the projectors decorative (architecture map S22).
+ark_may_jump = {
+	OPTIMIZE_MEMORY
+	OR = {
+		solar_system = { NOT = { ark_containment_holds = yes } }
+		has_fleet_flag = ark_capture_complete
+	}
+}
+
+# ---------------------------------------------------------------------------
+# THE STUB SEAM - trigger half
+# ---------------------------------------------------------------------------
+# Scope: the Ark's fleet. True while incoming fire exceeds shell regeneration.
+ark_shell_strip_ready = {
+	OPTIMIZE_MEMORY
+	always = no
+	# TODO: compare sustained incoming damage against the regen threshold,
+	# which scales with worlds held (architecture map S15).
+}
+
+# Scope: the Ark's fleet. The window closes when this becomes true again.
+ark_shell_regenerating = {
+	OPTIMIZE_MEMORY
+	has_fleet_flag = ark_shell_down
+	NOT = { ark_shell_strip_ready = yes }
+}
+
+# ---------------------------------------------------------------------------
+# WORTHINESS - who the Ark judges, and who it does not
+# ---------------------------------------------------------------------------
+# A machine empire is not the legacy the Ark was built to correct, so worthiness
+# never evaluates it. It can hold the Ark; it can never be assimilated, only
+# shattered (architecture map S19).
+ark_is_subject_to_judgment = {
+	OPTIMIZE_MEMORY
+	NOT = { is_machine_empire = yes }
+}
+
+# Scope: a country. The activation key checks for a LIVING ORGANIC POP, not a
+# strict portrait group. The humanoid-form reasoning was the builders' own, and
+# it was wrong - machines make war too (architecture map S20, G36).
+ark_holds_activation_key = {
+	OPTIMIZE_MEMORY
+	any_owned_pop = { is_robotic = no }
+}

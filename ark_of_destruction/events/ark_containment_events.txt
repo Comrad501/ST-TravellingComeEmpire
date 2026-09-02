@@ -1,0 +1,62 @@
+namespace = ark
+
+# =============================================================================
+# COUNTER MAINTENANCE
+# =============================================================================
+# Every event here is hidden, does bounded work, and fires only from an
+# on_action. None of them run on a pulse over the galaxy.
+# =============================================================================
+
+# A fleet entered a system.
+country_event = {
+	id = ark.100
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { from = { exists = this } }
+	immediate = {
+		from = { ark_inhibitors_enter_system = yes }
+	}
+}
+
+# A fleet left a system.
+country_event = {
+	id = ark.101
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { from = { exists = this } }
+	immediate = {
+		from = { ark_inhibitors_leave_system = yes }
+	}
+}
+
+# A ship was destroyed.
+ship_event = {
+	id = ark.102
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		ark_inhibitor_ship_destroyed = yes
+	}
+}
+
+# Monthly: decay the grudge, and reconcile only the Ark's own system.
+country_event = {
+	id = ark.110
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		# ~2% a month, so a grudge fades over roughly a decade (map S22).
+		if = {
+			limit = { check_variable = { which = ark_damage_dealt value > 0 } }
+			multiply_variable = { which = ark_damage_dealt value = 0.98 }
+		}
+		# Drift insurance. One system, not the galaxy.
+		if = {
+			limit = { has_country_flag = ark_holder }
+			every_owned_fleet = {
+				limit = { has_fleet_flag = ark_hull }
+				solar_system = { ark_reconcile_inhibitor_count = yes }
+			}
+		}
+	}
+}

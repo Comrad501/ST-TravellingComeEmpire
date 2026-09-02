@@ -39,7 +39,8 @@ So acquisition needs two keys rarely in one hand: a machine empire to hold it, a
 living humanoid to start it. A Determined Exterminator disqualifies itself by purging
 every hand that could have turned the key.
 
-**Status: planning only. No mod code has been written yet.**
+**Status: phase 1 in progress.** The mod skeleton and the mechanics that live in
+uncontested directories are written; see `Deploying` below.
 
 **v0.1 scope: the Ark is an AI crisis.** Build steps 1-6 sit in the shared core.
 
@@ -79,6 +80,21 @@ Four coined proper nouns (`Archelias`, `Gatlantis`, `Zemuria`, `Zworder`) and on
 technology term (`wave motion`) want replacing. "Ark of Destruction" and "travelling comet
 empire" are generic enough to keep. Cheapest done before build step 1, since localisation
 keys are written there (`G38`).
+
+## Deploying
+
+The mod lives in `ark_of_destruction/`. Symlink or copy that folder into
+`Documents/Paradox Interactive/Stellaris/mod/`, and copy `ark_of_destruction.mod`
+alongside it, then enable it in the launcher.
+
+Run `python3 tools/validate.py` before every commit. It checks brace balance, quote
+parity, the localisation BOM and key form, that every `ark_*` effect and trigger called is
+also defined, and that every event an `on_action` points at exists. All of those fail
+*silently* in-game, which is why they are checked here.
+
+It cannot verify that field names are real in 4.4.6. Check those against
+`script_documentation/` in the local data folder - the game writes it, and it is the only
+version-accurate source.
 
 ## Contents
 
