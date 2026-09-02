@@ -159,6 +159,28 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
 .steps .gate{display:inline-block;margin:8px 0 0;justify-self:start}
 .steps li.blocked h3{color:var(--ink)}
 
+/* ---- gaps ---- */
+.tier{margin:36px 0 0}
+.tier-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding:0 0 9px}
+.tier-h .n{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em}
+.tier-h h3{margin:0;font-size:20px}
+.tier-h .t1{color:var(--danger)} .tier-h .t2{color:var(--warn)} .tier-h .t3{color:var(--muted)}
+.tier-h .rider{font-size:13px;color:var(--muted);margin-left:auto;font-family:var(--font-mono)}
+.gap{display:grid;grid-template-columns:52px 1fr;gap:0 18px;padding:18px 0;
+  border-bottom:1px solid var(--line-2)}
+.gap>*{grid-column:2}
+.gap .g{grid-column:1;grid-row:1;font-family:var(--font-mono);font-size:12px;
+  color:var(--accent);padding-top:4px}
+.gap h4{font-family:var(--font-display);font-weight:600;font-size:18px;margin:0;color:var(--ink)}
+.gap p{margin:5px 0 0;font-size:14px;max-width:64ch}
+.gap .why{font-size:13px;color:var(--muted);margin:8px 0 0;max-width:64ch;
+  border-left:2px solid var(--line);padding-left:12px}
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);padding:20px 24px;
+  margin:34px 0 0;border-radius:0 3px 3px 0}
+.note .sig{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--warn);margin:0}
+.note h3{margin:7px 0 0;font-size:19px}
+.note p{margin:9px 0 0;font-size:14.5px;max-width:64ch}
+
 .foot{margin:64px 0 0;padding:24px 0 0;border-top:1px solid var(--line);
   font-size:13px;color:var(--muted);max-width:72ch}
 </style>
@@ -178,6 +200,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag on">Base + Apocalypse + Federations + Nemesis</span>
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">2 blocking unknowns</span>
+    <span class="tag">12 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -764,6 +787,213 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
       U3 and is explicitly not worth blocking on.</p>
     </li>
   </ol>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;10</span><h2>What the notes don't cover at all</h2></div>
+  <p class="lead">Distinct from U1&#8211;U5. Those are questions the notes ask and can't yet answer;
+  these are areas the notes never reach. Tier 1 changes what gets built, so it can't be deferred the
+  way the unknowns can.</p>
+
+  <div class="tier">
+    <div class="tier-h"><span class="n t1">TIER 1</span><h3>Architectural &#8212; answering these changes the build</h3>
+      <span class="rider">4 gaps</span></div>
+
+    <div class="gap">
+      <span class="g">G1</span>
+      <h4>Is the Ark a crisis, a playable empire, or both?</h4>
+      <p>The notes read both ways and never settle it. "Houses the empire's seat of government" and
+      the player-side overload component point at playable. "Gives the defending side a real mid-game
+      objective", "the Ark will prioritize killing it", and the Contingency/Blokkat framing point at
+      an AI crisis.</p>
+      <p class="why">This is the gap that sizes every other one. A crisis needs spawn conditions and
+      AI behaviour and no economy at all; a playable empire needs an origin, a tech path, a build
+      loop, and the whole of G2. They are not the same mod.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G2</span>
+      <h4>The economy of an empire with no homeworld</h4>
+      <p>One parenthetical about energy upkeep is the entire coverage. Unanswered: where income comes
+      from; whether carried colonies run normal districts, buildings and jobs; whether the Ark acts as
+      a mobile shipyard and starbase; what replaces the capital building chain, which requires a
+      capital planet; how sprawl and admin cap work when you own no systems.</p>
+      <p class="why">If G1 resolves to playable, this is roughly the larger half of the mod and it is
+      currently unwritten. If it resolves to crisis, most of it evaporates.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G3</span>
+      <h4>What happens when the Ark dies</h4>
+      <p>If the seat of government is aboard, does the empire end instantly? What becomes of the four
+      carried colonies &#8212; re-shattered, released as independents, or deleted with their pops? What
+      if it dies while a situation is mid-progress and its target colony went down with the ship?</p>
+      <p class="why">Partly a design question, partly a stuck-state risk: the situation layer's
+      <code>destroy_situation</code> requirement needs someone to call it, and the obvious caller is
+      the thing that just stopped existing.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G4</span>
+      <h4>How the defender learns the kill sequence</h4>
+      <p>There is a staged kill and a losing condition, but no event chain, research path, or advisor
+      prompt that teaches anyone the cannon is the answer.</p>
+      <p class="why">A stage-gated boss that never reveals the gate is indistinguishable from an
+      unkillable one. The losing condition fires and the player never knew a counter existed. Vanilla
+      teaches both the Contingency and Blokkat counters explicitly.</p>
+    </div>
+  </div>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 480" role="img" aria-label="A decision node asking who controls the Ark, branching into a crisis branch requiring three subsystems and a playable branch requiring five, both feeding into a shared band of subsystems required either way.">
+      <defs>
+        <marker id="m6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+      </defs>
+
+      <rect class="dg-acc" x="440" y="34" width="300" height="56" rx="3"/>
+      <text class="dg-t2" x="590" y="58" text-anchor="middle">G1 &#183; Who controls the Ark?</text>
+      <text class="dg-s" x="590" y="76" text-anchor="middle">unanswered in the notes</text>
+
+      <path class="dg-line" d="M520 90 L520 110 Q520 118 512 118 L308 118 Q300 118 300 126 L300 136" marker-end="url(#m6)"/>
+      <path class="dg-line" d="M660 90 L660 110 Q660 118 668 118 L872 118 Q880 118 880 126 L880 136" marker-end="url(#m6)"/>
+
+      <text class="dg-h" x="60" y="132">IF CRISIS &#183; ADDS</text>
+      <text class="dg-h" x="640" y="132">IF PLAYABLE &#183; ADDS</text>
+
+      <rect class="dg-box" x="60" y="142" width="480" height="38" rx="3"/>
+      <text class="dg-l" x="80" y="166">spawn conditions + escalation curve</text>
+      <rect class="dg-box" x="60" y="188" width="480" height="38" rx="3"/>
+      <text class="dg-l" x="80" y="212">AI target selection and jump timing</text>
+      <rect class="dg-box" x="60" y="234" width="480" height="38" rx="3"/>
+      <text class="dg-l" x="80" y="258">difficulty and galaxy-size scaling</text>
+
+      <rect class="dg-box" x="640" y="142" width="480" height="38" rx="3"/>
+      <text class="dg-l" x="660" y="166">origin, civics, tech access</text>
+      <rect class="dg-box2" x="640" y="188" width="480" height="38" rx="3" stroke-dasharray="5 4"/>
+      <text class="dg-l" x="660" y="212">economy with no homeworld</text>
+      <text class="dg-s" x="1100" y="212" text-anchor="end">G2</text>
+      <rect class="dg-box2" x="640" y="234" width="480" height="38" rx="3" stroke-dasharray="5 4"/>
+      <text class="dg-l" x="660" y="258">capital building chain substitute</text>
+      <rect class="dg-box2" x="640" y="280" width="480" height="38" rx="3" stroke-dasharray="5 4"/>
+      <text class="dg-l" x="660" y="304">mobile shipyard and starbase role</text>
+      <rect class="dg-box" x="640" y="326" width="480" height="38" rx="3"/>
+      <text class="dg-l" x="660" y="350">player build loop and UI</text>
+
+      <text class="dg-s" x="60" y="296">three subsystems, none written</text>
+      <text class="dg-s t-bad" x="640" y="382">five subsystems, none written &#183; dashed = no notes exist at all</text>
+
+      <line class="dg-line" x1="300" y1="272" x2="300" y2="404" marker-end="url(#m6)"/>
+      <line class="dg-line" x1="880" y1="364" x2="880" y2="404" marker-end="url(#m6)"/>
+
+      <rect class="dg-box" x="60" y="410" width="1060" height="56" rx="3"/>
+      <text class="dg-t2" x="80" y="434">Required either way</text>
+      <text class="dg-s" x="80" y="453">hull &#183; comet shell &#183; Planet Catcher &#183; containment &#183; situation layer &#183; stub seam &#183; kill stages 2&#8211;3</text>
+    </svg>
+    </div>
+    <figcaption><b>The shared band is what build-order steps 1&#8211;6 already cover.</b> Everything
+    above it is contingent on G1, and the two branches are not remotely the same size &#8212; the
+    playable branch adds an entire economic subsystem for which no notes exist. This is why G1 is
+    worth answering before any more code is scoped, not after.</figcaption>
+  </figure>
+
+  <div class="tier">
+    <div class="tier-h"><span class="n t2">TIER 2</span><h3>Specified too loosely to implement</h3>
+      <span class="rider">4 gaps</span></div>
+
+    <div class="gap">
+      <span class="g">G5</span>
+      <h4>Nothing anywhere is quantified</h4>
+      <p>No shell HP or regen rate. No containment radius R or ship-count threshold N. No duration
+      for the exposed window after a shell strip, no capture duration, no Ark fleet power relative to
+      a mid-game empire, no count of worlds at which the crisis is considered won.</p>
+      <p class="why">Placeholder numbers would be enough. Without any, the design is describable but
+      not testable &#8212; there is nothing to be right or wrong about yet.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G6</span>
+      <h4>The Golem is one sentence</h4>
+      <p>"Kills a target empire's population outright" leaves the scope open: all pops of a species
+      galaxy-wide, one planet, or one empire's worlds? "Seized from the throne room" leaves the
+      mechanism and the interface open too.</p>
+      <p class="why">It is the reward for the entire boarding stage, so its scope sets how valuable
+      stage 2 feels.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G7</span>
+      <h4>The Anti Wave Motion Lattice is orphaned</h4>
+      <p>Named once, flagged as needing a new component from scratch, then absent &#8212; not in the
+      kill sequence, not in containment, not in the open questions.</p>
+      <p class="why">Needs an explicit in-scope or cut. Right now it is neither, which is the state
+      that quietly costs time later.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G8</span>
+      <h4>AI behaviour, if G1 resolves to crisis</h4>
+      <p>Zero coverage. When does the Ark jump, how does it choose targets, does it prefer weak
+      empires or rich ones, how does it escalate over a campaign, how does it respond to difficulty
+      and galaxy size?</p>
+      <p class="why">The containment mechanic only produces interesting play if the Ark's side of it
+      is making decisions worth countering.</p>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-h"><span class="n t3">TIER 3</span><h3>Process &#8212; not design, but it will cost time</h3>
+      <span class="rider">4 gaps</span></div>
+
+    <div class="gap">
+      <span class="g">G9</span>
+      <h4>Compatibility with EFCF</h4>
+      <p>EFCF is installed and the notes already cite it as the working reference for locators &#8212;
+      which means it touches the same file categories this mod will. There is no audit of whether they
+      collide on <code>ship_sizes</code>, <code>section_templates</code>, or <code>on_actions</code>,
+      and load order gets a single mention.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G10</span>
+      <h4>The development and test loop</h4>
+      <p>Nothing on how iteration actually happens: where <code>error.log</code> lives, the console
+      commands to spawn the Ark, <code>debugtooltip</code>, a prepared test save.</p>
+      <p class="why">This is the gap that gates the others. U1 and U2 can only be resolved by running
+      the game, and I cannot run it &#8212; so the speed of your test loop is the speed of the whole
+      project.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G11</span>
+      <h4>No definition of done</h4>
+      <p>No split between a first release and a complete one. With two blocking unknowns and a
+      possibly-large economy subsystem, a deliberately small v0.1 is worth defining now.</p>
+    </div>
+
+    <div class="gap">
+      <span class="g">G12</span>
+      <h4>Save-game and version durability</h4>
+      <p>No position on whether saves survive a mod update, what happens to an in-flight Ark when
+      Stellaris patches, or whether the mod is ironman and achievement compatible.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <p class="sig">WORTH DECIDING EARLY, NOT LATE</p>
+    <h3>Intellectual property, if this ever goes to the Workshop</h3>
+    <p>The concept is closely derived from Space Battleship Yamato &#8212; Gatlantis, Zemuria, the
+    Ark of Destruction, wave motion technology. For a mod you run locally this is a non-issue. For a
+    public Steam Workshop release it is real exposure: anime rightsholders do issue Workshop
+    takedowns, and the risk is considerably higher if models, textures, or music are extracted from
+    the games rather than made from scratch.</p>
+    <p>Raising it now because it is a decision about <em>where the art comes from</em>, and that gets
+    expensive to reverse once assets are made. Original assets in the same visual language carry far
+    less risk than ripped ones. This is your call to make &#8212; it just costs less to make it
+    before the pipeline in &#167;8 of the notes gets built out.</p>
+  </div>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

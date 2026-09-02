@@ -37,6 +37,19 @@ Tracked in the architecture map as `U1`–`U5`. Two are blocking:
 - **U5** — the shell-stripping cannon in the kill sequence is Nomads content, but Nomads
   is not owned. Stage 1 needs a substitute or the kill sequence has no first step.
 
+## Information gaps
+
+Separate from `U1`-`U5`. The unknowns are questions the notes ask and cannot yet answer;
+the gaps (`G1`-`G12`, in the architecture map) are areas the notes never reach. Four are
+architectural and cannot be deferred:
+
+- **G1** - is the Ark an AI crisis, a playable empire, or both? The notes read both ways.
+  This sizes every other question; the two branches are not the same mod.
+- **G2** - the economy of an empire with no homeworld. One parenthetical about energy
+  upkeep is the entire coverage.
+- **G3** - what happens when the Ark dies, to the empire and to its carried colonies.
+- **G4** - how a defender ever learns the kill sequence exists.
+
 ## Build order
 
 Steps 1–6 require no unknown to be resolved: mod skeleton, Ark hull and comet shell, empty
