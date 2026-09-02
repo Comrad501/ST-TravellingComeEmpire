@@ -97,19 +97,28 @@ asserting that doom is universal does not fix this. Five levers cut the loop (`ย
 It does need teaching, since a player who assumes capture is the worse outcome reads the
 whole mechanic backwards.
 
-**Cooperation is rewarded, not gated** (`G20`). Contribution converts into **cannon
-yield**, which sets how long the shell stays down, which is the time stage 2 spends
-boarding. Since conventional fire cannot strip the shell at all, cannon yield is the only
-form "more firepower to shed it" can take - and unlike a generic reward it cannot be
-banked or spent on anything except the Ark.
+**Cooperation is rewarded, not gated** (`G20`).
 
-Each empire's usable share is **capped**, so the yield bar fills by adding empires rather
-than tonnage. A superpower arriving alone gets the same short window as anyone else. This
-gives the coalition requirement without a hard gate: a solo empire is never refused, it
-just fires at low yield and fails partway through boarding, for a reason it can name.
+**There is no cannon.** Stage 1 is sustained fleet fire (`ยง15`). The shell regenerates in
+proportion to how damaged it is, so incoming fire and regeneration reach an equilibrium:
 
-Two knock-ons: `L3`'s containment floor softens to match (degrade, do not gate), and the
-contribution counter is read twice - capped for yield, raw for ranking `L5`'s Golem award.
+- Combined damage **below** the threshold - the shell flattens out and *never* falls, no
+  matter how long the fight runs.
+- **Above** it - the shell falls, and every extra gun shortens the descent.
+
+Damage is natively additive across empires, so the coalition incentive lives in the combat
+maths with nothing to build and nobody to coordinate with. The window is not a timer: the
+shell stays down **only while fire is sustained above the threshold**, which collapses
+containment, stripping and boarding into one simultaneous engagement - and gives the Ark's
+spinal AoE weapon its purpose, since one wide attack degrades all three at once.
+
+**What stops a superpower soloing it:** regeneration scales with the number of worlds the
+Ark has collected. Early, one strong empire genuinely can - and should be allowed to.
+Late, no single fleet is enough. The gate is *time*, not permission, and the Ark's own
+growth becomes the difficulty curve.
+
+`L3`'s containment floor softens to match (degrade, do not gate), and the contribution
+counter still ranks empires for `L5`'s Golem award.
 
 **Caveat:** in single-player the coalition is mostly AI, and Stellaris AI does not reliably
 coordinate against crises. The cooperative outcome must be reachable without the AI

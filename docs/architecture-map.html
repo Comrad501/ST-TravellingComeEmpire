@@ -223,9 +223,9 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
   <div class="meta">
     <span class="tag on">Base + Apocalypse + Federations + Nemesis</span>
     <span class="tag">Nomads — not owned, stubbed</span>
-    <span class="tag">2 blocking unknowns</span>
+    <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">25 information gaps</span>
+    <span class="tag">26 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -1695,6 +1695,201 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     enough that a premature shot hurts, short enough that it is not campaign-ending &#8212; but the
     firing authority still needs an owner, and in a Galactic Community build that is a political
     question the game already has machinery for.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;15</span><h2>No cannon. Just guns, and enough of them.</h2></div>
+
+  <div class="verdict">
+    <p class="k">DECISION &#183; REPLACES THE STAGE 1 GATE</p>
+    <h3>The shell is stripped by fleet fire, not by a unique megastructure.</h3>
+    <p>Players need firepower, not a building. Which means stage 1 stops being a construction project
+    with a trigger on it and becomes what it should probably always have been: a fight you have to win
+    hard enough, for long enough.</p>
+  </div>
+
+  <p>This deletes more than it adds. Three open items close outright, one of them the second of the
+  two <em>blocking</em> unknowns:</p>
+
+  <div class="dec">
+    <div>
+      <p class="k ok">DISSOLVED</p>
+      <h3>U5 &#183; the Nomads cannon</h3>
+      <p>Stage 1 was built on a Stellar Cannon from a DLC that is not owned. With no cannon there is
+      no dependency and nothing to substitute. The blocking unknown does not get answered &#8212; it
+      stops existing.</p>
+    </div>
+    <div>
+      <p class="k ok">DISSOLVED</p>
+      <h3>G25 &#183; who fires it</h3>
+      <p>No single trigger means no firing authority, no premature discharge wasting a coalition's
+      investment, and no recharge rule to design. Everyone shooting is everyone participating.</p>
+    </div>
+    <div>
+      <p class="k ok">SUBSUMED</p>
+      <h3>L4 &#183; joint funding</h3>
+      <p>The Galactic Community build existed to make cooperation structural. Damage is already
+      additive across empires, so the coalition mechanic is now native to the combat instead of bolted
+      onto a shared construction.</p>
+    </div>
+    <div>
+      <p class="k ok">HALVED</p>
+      <h3>The stub seam</h3>
+      <p><code>ark_shell_strip</code> and <code>ark_shell_strip_ready</code> had two possible
+      backings only because of the cannon. Shell stripping is now plain base-game combat maths, so
+      only the colony-attach half of the seam still needs to swap.</p>
+    </div>
+  </div>
+
+  <h3>The premise has to invert, and it inverts into something better</h3>
+  <p>&#167;4 said conventional fire <em>cannot</em> touch the shell, which is what the cannon existed
+  to solve. Dropping the cannon means dropping that too &#8212; so the question stops being "can you
+  damage it" and becomes <strong>"can you out-damage its regeneration"</strong>. That is a rate
+  problem, not a total. It has a threshold, and thresholds are what make coalitions matter.</p>
+  <p>Model the shell as regenerating in proportion to how damaged it is, the way a shield does. Then
+  incoming fire and regeneration find an equilibrium, and where that equilibrium sits decides
+  everything:</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 410" role="img" aria-label="Shell integrity over time under three levels of sustained fire. Below the regeneration threshold the curve flattens at 62 percent and never reaches zero. Just above it, the shell falls to zero slowly. Well above it, the shell falls to zero quickly.">
+      <text class="dg-h" x="40" y="26">SHELL INTEGRITY UNDER SUSTAINED FIRE</text>
+
+      <line x1="140" y1="48" x2="162" y2="48" stroke="var(--danger)" stroke-width="2.5"/>
+      <text class="dg-l" x="170" y="52">2 empires &#183; below the threshold</text>
+      <line x1="470" y1="48" x2="492" y2="48" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="6 4"/>
+      <text class="dg-l" x="500" y="52">4 empires</text>
+      <line x1="620" y1="48" x2="642" y2="48" stroke="var(--accent)" stroke-width="2.5"/>
+      <text class="dg-l" x="650" y="52">7 empires</text>
+
+      <g transform="translate(0,20)">
+        <line x1="140" y1="60" x2="1000" y2="60" stroke="var(--line-2)" stroke-width="1"/>
+        <line x1="140" y1="190" x2="1000" y2="190" stroke="var(--line-2)" stroke-width="1"/>
+        <line x1="140" y1="320" x2="1000" y2="320" stroke="var(--accent)" stroke-width="1.4"/>
+        <line x1="140" y1="60" x2="140" y2="320" stroke="var(--line)" stroke-width="1"/>
+
+        <text class="dg-s" x="128" y="64" text-anchor="end">100%</text>
+        <text class="dg-s" x="128" y="194" text-anchor="end">50%</text>
+        <text class="dg-s" x="128" y="324" text-anchor="end">0%</text>
+
+        <polyline points="140.0,60.0 145.1,61.7 150.1,63.4 155.2,65.1 160.2,66.7 165.3,68.3 170.4,69.9 175.4,71.5 180.5,73.0 185.5,74.5 190.6,76.0 195.6,77.4 200.7,78.9 205.8,80.3 210.8,81.6 215.9,83.0 220.9,84.3 226.0,85.6 231.1,86.9 236.1,88.1 241.2,89.4 246.2,90.6 251.3,91.8 256.4,93.0 261.4,94.1 266.5,95.2 271.5,96.4 276.6,97.4 281.6,98.5 286.7,99.6 291.8,100.6 296.8,101.6 301.9,102.6 306.9,103.6 312.0,104.6 317.1,105.5 322.1,106.5 327.2,107.4 332.2,108.3 337.3,109.2 342.4,110.0 347.4,110.9 352.5,111.7 357.5,112.5 362.6,113.3 367.6,114.1 372.7,114.9 377.8,115.7 382.8,116.4 387.9,117.2 392.9,117.9 398.0,118.6 403.1,119.3 408.1,120.0 413.2,120.7 418.2,121.4 423.3,122.0 428.4,122.7 433.4,123.3 438.5,123.9 443.5,124.5 448.6,125.1 453.6,125.7 458.7,126.3 463.8,126.9 468.8,127.4 473.9,128.0 478.9,128.5 484.0,129.0 489.1,129.6 494.1,130.1 499.2,130.6 504.2,131.1 509.3,131.6 514.4,132.0 519.4,132.5 524.5,133.0 529.5,133.4 534.6,133.9 539.6,134.3 544.7,134.7 549.8,135.1 554.8,135.6 559.9,136.0 564.9,136.4 570.0,136.8 575.1,137.1 580.1,137.5 585.2,137.9 590.2,138.3 595.3,138.6 600.4,139.0 605.4,139.3 610.5,139.7 615.5,140.0 620.6,140.3 625.6,140.6 630.7,141.0 635.8,141.3 640.8,141.6 645.9,141.9 650.9,142.2 656.0,142.5 661.1,142.8 666.1,143.0 671.2,143.3 676.2,143.6 681.3,143.8 686.4,144.1 691.4,144.4 696.5,144.6 701.5,144.9 706.6,145.1 711.6,145.3 716.7,145.6 721.8,145.8 726.8,146.0 731.9,146.3 736.9,146.5 742.0,146.7 747.1,146.9 752.1,147.1 757.2,147.3 762.2,147.5 767.3,147.7 772.4,147.9 777.4,148.1 782.5,148.3 787.5,148.5 792.6,148.7 797.6,148.8 802.7,149.0 807.8,149.2 812.8,149.3 817.9,149.5 822.9,149.7 828.0,149.8 833.1,150.0 838.1,150.1 843.2,150.3 848.2,150.4 853.3,150.6 858.4,150.7 863.4,150.9 868.5,151.0 873.5,151.2 878.6,151.3 883.6,151.4 888.7,151.5 893.8,151.7 898.8,151.8 903.9,151.9 908.9,152.0 914.0,152.2 919.1,152.3 924.1,152.4 929.2,152.5 934.2,152.6 939.3,152.7 944.4,152.8 949.4,152.9 954.5,153.0 959.5,153.1 964.6,153.2 969.6,153.3 974.7,153.4 979.8,153.5 984.8,153.6 989.9,153.7 994.9,153.8 1000.0,153.9" fill="none" stroke="var(--danger)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polyline points="140.0,60.0 145.1,65.1 150.1,70.1 155.2,75.0 160.2,79.8 165.3,84.6 170.4,89.3 175.4,93.8 180.5,98.3 185.5,102.8 190.6,107.1 195.6,111.4 200.7,115.6 205.8,119.7 210.8,123.7 215.9,127.7 220.9,131.6 226.0,135.5 231.1,139.2 236.1,143.0 241.2,146.6 246.2,150.2 251.3,153.7 256.4,157.1 261.4,160.5 266.5,163.9 271.5,167.2 276.6,170.4 281.6,173.5 286.7,176.6 291.8,179.7 296.8,182.7 301.9,185.6 306.9,188.5 312.0,191.4 317.1,194.2 322.1,196.9 327.2,199.6 332.2,202.3 337.3,204.9 342.4,207.4 347.4,210.0 352.5,212.4 357.5,214.9 362.6,217.2 367.6,219.6 372.7,221.9 377.8,224.1 382.8,226.4 387.9,228.6 392.9,230.7 398.0,232.8 403.1,234.9 408.1,236.9 413.2,238.9 418.2,240.9 423.3,242.8 428.4,244.7 433.4,246.6 438.5,248.4 443.5,250.2 448.6,252.0 453.6,253.7 458.7,255.4 463.8,257.1 468.8,258.7 473.9,260.3 478.9,261.9 484.0,263.5 489.1,265.0 494.1,266.5 499.2,268.0 504.2,269.5 509.3,270.9 514.4,272.3 519.4,273.7 524.5,275.0 529.5,276.4 534.6,277.7 539.6,279.0 544.7,280.2 549.8,281.5 554.8,282.7 559.9,283.9 564.9,285.1 570.0,286.2 575.1,287.4 580.1,288.5 585.2,289.6 590.2,290.7 595.3,291.7 600.4,292.8 605.4,293.8 610.5,294.8 615.5,295.8 620.6,296.7 625.6,297.7 630.7,298.6 635.8,299.5 640.8,300.4 645.9,301.3 650.9,302.2 656.0,303.1 661.1,303.9 666.1,304.7 671.2,305.5 676.2,306.3 681.3,307.1 686.4,307.9 691.4,308.7 696.5,309.4 701.5,310.1 706.6,310.9 711.6,311.6 716.7,312.3 721.8,312.9 726.8,313.6 731.9,314.3 736.9,314.9 742.0,315.5 747.1,316.2 752.1,316.8 757.2,317.4 762.2,318.0 767.3,318.6 772.4,319.1 777.4,319.7 782.5,320.0" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round"/>
+        <polyline points="140.0,60.0 145.1,69.6 150.1,78.9 155.2,88.2 160.2,97.2 165.3,106.1 170.4,114.9 175.4,123.4 180.5,131.9 185.5,140.2 190.6,148.3 195.6,156.3 200.7,164.2 205.8,171.9 210.8,179.5 215.9,187.0 220.9,194.3 226.0,201.5 231.1,208.6 236.1,215.5 241.2,222.4 246.2,229.1 251.3,235.7 256.4,242.2 261.4,248.5 266.5,254.8 271.5,260.9 276.6,266.9 281.6,272.9 286.7,278.7 291.8,284.4 296.8,290.1 301.9,295.6 306.9,301.0 312.0,306.3 317.1,311.6 322.1,316.7 327.2,320.0" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>
+
+        <line x1="1000" y1="159" x2="1004" y2="159" stroke="var(--danger)" stroke-width="2.5"/>
+        <text class="dg-l t-bad" x="1010" y="155">2 empires</text>
+        <text class="dg-s" x="1010" y="171">never reaches zero</text>
+
+        <circle cx="327" cy="320" r="4.5" fill="var(--accent)"/>
+        <text class="dg-l t-acc" x="337" y="308">7 empires</text>
+        <circle cx="782" cy="320" r="4.5" fill="var(--accent)"/>
+        <text class="dg-l t-acc" x="792" y="308">4 empires</text>
+        <text class="dg-s t-acc" x="1010" y="326">shell down</text>
+
+        <line x1="150" y1="159" x2="960" y2="159" stroke="var(--danger)" stroke-width="1" stroke-dasharray="3 5"/>
+        <text class="dg-s t-bad" x="150" y="150">equilibrium: regeneration exactly matches incoming fire</text>
+      </g>
+
+      <text class="dg-s" x="140" y="364">time under sustained fire &#8594;</text>
+      <text class="dg-s" x="1000" y="364" text-anchor="end">Schematic. Curve shapes follow the regeneration model; the values are not tuned &#8212; see G5.</text>
+    </svg>
+    </div>
+    <figcaption><b>The flat red line is the whole argument.</b> A coalition below the threshold does
+    not lose slowly &#8212; it does not lose at all, it simply never wins, and no amount of patience
+    changes that. Above the threshold every extra gun shortens the descent. That is a cooperation
+    incentive expressed purely in combat maths, with nothing to build and nobody to coordinate
+    with.</figcaption>
+  </figure>
+
+  <h3>The window stops being a timer</h3>
+  <p>Under the cannon, yield bought a fixed countdown. Under sustained fire it buys nothing of the
+  sort: the shell stays down <strong>for exactly as long as you keep out-damaging it</strong>. Break
+  off, lose the line, or get thinned below the threshold and regeneration restarts immediately.</p>
+  <p>That collapses three things the design had been treating as sequential into one engagement.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 350" role="img" aria-label="Three simultaneous requirements - inhibitor ships holding the Ark, combined fleet fire out-damaging the shell, and troop transports landing - all cut by the Ark's spinal area-effect weapon, feeding one outcome: the window holds only while all three hold.">
+      <defs>
+        <marker id="m11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="40" y="30">SIMULTANEOUS, NOT SEQUENTIAL</text>
+
+      <rect class="dg-box" x="40" y="66" width="300" height="58" rx="3"/>
+      <text class="dg-t2" x="58" y="90">Inhibitor ships</text>
+      <text class="dg-s" x="58" y="109">hold it in place</text>
+
+      <rect class="dg-acc" x="40" y="146" width="300" height="58" rx="3"/>
+      <text class="dg-t2" x="58" y="170">Combined fleet fire</text>
+      <text class="dg-s" x="58" y="189">out-damage the regeneration</text>
+
+      <rect class="dg-box" x="40" y="226" width="300" height="58" rx="3"/>
+      <text class="dg-t2" x="58" y="250">Troop transports</text>
+      <text class="dg-s" x="58" y="269">land on the carried worlds</text>
+
+      <line class="dg-line" x1="340" y1="95" x2="592" y2="130" marker-end="url(#m11)"/>
+      <line class="dg-line" x1="340" y1="175" x2="592" y2="175" marker-end="url(#m11)"/>
+      <line class="dg-line" x1="340" y1="255" x2="592" y2="220" marker-end="url(#m11)"/>
+
+      <rect x="424" y="52" width="52" height="246" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text class="dg-l t-bad" x="450" y="44" text-anchor="middle">spinal AoE</text>
+      <text class="dg-s t-bad" x="450" y="316" text-anchor="middle">one attack, all three lines at once</text>
+
+      <rect class="dg-box" x="600" y="110" width="540" height="130" rx="3"/>
+      <text class="dg-t2" x="622" y="138">The shell stays down only while all three hold</text>
+      <line class="dg-rule" x1="622" y1="152" x2="1118" y2="152"/>
+      <text class="dg-s" x="622" y="176">containment fails &#8594; the Ark jumps out and the fight ends</text>
+      <text class="dg-s" x="622" y="199">fire slackens &#8594; regeneration restarts from wherever it stood</text>
+      <text class="dg-s" x="622" y="222">the line breaks &#8594; your armies are stranded aboard a sealed hull</text>
+    </svg>
+    </div>
+    <figcaption><b>This is where the Ark's area-effect weapon finally earns its place.</b> Against
+    sequential phases an AoE is just efficient damage; against three concurrent requirements held by
+    one fleet line, a single wide attack degrades containment, damage output and the landing all at
+    once. The counter to a coalition is to hit the thing that makes it a coalition.</figcaption>
+  </figure>
+
+  <h3>What stops one superpower doing it alone</h3>
+  <p>&#167;14 used a per-empire cap for this. Raw damage cannot be capped without it feeling arbitrary,
+  so the honest answer is to move the threshold instead: <strong>scale regeneration with the number of
+  worlds the Ark has collected.</strong></p>
+  <p>Early, a single strong empire genuinely can out-damage it &#8212; and that should be allowed,
+  because acting early at real cost is exactly the behaviour the whole of &#167;13 was trying to buy.
+  Late, after the Ark has fed, no one fleet is enough. The gate becomes <em>time</em> rather than
+  permission, which is what "rewarded, not gated" ought to mean, and the Ark's own growth becomes the
+  difficulty curve rather than a separate tuning knob.</p>
+
+  <div class="note">
+    <p class="sig">WHAT THIS COSTS</p>
+    <h3>The defenders lose their concrete mid-game objective</h3>
+    <p>The cannon was a thing to build and protect &#8212; something specific to do between attacks.
+    "Assemble a large fleet" is not a replacement, because that is what every Stellaris campaign is
+    already doing anyway. Without something in its place, the mid-game loses a beat.</p>
+    <p>The version that fits "players need firepower, not a building" is a <strong>researchable
+    anti-shell weapon component</strong>: a real progression objective with a tech path behind it,
+    fitted to any ship by any empire, with no single point of failure and nothing to capture. It
+    preserves the sense of preparing a counter while keeping the counter distributed.</p>
+  </div>
+
+  <div class="gap" id="g26">
+    <span class="g">G26</span>
+    <h4>Is the shell a flat damage check, or does it discriminate?</h4>
+    <p>If any damage counts equally, stage 1 is a pure fleet-power stat check and composition stops
+    mattering. Resistances by weapon class, or a rule that only sustained fire counts while
+    alpha-strike does not, would give the fight texture &#8212; at the cost of a fleet-building
+    puzzle players have to be taught.</p>
+  </div>
+
+  <div class="gap" id="g27">
+    <span class="g">G27</span>
+    <h4>What the mid-game objective becomes</h4>
+    <p>Whether the anti-shell component above is the answer, and if so where it sits: a normal tech,
+    a rare tech, or something recovered from a shattered world &#8212; which would tie it back to the
+    reveal chain in G4 and give the Ark's own destruction the job of teaching its counter.</p>
   </div>
 </section>
 
