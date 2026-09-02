@@ -31,6 +31,27 @@ Nearly every structural decision follows from these:
 2. **Situations cannot target a fleet.** A Situation is country-scoped with a planet or
    empire target. This is why the Planet Catcher is load-bearing rather than thematic — a
    carried colony is the only thing on the Ark a Situation can legally hook into.
+3. **There is no browsable tech tree.** Research is a card draw: three weighted alternatives
+   per area, and a card shown last hand has its weight halved next draw. Prerequisite chains
+   are scriptable; a screen where the player *sees* the chain is not. So anything mandatory
+   must not be left to the draw.
+
+## Research structure
+
+Gating a branch on the comet event works cleanly — `potential = { has_country_flag =
+ark_revealed }` keeps the whole branch out of every draw pool until the Ark exists, so it
+never dilutes the early game. The structure splits by whether content is required:
+
+| Layer | Mechanism | Used for |
+| --- | --- | --- |
+| Mandatory spine | `common/special_projects/`, started with `enable_special_project` | The reveal chain (`G4`). Deterministic — assign a scientist, it completes. Cannot be missed. |
+| Optional depth | `common/technology/` with `potential` + `weight_modifier`; `add_research_option` to force a card into hand | Branch techs that reward engagement but are not required |
+| Scaling | Repeatable techs | Where "more firepower" lives — an empire raising its own share of the damage threshold |
+
+Three branches, mirroring the three simultaneous requirements of the engagement:
+engineering (anti-shell weapons), physics (inhibitor components), society (boarding
+doctrine). The third unlocks from an archaeology site on a world the Ark shattered
+(`create_archaeological_site`) — so the Ark's own destruction teaches its counter.
 
 ## Open unknowns
 

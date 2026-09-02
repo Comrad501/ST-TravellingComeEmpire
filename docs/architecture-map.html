@@ -225,7 +225,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">26 information gaps</span>
+    <span class="tag">28 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -1891,6 +1891,194 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     a rare tech, or something recovered from a shattered world &#8212; which would tie it back to the
     reveal chain in G4 and give the Ark's own destruction the job of teaching its counter.</p>
   </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;16</span><h2>Tech: what the engine will actually give us</h2></div>
+
+  <div class="note">
+    <p class="sig">CONSTRAINT C &#183; THE THIRD ONE</p>
+    <h3>Stellaris has no browsable tech tree, so a "tech tree" is not the thing to build</h3>
+    <p>Research is a <strong>card draw</strong>. Each area &#8212; Physics, Society, Engineering
+    &#8212; offers three alternatives at a time, selected by weight from everything currently valid.
+    There is no screen where a player traces a path from the comet to its counter, because no such
+    screen exists for anything.</p>
+    <p>Worse for our purposes: a technology that appeared in the previous hand has its weight
+    <em>halved</em> in the next draw. Anything left to weight alone can hide for years. Prerequisite
+    chains are real and scriptable; the tree that would let someone <em>see</em> the chain is not.</p>
+  </div>
+
+  <p>So the answer to "can we gate a tech tree on the comet event" splits in two. <strong>The gating:
+  yes, cleanly.</strong> <code>potential = { has_country_flag = ark_revealed }</code> decides whether
+  a country may draw a technology at all, so the whole branch simply does not exist in anyone's pool
+  until the Ark shows up &#8212; which also means it never dilutes the early game.
+  <strong>The tree: no</strong>, and designing as though players can see one is the trap.</p>
+
+  <p>That matters most because of a hazard the card system creates for crisis content:
+  <strong>anything mandatory must not be random.</strong> If the counter to the Ark sits behind a
+  weighted draw, some campaigns lock the player out by luck. The structure below keeps the required
+  path deterministic and lets only the optional depth ride the draw.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 450" role="img" aria-label="Three observation events set country flags, each enabling a deterministic special project, each of which unlocks and injects a technology branch, and each branch serves one of the three simultaneous requirements of the engagement.">
+      <defs>
+        <marker id="m12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="40" y="24">OBSERVATION</text>
+      <text class="dg-s" x="40" y="42">set_country_flag</text>
+      <text class="dg-h" x="320" y="24">DETERMINISTIC SPINE</text>
+      <text class="dg-s" x="320" y="42">enable_special_project</text>
+      <text class="dg-h" x="600" y="24">UNLOCKED BRANCH</text>
+      <text class="dg-s" x="600" y="42">potential + add_research_option</text>
+      <text class="dg-h" x="900" y="24">ROLE IN THE FIGHT</text>
+      <text class="dg-s" x="900" y="42">from &#167;15</text>
+
+      <rect class="dg-box" x="40" y="72" width="230" height="76" rx="3"/>
+      <text class="dg-t2" x="58" y="98">The comet appears</text>
+      <text class="dg-s" x="58" y="117">first contact with the Ark</text>
+      <text class="dg-s" x="58" y="133">ark_revealed</text>
+
+      <rect class="dg-acc" x="320" y="72" width="230" height="76" rx="3"/>
+      <text class="dg-t2" x="338" y="98">Analyse the shell</text>
+      <text class="dg-s" x="338" y="117">reveals the regen threshold</text>
+      <text class="dg-s" x="338" y="133">always appears &#183; never random</text>
+
+      <rect class="dg-box" x="600" y="72" width="250" height="76" rx="3"/>
+      <text class="dg-t2" x="618" y="98">Engineering branch</text>
+      <text class="dg-s" x="618" y="117">anti-shell weapon components</text>
+      <text class="dg-s" x="618" y="133">repeatable tail for scaling</text>
+
+      <rect class="dg-box2" x="900" y="72" width="240" height="76" rx="3"/>
+      <text class="dg-t2" x="918" y="98">Out-damage regen</text>
+      <text class="dg-s" x="918" y="117">clears the threshold</text>
+
+      <rect class="dg-box" x="40" y="192" width="230" height="76" rx="3"/>
+      <text class="dg-t2" x="58" y="218">It jumps away</text>
+      <text class="dg-s" x="58" y="237">you had it, and lost it</text>
+      <text class="dg-s" x="58" y="253">ark_escaped_once</text>
+
+      <rect class="dg-acc" x="320" y="192" width="230" height="76" rx="3"/>
+      <text class="dg-t2" x="338" y="218">Trace the drive</text>
+      <text class="dg-s" x="338" y="237">why containment failed</text>
+      <text class="dg-s" x="338" y="253">always appears &#183; never random</text>
+
+      <rect class="dg-box" x="600" y="192" width="250" height="76" rx="3"/>
+      <text class="dg-t2" x="618" y="218">Physics branch</text>
+      <text class="dg-s" x="618" y="237">shipborne inhibitor components</text>
+      <text class="dg-s" x="618" y="253">radius and strength upgrades</text>
+
+      <rect class="dg-box2" x="900" y="192" width="240" height="76" rx="3"/>
+      <text class="dg-t2" x="918" y="218">Hold it in place</text>
+      <text class="dg-s" x="918" y="237">stops the jump</text>
+
+      <rect class="dg-box" x="40" y="312" width="230" height="76" rx="3"/>
+      <text class="dg-t2" x="58" y="338">It shatters a world</text>
+      <text class="dg-s" x="58" y="357">a husk is left behind</text>
+      <text class="dg-s" x="58" y="373">create_archaeological_site</text>
+
+      <rect class="dg-acc" x="320" y="312" width="230" height="76" rx="3"/>
+      <text class="dg-t2" x="338" y="338">Excavate the husk</text>
+      <text class="dg-s" x="338" y="357">chapters, not a single roll</text>
+      <text class="dg-s" x="338" y="373">teaches SHATTER vs ASSIMILATE</text>
+
+      <rect class="dg-box" x="600" y="312" width="250" height="76" rx="3"/>
+      <text class="dg-t2" x="618" y="338">Society branch</text>
+      <text class="dg-s" x="618" y="357">boarding doctrine, army bonuses</text>
+      <text class="dg-s" x="618" y="373">reclaiming carried worlds</text>
+
+      <rect class="dg-box2" x="900" y="312" width="240" height="76" rx="3"/>
+      <text class="dg-t2" x="918" y="338">Land and fight in</text>
+      <text class="dg-s" x="918" y="357">reaches the throne room</text>
+
+      <line class="dg-line" x1="270" y1="110" x2="312" y2="110" marker-end="url(#m12)"/>
+      <line class="dg-line" x1="550" y1="110" x2="592" y2="110" marker-end="url(#m12)"/>
+      <line class="dg-line acc" x1="850" y1="110" x2="892" y2="110" marker-end="url(#m12)"/>
+      <line class="dg-line" x1="270" y1="230" x2="312" y2="230" marker-end="url(#m12)"/>
+      <line class="dg-line" x1="550" y1="230" x2="592" y2="230" marker-end="url(#m12)"/>
+      <line class="dg-line acc" x1="850" y1="230" x2="892" y2="230" marker-end="url(#m12)"/>
+      <line class="dg-line" x1="270" y1="350" x2="312" y2="350" marker-end="url(#m12)"/>
+      <line class="dg-line" x1="550" y1="350" x2="592" y2="350" marker-end="url(#m12)"/>
+      <line class="dg-line acc" x1="850" y1="350" x2="892" y2="350" marker-end="url(#m12)"/>
+
+      <text class="dg-s t-acc" x="320" y="422">Blue = deterministic. Everything required to beat the Ark lives in this column.</text>
+      <text class="dg-s" x="320" y="438">The branch column is optional depth, and rides the three-card draw like anything else.</text>
+    </svg>
+    </div>
+    <figcaption><b>The three branches are the three things the fight demands at once.</b> Because
+    &#167;15 collapsed containment, stripping and boarding into one simultaneous engagement, the
+    research structure can mirror it exactly &#8212; one area per line the Ark's spinal weapon is
+    trying to cut. And the third row is the payoff G27 was reaching for: <b>the Ark's own destruction
+    teaches its counter</b>, since a shattered husk is a legitimate archaeology site and excavation
+    runs in chapters rather than one roll.</figcaption>
+  </figure>
+
+  <h3>The three mechanisms, and what each is actually for</h3>
+
+  <div class="gap">
+    <span class="g">01</span>
+    <h4>Special projects &#8212; the mandatory spine</h4>
+    <p>Defined in <code>common/special_projects/</code>, started from an event with
+    <code>enable_special_project</code> (name, location, owner) and cancellable with
+    <code>abort_special_project</code>. Once enabled they simply exist: assign a scientist, it
+    completes. No draw, no luck.</p>
+    <p class="why">This is where the reveal chain from G4 belongs. Anything a player <em>must</em>
+    learn to beat the Ark goes here, because it is the only research-shaped mechanism that cannot be
+    missed.</p>
+  </div>
+
+  <div class="gap">
+    <span class="g">02</span>
+    <h4>Technologies &#8212; optional depth, gated so they never clutter</h4>
+    <p><code>potential = { }</code> decides whether a country may draw a tech at all, so
+    <code>has_country_flag = ark_revealed</code> keeps the entire branch out of the pool until the
+    crisis exists. <code>weight_modifier</code> then biases the draw, and
+    <code>add_research_option</code> from a completing project can put a specific card in the player's
+    hand outright when determinism is needed.</p>
+    <p class="why">Use <code>is_rare</code> for the branch if it should feel like a find rather than
+    a routine unlock; use <code>give_technology</code> only where a tech should be a reward rather
+    than a research decision.</p>
+  </div>
+
+  <div class="gap">
+    <span class="g">03</span>
+    <h4>Repeatable techs &#8212; where "more firepower" actually lives</h4>
+    <p>&#167;15 made the crisis a rate problem: your contribution is damage per unit time against a
+    regenerating shell. A repeatable anti-shell tech is the natural expression of that &#8212; an
+    empire can keep investing to raise its own share of the threshold, with no ceiling and no
+    building to protect.</p>
+    <p class="why">It also gives a late-joining empire a way to catch up and matter, which the
+    coalition design in &#167;13 wants.</p>
+  </div>
+
+  <div class="gap" id="g28">
+    <span class="g">G28</span>
+    <h4>Will the AI research any of this?</h4>
+    <p>Gated techs need weights and <code>ai_update_type</code> set so AI empires actually take them.
+    If they do not, the AI turns up to the fight with no anti-shell weapons and contributes nothing to
+    the threshold.</p>
+    <p class="why">This compounds G21 rather than sitting beside it. "The AI will not cooperate"
+    becomes "the AI cannot cooperate, because it never researched the thing that would let it" &#8212;
+    a much harder failure to paper over.</p>
+  </div>
+
+  <div class="gap" id="g29">
+    <span class="g">G29</span>
+    <h4>Two curves that race</h4>
+    <p>Repeatable anti-shell research raises coalition damage over time. Shell regeneration scales
+    with worlds collected, also over time. Those are two growth curves pointed at each other, and
+    which one wins decides whether the crisis is beatable, trivial, or hopeless.</p>
+    <p class="why">Probably the single most important balance relationship in the design, and it
+    cannot be tuned until G5 has numbers at all.</p>
+  </div>
+
+  <p class="foot" style="margin-top:34px;padding-top:18px">Verified against community documentation
+  this session, not against the installed game: technology fields and the card-draw behaviour, the
+  special-project effects, and <code>create_archaeological_site</code>. Version-specific details for
+  4.4.6 still want a check against the local files before anything is written.</p>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris
