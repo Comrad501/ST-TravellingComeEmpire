@@ -5,12 +5,20 @@ hull with no fixed homeworld, wrapped in a regenerating comet shell, carrying ca
 worlds as detached colonies, killable only through a staged sequence rather than HP
 attrition.
 
+Built by the **Archelias**, a precursor civilisation. **Zemuria** is one of the worlds
+the Planet Catcher captures, not its builders.
+
 **Status: planning only. No mod code has been written yet.**
 
 **v0.1 scope: the Ark is an AI crisis.** Build steps 1-6 sit in the shared core.
 
+**There is exactly one Ark, buried in the galaxy from the first day.** It is placed at
+galaxy generation as a flagged system with *no fleet spawned* - a flag and a location,
+costing nothing - and only instantiates when something wakes it. It is not spawned by a
+crisis system on a schedule; the crisis is what happens if nobody reaches it first.
+
 **v0.2 proposal: the Ark is acquirable by a machine empire** via a precursor event chain,
-racing the crisis spawn date. Finish first and it is yours; fail and it wakes on its own.
+racing the wake date. Finish first and it is yours; fail and it wakes on its own.
 Crucially this is *acquisition, not displacement* - the player keeps their empire and
 gains a fortress - so `G2`'s economy problem does not arise, and Nemesis' Become the
 Crisis supplies the galaxy's response. The branch reduces to one new system (the chain)
