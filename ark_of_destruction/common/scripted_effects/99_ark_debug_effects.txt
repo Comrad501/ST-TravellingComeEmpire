@@ -12,7 +12,7 @@
 # Drive these through `event arktest.1x` instead: a country_event always fires
 # on the player country regardless of what is clicked. See docs/TESTING.md.
 #
-# LOGGING: do not put [This.GetName] in a log for a country or a fleet. Their
+# LOGGING: do not put \\[This.GetName] in a log for a country or a fleet. Their
 # names are localisation-composed (key + variables) and resolve to an empty
 # string here, which is why the first run logged "ark fleet found:" with
 # nothing after it. Solar systems have literal names and do print.
@@ -30,32 +30,32 @@
 ark_assert_var_equals = {
 	if = {
 		limit = { check_variable = { which = $VAR$ value = $EXPECT$ } }
-		log = "[ARK TEST] PASS  $VAR$ == $EXPECT$  ($LABEL$)"
+		log = "ARK TEST | PASS  $VAR$ == $EXPECT$  ($LABEL$)"
 	}
 	else = {
-		log = "[ARK TEST] FAIL  $VAR$ != $EXPECT$  ($LABEL$)"
+		log = "ARK TEST | FAIL  $VAR$ != $EXPECT$  ($LABEL$)"
 	}
 }
 
 # --- state dump ------------------------------------------------------------
 # Scope: a country. Select your own empire and run: effect ark_debug_dump = yes
 ark_debug_dump = {
-	log = "[ARK DEBUG] ---- state dump ----"
+	log = "ARK DEBUG | ---- state dump ----"
 	if = {
 		limit = { has_country_flag = ark_holder }
-		log = "[ARK DEBUG] this country IS flagged as the Ark holder"
+		log = "ARK DEBUG | this country IS flagged as the Ark holder"
 	}
-	else = { log = "[ARK DEBUG] this country is NOT flagged as the Ark holder" }
+	else = { log = "ARK DEBUG | this country is NOT flagged as the Ark holder" }
 	every_owned_fleet = {
 		limit = { has_fleet_flag = ark_hull }
-		log = "[ARK DEBUG] an Ark-flagged fleet exists"
+		log = "ARK DEBUG | an Ark-flagged fleet exists"
 		if = {
 			limit = { has_fleet_flag = ark_shell_down }
-			log = "[ARK DEBUG]   shell is DOWN"
+			log = "ARK DEBUG |   shell is DOWN"
 		}
-		else = { log = "[ARK DEBUG]   shell is UP" }
+		else = { log = "ARK DEBUG |   shell is UP" }
 		solar_system = {
-			log = "[ARK DEBUG]   system: [This.GetName]"
+			log = "ARK DEBUG |   system: \\[This.GetName]"
 			ark_debug_log_inhibitors = yes
 		}
 	}
@@ -65,10 +65,10 @@ ark_debug_dump = {
 ark_debug_log_inhibitors = {
 	if = {
 		limit = { check_variable = { which = ark_inhibitor_count value > 0 } }
-		log = "[ARK DEBUG] containment holds in this system"
+		log = "ARK DEBUG | containment holds in this system"
 	}
 	else = {
-		log = "[ARK DEBUG] containment absent in this system"
+		log = "ARK DEBUG | containment absent in this system"
 	}
 }
 
@@ -79,7 +79,7 @@ ark_debug_tag_all_ships = {
 	every_owned_fleet = {
 		every_owned_ship = { set_ship_flag = ark_inhibitor_fitted }
 	}
-	log = "[ARK DEBUG] all owned ships tagged as inhibitor-fitted"
+	log = "ARK DEBUG | all owned ships tagged as inhibitor-fitted"
 }
 
 # Scope: a country. Marks a fleet as the Ark for testing, without needing the
@@ -89,7 +89,7 @@ ark_debug_make_ark = {
 		limit = { NOT = { has_fleet_flag = ark_hull } }
 		set_fleet_flag = ark_hull
 		prev = { set_country_flag = ark_holder }
-		log = "[ARK DEBUG] a fleet was marked as the Ark"
+		log = "ARK DEBUG | a fleet was marked as the Ark"
 	}
 }
 
@@ -102,5 +102,5 @@ ark_debug_reset = {
 		every_owned_ship = { remove_ship_flag = ark_inhibitor_fitted }
 		solar_system = { set_variable = { which = ark_inhibitor_count value = 0 } }
 	}
-	log = "[ARK DEBUG] reset complete"
+	log = "ARK DEBUG | reset complete"
 }

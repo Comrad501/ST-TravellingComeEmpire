@@ -9,23 +9,32 @@ the map before changing design, read this before changing code.
 
 ## Do this first
 
-An in-game probe is pending and it decides the shape of the next fix. Deselect everything,
-then in the console:
+Re-run the suite. The last recorded run cannot be trusted - the harness was corrupting
+its own output (see rule 6). Deselect everything, then:
 
 ```
-event arktest.5
+event arktest.1
 ```
 
-The first live suite run **failed every equality assertion and passed every inequality** —
-the signature of a variable that was never created. `arktest.5` sets the same variable on
-country, planet and solar_system scope and reports which hold it. Two opposite outcomes:
+Search `game.log` for `ARK TEST` - **not** `[ARK TEST]`, which never appears.
 
-| Log line | Meaning | Fix |
-| --- | --- | --- |
-| `SYSTEM FAILED to hold a variable` | Variables don't persist on `solar_system` | **Design hole.** The containment counter needs a different home — country-scoped keyed by system, most likely. Not a test bug. |
-| `SYSTEM holds a variable` | Storage is fine | `ark_assert_var_equals` is broken. Fix the helper, design stands. |
+**The variable-scope probe is answered.** `arktest.5` reported `COUNTRY`, `PLANET` and
+`SYSTEM` all holding a variable, and `>= 7` matching on a scope known to work. So
+solar-system storage is sound and equality works: **the caching design in the map stands
+unchanged, and the containment counter keeps its home.** The failing assertions were the
+harness, not the design.
 
-Do not patch anything until that line is read. The two causes need opposite work.
+Root cause, confirmed against vanilla and `error.log`: square brackets in a log string.
+Inside `common/` the metascript parser reads `[X]` as the opening of a `[[PARAM] ... ]`
+block and eats the bracket plus one character - hence five `Invalid macro entry in
+ark_debug_reset: RK DEBUG` errors at load, `ark_debug_log_inhibitors` logging nothing at
+all, and T3 producing no verdict. Fixed: prefixes are plain `ARK TEST |` text and the one
+real command is escaped `\\[This.GetName]`. `tools/validate.py` now fails on a bare one.
+
+Also fixed in the same pass, all verified against vanilla: `cost = 40` is not a key of
+`utility_component_template` (it broke the block mid-parse, which is what cascaded into
+`Invalid component set`), `ship_size_military_5` is not a sprite, `generic_01` is not a
+graphical culture, and the two static modifiers had no localisation keys.
 
 ---
 
@@ -56,15 +65,19 @@ Breaking these breaks the design, not just the build.
 4. **The console is scope-sensitive.** Use `event`, never `effect`, and deselect first.
    `Wrong scope for effect` and `got planet expected country` are the same mistake.
 5. **Localisation files need a UTF-8 BOM** or they fail silently.
+6. **No bare `[` in a string under `common/`.** The metascript parser claims it and
+   silently swallows the rest of the effect. Escape a real command as `\\[This.GetName]`;
+   for literal text drop the brackets entirely - the localisation layer eats those too, so
+   a `[TAG]` prefix prints as nothing. Bare `[` is fine in `events/`.
 
 ---
 
 ## Loop
 
 ```
-python3 tools/validate.py          # before every commit
-python3 tools/watchlog.py          # while testing, tails both logs filtered to ark_
-python3 tools/install_local_mod.py --write   # registers the repo as a local mod
+py tools/validate.py          # before every commit (python3 is not on PATH on Windows; use py)
+py tools/watchlog.py          # while testing, tails both logs filtered to ark_
+py tools/install_local_mod.py --write   # registers the repo as a local mod
 ```
 
 Launch Stellaris with **`-logall`** or repeated log lines are swallowed and a second test

@@ -25,6 +25,22 @@ for f in txt_files:
     if depth:
         errs.append(f"{f.relative_to(ROOT)}  ends with {depth} unclosed brace(s)")
 
+# Inside common/, the metascript parser claims "[" - it reads "[X]" as the start
+# of a "[[PARAM] ... ]" block, consuming the bracket plus one character. Vanilla
+# escapes every one as \[ in scripted effects and never leaves a bare one.
+# Unescaped, it produces "Invalid macro entry" at load and silently swallows the
+# rest of the effect body. Events are exempt: there the parser leaves them alone.
+for f in txt_files:
+    if "common" not in f.parts:
+        continue
+    for n, line in enumerate(f.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+        for q in re.findall(r'"[^"]*"', line):
+            for m in re.finditer(r'\[', q):
+                if q[max(0, m.start() - 2):m.start()] != "\\\\":
+                    errs.append(f"{f.relative_to(ROOT)}:{n}  unescaped '[' in a string "
+                                f"under common/ - use \\[ or drop the brackets")
+
+
 # localisation: BOM is mandatory, and the :0 form is easy to get wrong
 for f in sorted(MOD.rglob("*.yml")):
     b = f.read_bytes()

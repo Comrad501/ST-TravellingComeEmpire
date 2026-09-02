@@ -18,7 +18,13 @@ utility_component_template = {
 	icon = "GFX_ship_part_aura_targeting_grid"
 	icon_frame = 1
 	power = -50
-	cost = 40
+
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 40
+		}
+	}
 
 	# The ship carries the tag from the moment it exists. Nothing inspects
 	# components at runtime (architecture map S4).

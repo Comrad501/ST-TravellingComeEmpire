@@ -13,7 +13,7 @@
 # =============================================================================
 
 ark_hull = {
-	graphical_culture = { "generic_01" }
+	graphical_culture = no
 	entity = "juggernaut_entity"          # TODO placeholder - phase 3 replaces
 	max_speed = 40.0
 	acceleration = 0.05
@@ -28,7 +28,7 @@ ark_hull = {
 
 	class = shipclass_military
 	is_space_station = no
-	icon = ship_size_military_5
+	icon = ship_size_military_64
 	is_civilian = no
 
 	prerequisites = { }

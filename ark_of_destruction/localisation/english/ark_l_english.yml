@@ -29,3 +29,9 @@
  ark_shell_component_desc:0 "A layered cloud of high-temperature gas. It is both the vessel's shield and its area weapon: what burns it away also takes its reach."
  ship_inhibitor_aura:0 "Containment Field Projector"
  ship_inhibitor_aura_desc:0 "Projects a subspace anchor. Containment strength is a function of how many projectors survive in the system, and degrades as they are lost."
+
+ # Static modifiers (a missing key here is a load-time error)
+ ark_shell_intact:0 "$ARK_SHELL_NAME$"
+ ark_shell_intact_desc:0 "The shell is whole. Sustained fire above its regeneration threshold is the only thing that brings it down."
+ ark_shell_stripped:0 "$ARK_SHELL_NAME$ Stripped"
+ ark_shell_stripped_desc:0 "The shell is down and stays down only while fire is sustained. The hull is exposed."

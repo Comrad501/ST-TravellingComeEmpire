@@ -127,7 +127,7 @@ size to exist.
 event arktest.1
 ```
 
-Then read `game.log` (or use the watcher) and search for `[ARK TEST]`. Every line is `PASS`
+Then read `game.log` (or use the watcher) and search for `ARK TEST`. Every line is `PASS`
 or `FAIL`.
 
 | Test | What it proves |
@@ -149,6 +149,18 @@ plus variables), and `[This.GetName]` resolves to an empty string in a `log` for
 scopes. That is why the first run logged `ark fleet found:` with nothing after it. Solar
 systems have literal names and do print. The harness now logs fixed identifying strings
 instead of names.
+
+**Square brackets never survive a log string.** `[ARK TEST]` prefixes printed as
+nothing at all: the localisation layer treats `[...]` as a command and an unknown one
+resolves to empty. Worse, inside `common/` the metascript parser claims the bracket
+first - it reads `[X]` as the opening of a `[[PARAM] ... ]` block, consuming the
+bracket plus one character. That is where the `Invalid macro entry in
+ark_debug_reset: RK DEBUG` errors came from (`[ARK DEBUG]` minus its first two
+characters), and why `ark_debug_log_inhibitors` logged *nothing* while
+`ark_debug_dump` logged one line out of five. Prefixes are now plain `ARK TEST |`
+text, and the one real command is escaped `\\[This.GetName]` the way
+vanilla does it. `tools/validate.py` fails on a bare one now.
+
 
 **Other mods' errors appear in the same file.** Lines like
 

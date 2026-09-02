@@ -17,7 +17,7 @@
 ark_attach_colony = {
 	# TODO backing B: strip the source world, then transplant the colony into
 	# a free cradle. Both halves have vanilla precedent (architecture map S3).
-	log = "[ARK] ark_attach_colony called - not yet implemented"
+	log = "ARK | ark_attach_colony called - not yet implemented"
 }
 
 # Scope: the Ark's fleet.  FROM = the carried colony being released.
@@ -26,7 +26,7 @@ ark_attach_colony = {
 # still exists, otherwise it becomes independent (architecture map S22, G3).
 ark_detach_colony = {
 	# TODO backing B.
-	log = "[ARK] ark_detach_colony called - not yet implemented"
+	log = "ARK | ark_detach_colony called - not yet implemented"
 }
 
 # Scope: the Ark's fleet. Flips the shell down and opens the exposed window.

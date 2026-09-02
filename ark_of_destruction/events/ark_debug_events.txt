@@ -9,7 +9,7 @@ namespace = arktest
 # whatever is selected, and these are country_events - a selected planet gives
 # "got planet expected country". Or target it explicitly: event arktest.1 0
 # Each test leaves the world as it found it, so they can be re-run.
-# Results land in game.log as [ARK TEST] PASS / FAIL lines.
+# Results land in game.log as ARK TEST | PASS / FAIL lines.
 # =============================================================================
 
 country_event = {
@@ -17,11 +17,11 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	immediate = {
-		log = "[ARK TEST] ================ run begins ================"
+		log = "ARK TEST | ================ run begins ================"
 		country_event = { id = arktest.2 }
 		country_event = { id = arktest.3 }
 		country_event = { id = arktest.4 }
-		log = "[ARK TEST] ================ run ends =================="
+		log = "ARK TEST | ================ run ends =================="
 	}
 }
 
@@ -37,9 +37,9 @@ country_event = {
 				ark_assert_var_equals = { VAR = ark_inhibitor_count EXPECT = 0 LABEL = "T1 clean system starts at zero" }
 				if = {
 					limit = { NOT = { ark_containment_holds = yes } }
-					log = "[ARK TEST] PASS  containment absent at zero (T1)"
+					log = "ARK TEST | PASS  containment absent at zero (T1)"
 				}
-				else = { log = "[ARK TEST] FAIL  containment reported at zero (T1)" }
+				else = { log = "ARK TEST | FAIL  containment reported at zero (T1)" }
 			}
 		}
 	}
@@ -82,7 +82,7 @@ country_event = {
 		capital_scope = {
 			solar_system = {
 				ark_reconcile_inhibitor_count = yes
-				log = "[ARK TEST] T3 reconciled count logged below; compare against ships present"
+				log = "ARK TEST | T3 reconciled count logged below; compare against ships present"
 				ark_debug_log_inhibitors = yes
 			}
 		}
@@ -145,49 +145,49 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	immediate = {
-		log = "[ARK PROBE] ===== variable scope probe ====="
+		log = "ARK PROBE | ===== variable scope probe ====="
 
 		# --- country scope ---
 		set_variable = { which = ark_probe value = 7 }
 		if = {
 			limit = { check_variable = { which = ark_probe value = 7 } }
-			log = "[ARK PROBE] COUNTRY  holds a variable (= 7 matched)"
+			log = "ARK PROBE | COUNTRY  holds a variable (= 7 matched)"
 		}
-		else = { log = "[ARK PROBE] COUNTRY  FAILED to hold a variable" }
+		else = { log = "ARK PROBE | COUNTRY  FAILED to hold a variable" }
 
 		capital_scope = {
 			# --- planet scope ---
 			set_variable = { which = ark_probe value = 7 }
 			if = {
 				limit = { check_variable = { which = ark_probe value = 7 } }
-				log = "[ARK PROBE] PLANET   holds a variable (= 7 matched)"
+				log = "ARK PROBE | PLANET   holds a variable (= 7 matched)"
 			}
-			else = { log = "[ARK PROBE] PLANET   FAILED to hold a variable" }
+			else = { log = "ARK PROBE | PLANET   FAILED to hold a variable" }
 
 			solar_system = {
 				# --- solar system scope: the one the design depends on ---
 				set_variable = { which = ark_probe value = 7 }
 				if = {
 					limit = { check_variable = { which = ark_probe value = 7 } }
-					log = "[ARK PROBE] SYSTEM   holds a variable (= 7 matched)"
+					log = "ARK PROBE | SYSTEM   holds a variable (= 7 matched)"
 				}
-				else = { log = "[ARK PROBE] SYSTEM   FAILED to hold a variable" }
+				else = { log = "ARK PROBE | SYSTEM   FAILED to hold a variable" }
 
 				# Ladder: reveals what is actually stored without printing it.
 				if = { limit = { check_variable = { which = ark_probe value > 6 } }
-					log = "[ARK PROBE] SYSTEM   reads > 6" }
+					log = "ARK PROBE | SYSTEM   reads > 6" }
 				if = { limit = { check_variable = { which = ark_probe value > 0 } }
-					log = "[ARK PROBE] SYSTEM   reads > 0" }
+					log = "ARK PROBE | SYSTEM   reads > 0" }
 				if = { limit = { check_variable = { which = ark_probe value >= 0 } }
-					log = "[ARK PROBE] SYSTEM   reads >= 0" }
+					log = "ARK PROBE | SYSTEM   reads >= 0" }
 			}
 		}
 
 		# --- is it equality itself that is broken, on a scope known to work? ---
 		if = {
 			limit = { check_variable = { which = ark_probe value >= 7 } }
-			log = "[ARK PROBE] COUNTRY  >= 7 also matched (equality is fine here)"
+			log = "ARK PROBE | COUNTRY  >= 7 also matched (equality is fine here)"
 		}
-		log = "[ARK PROBE] ===== probe ends ====="
+		log = "ARK PROBE | ===== probe ends ====="
 	}
 }
