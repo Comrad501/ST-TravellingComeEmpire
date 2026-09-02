@@ -225,7 +225,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">28 information gaps</span>
+    <span class="tag">30 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -2079,6 +2079,171 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
   this session, not against the installed game: technology fields and the card-draw behaviour, the
   special-project effects, and <code>create_archaeological_site</code>. Version-specific details for
   4.4.6 still want a check against the local files before anything is written.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;17</span><h2>Taking the Ark: a precursor route for machine empires</h2></div>
+
+  <div class="note">
+    <p class="sig">CORRECTION TO &#167;16</p>
+    <h3>The dig site survives, but its reward cannot be minor artifacts</h3>
+    <p>&#167;16 hung the third research branch on an archaeology site without checking its DLC
+    footprint &#8212; the same mistake U5 was. Checked now: sites can be created and excavated
+    without Ancient Relics, but <strong>minor artifacts require it</strong>, and Ancient Relics is
+    not owned. So the mechanism holds and the chapter rewards have to be ordinary ones &#8212; a
+    tech option, a modifier, an event &#8212; never artifacts or relics.</p>
+  </div>
+
+  <div class="verdict">
+    <p class="k">PROPOSAL &#183; v0.2 BRANCH</p>
+    <h3>Acquisition is not displacement, and that is what makes it affordable</h3>
+    <p>&#167;10's playable branch assumed an empire with no homeworld, which dragged an entire
+    economy behind it. A precursor chain that <em>hands the Ark to an existing empire</em> is a
+    different proposition: the player keeps their worlds, their economy and their capital, and gains a
+    mobile fortress. Most of what made the playable branch expensive simply does not arise.</p>
+  </div>
+
+  <p>And the galaxy's response to a player holding the Ark does not need writing either. Nemesis is
+  owned, and its <strong>Become the Crisis</strong> path already implements exactly that situation: a
+  Menace resource earned through destruction, crisis levels each gated behind a special project, crisis
+  perks that unlock new ship types, and a permanent opinion penalty with every empire in the game. The
+  coalition machinery in &#167;13 was designed against an AI Ark; pointed at a player, vanilla already
+  runs it.</p>
+
+  <h3>The chain is a race, and the deadline already exists</h3>
+  <p>The strongest version makes the precursor chain compete directly with the crisis timer. Finish
+  before the Ark would have woken on its own and it is yours. Fail, and it wakes anyway &#8212; and
+  the empire that spent a century hunting it is the one that knows exactly what is coming. G14's spawn
+  date stops being a tuning value and becomes the clock the whole branch is played against.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 380" role="img" aria-label="Two scenarios against one deadline. Completing all four precursor stages before the crisis spawn date yields the Ark and crisis-empire status. Failing to finish means the Ark wakes on its own and the searching empire becomes a target.">
+      <defs>
+        <marker id="m13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+        <marker id="m13b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+        <marker id="m13c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h t-acc" x="40" y="30">CHAIN COMPLETED IN TIME</text>
+
+      <rect class="dg-box" x="40" y="60" width="160" height="56" rx="3"/>
+      <text class="dg-t2" x="56" y="83">Derelict signal</text>
+      <text class="dg-s" x="56" y="101">an anomaly</text>
+      <line class="dg-line" x1="200" y1="88" x2="207" y2="88" marker-end="url(#m13c)"/>
+
+      <rect class="dg-box" x="215" y="60" width="160" height="56" rx="3"/>
+      <text class="dg-t2" x="231" y="83">Three more clues</text>
+      <text class="dg-s" x="231" y="101">event chain</text>
+      <line class="dg-line" x1="375" y1="88" x2="382" y2="88" marker-end="url(#m13c)"/>
+
+      <rect class="dg-box" x="390" y="60" width="160" height="56" rx="3"/>
+      <text class="dg-t2" x="406" y="83">Site located</text>
+      <text class="dg-s" x="406" y="101">the cradle system</text>
+      <line class="dg-line" x1="550" y1="88" x2="557" y2="88" marker-end="url(#m13c)"/>
+
+      <rect class="dg-acc" x="565" y="60" width="160" height="56" rx="3"/>
+      <text class="dg-t2" x="581" y="83">Awaken it</text>
+      <text class="dg-s" x="581" y="101">special project</text>
+
+      <line class="dg-line acc" x1="725" y1="88" x2="852" y2="88" marker-end="url(#m13)"/>
+
+      <rect class="dg-acc" x="860" y="52" width="280" height="72" rx="3"/>
+      <text class="dg-t2" x="880" y="78">The Ark is yours</text>
+      <text class="dg-s" x="880" y="97">Nemesis crisis empire &#183; Menace</text>
+      <text class="dg-s" x="880" y="113">the AI crisis never spawns</text>
+
+      <line x1="790" y1="42" x2="790" y2="330" stroke="var(--danger)" stroke-width="1.6" stroke-dasharray="6 5"/>
+      <text class="dg-l t-bad" x="790" y="32" text-anchor="middle">crisis spawn date &#183; G14</text>
+
+      <line class="dg-rule" x1="40" y1="170" x2="1140" y2="170"/>
+
+      <text class="dg-h t-bad" x="40" y="204">CHAIN STILL UNFINISHED</text>
+
+      <rect class="dg-box" x="40" y="234" width="160" height="56" rx="3"/>
+      <text class="dg-t2" x="56" y="257">Derelict signal</text>
+      <text class="dg-s" x="56" y="275">an anomaly</text>
+      <line class="dg-line" x1="200" y1="262" x2="207" y2="262" marker-end="url(#m13c)"/>
+
+      <rect class="dg-box" x="215" y="234" width="160" height="56" rx="3"/>
+      <text class="dg-t2" x="231" y="257">Two more clues</text>
+      <text class="dg-s" x="231" y="275">too slow</text>
+
+      <line class="dg-line dash" x1="375" y1="262" x2="782" y2="262"/>
+      <text class="dg-s" x="500" y="253">still searching when the clock runs out</text>
+      <line class="dg-line bad" x1="790" y1="262" x2="852" y2="262" marker-end="url(#m13b)"/>
+
+      <rect x="860" y="226" width="280" height="72" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="880" y="252">It wakes on its own</text>
+      <text class="dg-s" x="880" y="271">the standard AI crisis</text>
+      <text class="dg-s" x="880" y="287">and you know exactly what it is</text>
+
+      <text class="dg-s" x="40" y="360">Losing the race is not a dead end &#8212; the empire that hunted the Ark starts the crisis knowing its shell, its jump behaviour and its appetite.</text>
+    </svg>
+    </div>
+    <figcaption><b>The failure branch is the reason this works as a design.</b> A precursor chain you
+    can simply fail would be a wasted century; a precursor chain that fails <em>into the crisis you
+    were already going to face</em>, holding everything you learned on the way, costs the player
+    nothing they would not have spent anyway. It also means the branch can ship without a separate
+    balance pass on "what if nobody finishes it".</figcaption>
+  </figure>
+
+  <h3>What this actually costs, against &#167;10's version</h3>
+  <p>The playable branch in &#167;10 needed five subsystems. Three of them stop existing under
+  acquisition, and one is supplied by a DLC already owned.</p>
+
+  <div class="tw">
+  <table>
+    <thead>
+      <tr><th>Subsystem</th><th>&#167;10 displaced-empire branch</th><th>Precursor acquisition</th></tr>
+    </thead>
+    <tbody>
+      <tr class="sev-def"><td class="id">Economy</td><td>An entire income model with no homeworld</td><td><span class="pill p-yes">Not needed &#8212; the player keeps their empire</span></td></tr>
+      <tr class="sev-def"><td class="id">Capital chain</td><td>A substitute for a building chain that requires a capital planet</td><td><span class="pill p-yes">Not needed &#8212; the capital still exists</span></td></tr>
+      <tr class="sev-def"><td class="id">Starbase role</td><td>The Ark standing in as shipyard and anchorage</td><td><span class="pill p-yes">Not needed &#8212; normal starbases remain</span></td></tr>
+      <tr class="sev-high"><td class="id">Galaxy response</td><td>Written from scratch: hostility, coalitions, victory conditions</td><td><span class="pill p-def">Nemesis Become the Crisis</span></td></tr>
+      <tr class="sev-block"><td class="id">Origin / access</td><td>An origin, civics and a start-of-game identity</td><td><span class="pill p-block">The precursor chain &#8212; genuinely new work</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>So the branch reduces to one new system rather than five, and the one that remains is the one
+  that is actually fun to write.</p>
+
+  <h3>Why machine empires specifically</h3>
+  <p>Beyond the fiction, the restriction does real work. It bounds the balance surface to one empire
+  type instead of all of them; Nemesis already excludes xenophile, pacifist and rogue servitor
+  empires from the crisis path, so most machine empires are eligible without fighting the existing
+  rules; and a machine empire's assimilation of populations rhymes with the Planet Catcher's
+  <code>ASSIMILATE</code> verdict closely enough that the two can share vocabulary rather than
+  competing for it.</p>
+  <p>The verdicts from &#167;12 also stop being AI policy and become <strong>player decisions</strong>.
+  Choosing which worlds are worth carrying and which are only worth breaking is a considerably more
+  interesting thing to hand a player than a damage number &#8212; and it is already specified.</p>
+
+  <div class="gap" id="g30">
+    <span class="g">G30</span>
+    <h4>Does the player keep their capital, or give it up?</h4>
+    <p>Keeping it is what makes this cheap, and makes the Ark a fortress rather than an identity.
+    Giving it up is closer to the source material and to the original "displaced empire" idea &#8212;
+    and brings G2's entire economy problem back with it.</p>
+    <p class="why">This is the fork that decides whether the branch stays a v0.2 addition or becomes
+    the large build again. Worth answering before any of it is written.</p>
+  </div>
+
+  <div class="gap" id="g31">
+    <span class="g">G31</span>
+    <h4>Can a player Ark and an AI Ark coexist?</h4>
+    <p>Mutually exclusive is cleaner and gives the race its stakes. Allowing both is more dramatic and
+    doubles every balance question, since the galaxy would then face two comet empires with no
+    guarantee they fight each other.</p>
+  </div>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

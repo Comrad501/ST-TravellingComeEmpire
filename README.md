@@ -7,9 +7,18 @@ attrition.
 
 **Status: planning only. No mod code has been written yet.**
 
-**v0.1 scope: the Ark is an AI crisis.** A playable "displaced empire" version is the
-more interesting build and stays on the roadmap, but it is deferred until the mechanics
-have been playtested. Build steps 1-6 sit in the shared core and are not wasted either way.
+**v0.1 scope: the Ark is an AI crisis.** Build steps 1-6 sit in the shared core.
+
+**v0.2 proposal: the Ark is acquirable by a machine empire** via a precursor event chain,
+racing the crisis spawn date. Finish first and it is yours; fail and it wakes on its own.
+Crucially this is *acquisition, not displacement* - the player keeps their empire and
+gains a fortress - so `G2`'s economy problem does not arise, and Nemesis' Become the
+Crisis supplies the galaxy's response. The branch reduces to one new system (the chain)
+rather than the five the displaced-empire version needed. See `§17`.
+
+**DLC note:** archaeological sites can be created and excavated without Ancient Relics,
+but **minor artifacts and relics require it** and it is not owned. Chapter rewards must be
+ordinary ones - a tech option, a modifier, an event.
 
 Target version: Stellaris 4.4.6 (Pegasus).
 Owned DLC: Apocalypse, Federations, Nemesis. **Nomads is not owned** — the mechanics that
