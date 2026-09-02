@@ -17,7 +17,17 @@ the spine of the acquisition design:
   approach and hold the Ark - and can never be `ASSIMILATE`d, only `SHATTER`ed. The only
   empires that can hold it are the only ones with nothing held in escrow if they fail.
 - **Only a human can activate it.** The correction requires the consent of the flawed.
-  A machine empire can own the Ark and still not switch it on.
+  A machine empire can own the Ark and still not switch it on. The activation key checks
+  for a living organic pop, not a strict portrait group - the humanoid-form reasoning is
+  the Archelias' stated rationale, and it was wrong. Machines make war too; the exemption
+  is a flaw in the device's premise, not a fact about machines.
+- **The activator survives, and their world goes into a cradle.** Activation converts one
+  of the empire's worlds into the first carried colony, so the Ark never starts empty and
+  the acquiring empire is bound to it from the first moment.
+
+The Ark was originally a **seeding vessel** - built to carry life outward to empty worlds.
+Carrying worlds is what the machine was made for; the cradles are being used in reverse.
+That makes `SHATTER` the genuinely aberrant verdict, the one thing it was never built to do.
 
 So acquisition needs two keys rarely in one hand: a machine empire to hold it, and a
 living humanoid to start it. A Determined Exterminator disqualifies itself by purging
@@ -50,6 +60,19 @@ ordinary ones - a tech option, a modifier, an event.
 Target version: Stellaris 4.4.6 (Pegasus).
 Owned DLC: Apocalypse, Federations, Nemesis. **Nomads is not owned** — the mechanics that
 would use it sit behind a stub seam so the backing implementation can be swapped later.
+
+## Lore stance
+
+**Yamato-inspired, not a retelling.** The design has already diverged structurally - a
+buried object raced for by three parties, worthiness verdicts with eviction, a
+regeneration threshold, degrading containment. None of that is in the source. What remains
+one-to-one is the **naming**, which is the cheapest layer to change and carries nearly all
+the IP risk.
+
+Four coined proper nouns (`Archelias`, `Gatlantis`, `Zemuria`, `Zworder`) and one
+technology term (`wave motion`) want replacing. "Ark of Destruction" and "travelling comet
+empire" are generic enough to keep. Cheapest done before build step 1, since localisation
+keys are written there (`G38`).
 
 ## Contents
 
