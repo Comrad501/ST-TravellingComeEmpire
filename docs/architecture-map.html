@@ -225,7 +225,8 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">1 blocking unknown</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">40 raised &#183; 11 still open</span>
+    <span class="tag on">nothing blocks v0.1</span>
+    <span class="tag">40 raised &#183; 8 open</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -2954,6 +2955,94 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     needed doing rather than risk that needed retiring &#8212; and now that it is done, the path to a
     first playable version runs through exactly one unknown and one afternoon at your own keyboard.</figcaption>
   </figure>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;23</span><h2>v0.1, re-scoped &#8212; and U1 leaves the critical path</h2></div>
+
+  <div class="verdict solved">
+    <p class="k">DECISION &#183; SUPERSEDES G11</p>
+    <h3>Scoping visuals out of v0.1 removes the only thing that was blocking code</h3>
+    <p>U1 &#8212; whether a <code>section_templates</code> slot can swap by script outside a drydock
+    refit &#8212; was the last blocker, and it only ever blocked <em>rendering</em> the carried worlds.
+    Put lore, situations and mechanics in v0.1 and the render question moves to the phase after it.
+    <strong>Nothing now stands between here and a first build.</strong></p>
+  </div>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 320" role="img" aria-label="Three phases. Phase one is lore, situations and mechanics with no unknowns blocking. Phase two is graphics experiments and the containment aura, where U1 and U2 live. Phase three is modelling and the reveal chain, done by the author.">
+      <defs>
+        <marker id="m20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+      </defs>
+
+      <rect class="dg-acc" x="40" y="56" width="350" height="150" rx="3"/>
+      <text class="dg-h t-acc" x="60" y="82">PHASE 1 &#183; v0.1</text>
+      <text class="dg-t2" x="60" y="108">Lore, situations, mechanics</text>
+      <text class="dg-s" x="60" y="130">build steps 1&#8211;6</text>
+      <text class="dg-s" x="60" y="148">worthiness, containment logic,</text>
+      <text class="dg-s" x="60" y="166">the shell threshold, capture</text>
+      <text class="dg-s t-ok" x="60" y="192">no unknown blocks any of it</text>
+
+      <line class="dg-line acc" x1="390" y1="130" x2="442" y2="130" marker-end="url(#m20)"/>
+
+      <rect class="dg-box" x="450" y="56" width="350" height="150" rx="3"/>
+      <text class="dg-h" x="470" y="82">PHASE 2</text>
+      <text class="dg-t2" x="470" y="108">Graphics, and the aura</text>
+      <text class="dg-s" x="470" y="130">comet shell particles</text>
+      <text class="dg-s" x="470" y="148">carried-world rendering</text>
+      <text class="dg-s" x="470" y="166">the containment aura's look</text>
+      <a href="#u1"><circle class="ub crit" cx="770" cy="76" r="13"/><text class="ub-t crit" x="770" y="80" text-anchor="middle">U1</text></a>
+      <text class="dg-s t-bad" x="470" y="192">U1 and U2 live here now, not on the path to a build</text>
+
+      <line class="dg-line acc" x1="800" y1="130" x2="852" y2="130" marker-end="url(#m20)"/>
+
+      <rect class="dg-box2" x="860" y="56" width="280" height="150" rx="3" stroke-dasharray="5 4"/>
+      <text class="dg-h" x="880" y="82">PHASE 3 &#183; YOURS</text>
+      <text class="dg-t2" x="880" y="108">Modelling</text>
+      <text class="dg-s" x="880" y="130">meshes, locators, assets</text>
+      <text class="dg-s" x="880" y="156">then the reveal chain</text>
+      <text class="dg-s" x="880" y="174">G4, deliberately last</text>
+
+      <text class="dg-s" x="40" y="240">One thing to split: containment <tspan style="font-style:italic">logic</tspan> is phase 1 mechanics &#8212; the cached counter, the shared trigger, the degrade curve.</text>
+      <text class="dg-s" x="40" y="258">Only the aura's <tspan style="font-style:italic">appearance</tspan> is phase 2. Say if you meant the whole mechanic to move.</text>
+
+      <text class="dg-s t-bad" x="40" y="296">Shipping v0.1 without G4 is fine for your own testing. It is not playable by anyone else &#8212; without the reveal chain the kill sequence is unreachable by design.</text>
+    </svg>
+    </div>
+    <figcaption><b>The phase boundary is doing real work here.</b> Every unknown left in this project
+    is a rendering question or a question about your own machine, and neither kind blocks writing
+    script. That was not true an hour ago, and it is the direct consequence of scoping visuals out
+    rather than of anything being solved.</figcaption>
+  </figure>
+
+  <div class="verdict">
+    <p class="k">DECISION &#183; SUPERSEDES G38</p>
+    <h3>Names get a dedicated day, and the schedule conflict has a cheap fix</h3>
+    <p>Two-to-three syllable generation, one day, yours. There is one wrinkle: v0.1 contains
+    situations, and situations need localisation keys, so on the obvious reading the names would have
+    to exist before phase 1 or the keys get written twice.</p>
+    <p>They do not. <strong>Key on roles, never on names</strong> &#8212;
+    <code>BUILDER_RACE_NAME</code>, <code>WIELDER_RACE_NAME</code>, <code>FIRST_TAKEN_WORLD</code>.
+    The generated names then land as loc <em>values</em> whenever the day happens, and nothing above
+    them ever changes. The rename stops being a sequencing problem and becomes a text file.</p>
+  </div>
+
+  <div class="note">
+    <p class="sig">G30 &#183; I CANNOT REACH YOUR DISK</p>
+    <h3>This session is a remote container, not your PC</h3>
+    <p>"Locally available" is true for you and not for me &#8212; there is no path from here to your
+    save games folder. If you want a number computed from a real save, upload the <code>.sav</code>
+    and I will parse it; a Stellaris save is a zip holding a <code>gamestate</code> file in Clausewitz
+    text, which is tractable to read.</p>
+    <p>Also worth checking that we are answering the same question. G30 as written was
+    <em>whether the player keeps their capital at all</em> &#8212; a yes-or-no that decides whether
+    v0.2 stays small or becomes the large build. Averaging capitals sounds like you are answering a
+    different and also useful question: <em>how large the world absorbed into a cradle should be</em>.
+    I can do the second from a save. The first is still open.</p>
+  </div>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

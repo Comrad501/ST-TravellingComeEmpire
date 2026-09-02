@@ -130,8 +130,25 @@ consolidates all of them. Current state:
 - **Still yours** (4): `G30` capital, `G38` naming, `G11` scope, `G4` reveal-chain content.
 - **Needs the game** (6): `U1`-`U4`, `G9` EFCF audit, `G10` your iteration loop.
 
-One item blocks code (`U1`). Everything else is settled, is writing, or needs a machine
-with Stellaris on it.
+**Nothing blocks v0.1.** `U1` was the last blocker and it only ever blocked *rendering*
+the carried worlds - scoping visuals out of v0.1 moves it to phase 2.
+
+## Phases
+
+| Phase | Contents | Blockers |
+| --- | --- | --- |
+| **1 - v0.1** | Lore, situations, mechanics. Build steps 1-6: worthiness, containment logic, the shell threshold, capture. | none |
+| **2** | Graphics experiments, the containment aura's appearance, carried-world rendering. | `U1`, `U2` |
+| **3** | Modelling (author's own), then the reveal chain `G4`. | - |
+
+Containment *logic* is phase 1; only the aura's *appearance* is phase 2.
+
+Shipping v0.1 without `G4` is fine for private testing. It is **not playable by anyone
+else** - without the reveal chain the kill sequence is unreachable by design.
+
+**Localisation keys are named for roles, never for names** (`BUILDER_RACE_NAME`,
+`WIELDER_RACE_NAME`, `FIRST_TAKEN_WORLD`), so the `G38` naming pass lands as loc *values*
+whenever it happens and never becomes a sequencing dependency.
 
 **`script_documentation/` in the local data folder is the ground truth** for every trigger
 and effect name in these documents - the game writes it, and it is version-accurate in a
