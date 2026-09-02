@@ -225,7 +225,7 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     <span class="tag">Nomads — not owned, stubbed</span>
     <span class="tag">2 blocking unknowns</span>
     <span class="tag on">v0.1 = AI crisis</span>
-    <span class="tag">19 information gaps</span>
+    <span class="tag">22 information gaps</span>
     <span class="tag">0 lines written</span>
   </div>
 </header>
@@ -1327,6 +1327,14 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
     </div>
   </div>
 
+  <div class="verdict">
+    <p class="k">DECISION &#183; SCORING BASIS</p>
+    <h3>Option C. Strength sets the floor, damage escalates it.</h3>
+    <p>Which leaves the offsetting reward still owed. Without it, Option B's turtling incentive
+    survives in weaker form &#8212; and that debt is paid in &#167;13, where the same worthiness
+    verdicts turn out to be the lever that fixes it.</p>
+  </div>
+
   <h3>Implementation shape</h3>
   <p>The same rule from &#167;4 applies and for the same reason: worthiness is <strong>maintained,
   not measured</strong>. A score recomputed by walking empires and their planets on a timer is the
@@ -1370,6 +1378,175 @@ td.q{color:var(--ink);font-weight:500;min-width:270px}
   <p>One consequence worth stating plainly: DISPLACE means a world the Ark already carries can be
   jettisoned. That is a live question for &#167;10's G3 &#8212; whatever happens to carried colonies
   when the Ark dies is now also what happens when one is evicted, so the two want a single answer.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">&#167;13</span><h2>Fighting before it is your turn</h2></div>
+  <p class="lead">A crisis everyone agrees is fatal, and that nobody moves against until it reaches
+  their own border, is not a coordination failure in the players &#8212; it is a payoff table the
+  design handed them. Free-riding is the correct play unless the mechanics make it wrong.</p>
+
+  <p>The lore does real work here, but not the work it looks like. "All biological and emotional
+  life ends" establishes that there is no survivable neutral position &#8212; but stating that in an
+  event popup changes nothing, because a player who has read the tooltip and a player who has not
+  will both still calculate that the empire two jumps away is a cheaper shield than their own fleet.
+  Inevitability has to be <strong>demonstrated and enforced</strong>, not asserted.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 330" role="img" aria-label="A four-step doom spiral: the Ark takes a neighbour, I stay out, the Ark grows while I do not, and my turn arrives alone. A return arc closes the loop. Five numbered intervention points sit on the arrows between steps.">
+      <defs>
+        <marker id="m9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h t-bad" x="40" y="32">THE FREE-RIDER SPIRAL</text>
+
+      <rect x="40" y="90" width="210" height="70" rx="3" fill="var(--surface)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="58" y="118">Ark takes a neighbour</text>
+      <text class="dg-s" x="58" y="138">not my problem yet</text>
+
+      <rect x="330" y="90" width="210" height="70" rx="3" fill="var(--surface)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="348" y="118">I stay out</text>
+      <text class="dg-s" x="348" y="138">my fleet stays intact</text>
+
+      <rect x="620" y="90" width="210" height="70" rx="3" fill="var(--surface)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="638" y="118">Ark grows, I do not</text>
+      <text class="dg-s" x="638" y="138">relative power falls</text>
+
+      <rect x="910" y="90" width="210" height="70" rx="3" fill="var(--surface)" stroke="var(--danger)" stroke-width="1.3"/>
+      <text class="dg-t2" x="928" y="118">My turn arrives</text>
+      <text class="dg-s" x="928" y="138">and I face it alone</text>
+
+      <line class="dg-line bad" x1="250" y1="125" x2="322" y2="125" marker-end="url(#m9)"/>
+      <line class="dg-line bad" x1="540" y1="125" x2="612" y2="125" marker-end="url(#m9)"/>
+      <line class="dg-line bad" x1="830" y1="125" x2="902" y2="125" marker-end="url(#m9)"/>
+
+      <path class="dg-line bad" d="M1015 160 L1015 250 Q1015 262 1003 262 L157 262 Q145 262 145 250 L145 168" marker-end="url(#m9)"/>
+      <text class="dg-l t-bad" x="580" y="284" text-anchor="middle">and on every turn of the loop the Ark is stronger than it was</text>
+
+      <circle cx="286" cy="125" r="15" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+      <text class="ub-t t-acc" x="286" y="129" text-anchor="middle">L1</text>
+      <circle cx="576" cy="125" r="15" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+      <text class="ub-t t-acc" x="576" y="129" text-anchor="middle">L2</text>
+      <circle cx="866" cy="125" r="15" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+      <text class="ub-t t-acc" x="866" y="129" text-anchor="middle">L3</text>
+      <circle cx="800" cy="262" r="15" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+      <text class="ub-t t-acc" x="800" y="266" text-anchor="middle">L4</text>
+      <circle cx="360" cy="262" r="15" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+      <text class="ub-t t-acc" x="360" y="266" text-anchor="middle">L5</text>
+    </svg>
+    </div>
+    <figcaption><b>Five places the loop can be cut, detailed below.</b> The spiral itself needs no
+    hostile design to appear &#8212; it is what a rational empire does by default. Every lever is an
+    intervention on one specific edge, and only one of them relies on the player choosing well.</figcaption>
+  </figure>
+
+  <div class="verdict solved">
+    <p class="k">L1 &#183; THE LEVER YOU ALREADY BUILT</p>
+    <h3>Invert what the verdicts mean for the victim, and turtling stops being safe</h3>
+    <p>Under Option C, an empire that never fights never accrues damage, so its worthiness stays
+    low &#8212; and low worthiness means <code>SHATTER</code>, not <code>ASSIMILATE</code>. Read from
+    the victim's side that reverses: an assimilated world keeps its pops alive aboard the Ark, and a
+    carried world is <strong>recoverable by boarding</strong> in stage 2. A shattered world is gone
+    permanently, with everyone on it.</p>
+    <p>So the empires that fought have their losses held in escrow, and the empires that abstained
+    are simply erased. The free rider does not merely fail to gain &#8212; it draws the worse of the
+    two fates. And it is exactly what the lore already says: the Ark is not angry with you, it is
+    deciding whether you were worth continuing.</p>
+  </div>
+
+  <p>That single reframe pays off the debt left by Option C in &#167;12. It costs no new systems: the
+  score, the verdicts and the boarding surface all exist already. What it costs is
+  <strong>communication</strong> &#8212; a player who assumes being captured is the worse outcome
+  will read the whole mechanic backwards, so this is the thing the reveal chain in G4 has to teach
+  first.</p>
+
+  <h3>The other four</h3>
+
+  <div class="gap">
+    <span class="g">L2</span>
+    <h4>Make the ledger public</h4>
+    <p>G19 stops being a UX nicety and becomes the coordination substrate. If every empire can see
+    the worthiness standings and the Ark's distance from its threshold, doom stops being abstract and
+    becomes a schedule. Pair it with a galaxy-wide broadcast the first time a <em>neutral</em> empire
+    is shattered: observed precedent teaches inevitability in a way no tooltip manages, and it
+    teaches it while there is still time to act on it.</p>
+  </div>
+
+  <div class="gap">
+    <span class="g">L3</span>
+    <h4>Put the containment floor above any single empire</h4>
+    <p>Straight from &#167;5: containment holds while N inhibitor ships survive within radius R.
+    Tune N above what one empire can plausibly field mid-game, and pinning the Ark becomes a physical
+    coalition act rather than a moral one.</p>
+    <p class="why">The strongest of the five, because it is a constraint rather than an incentive
+    &#8212; it does not care whether anyone wanted to cooperate. It also finally gives the Ark's
+    spinal AoE weapon its purpose: it exists to break coalitions, not to kill single ships.</p>
+  </div>
+
+  <div class="gap">
+    <span class="g">L4</span>
+    <h4>Fund the cannon jointly</h4>
+    <p>Federations is owned, so the Galactic Community is available. Make the shell-stripping cannon
+    a community project with pooled cost, or price it beyond any one mid-game economy. Cooperation
+    then becomes structural &#8212; nobody has to be persuaded, because nobody can afford it
+    alone.</p>
+    <p class="why">This also gives U5 its shape. Whatever substitutes for the Nomads Stellar Cannon
+    should be designed as a shared build from the start, rather than a private one that gets a
+    cooperation mechanic bolted on later.</p>
+  </div>
+
+  <div class="gap">
+    <span class="g">L5</span>
+    <h4>Make the Golem a prize, not a commons</h4>
+    <p>Track per-empire contribution and award the Golem to whoever contributed most. A reward that
+    cannot be split converts a collective action problem into a competitive one: the race becomes who
+    can help the most rather than who can abstain longest.</p>
+    <p class="why">Cheap relative to its effect, and it uses G6's unresolved scope productively
+    &#8212; the Golem needed a defined owner and a defined reach anyway.</p>
+  </div>
+
+  <div class="note">
+    <p class="sig">THE LOAD-BEARING CAVEAT</p>
+    <h3>Four of these five assume the other empires respond to incentives</h3>
+    <p>In single-player the coalition is mostly AI, and Stellaris AI does not reliably coordinate
+    against crises even when the incentive is plain. A design that <em>depends</em> on emergent AI
+    cooperation will read to the player as a broken promise: the mechanics say band together, and
+    then nobody comes.</p>
+    <p>So the cooperative outcome has to be reachable without the AI choosing it &#8212; the
+    Community resolution passing on a scripted threshold rather than on votes, or L3's N being
+    meetable by one player plus scripted allies. L3 survives this caveat because it is a constraint;
+    L1 survives because it punishes the abstainer directly rather than rewarding a coalition. The
+    other two need scripting to be dependable.</p>
+  </div>
+
+  <div class="gap" id="g20">
+    <span class="g">G20</span>
+    <h4>Is cooperation required, or merely rewarded?</h4>
+    <p>L3 makes it a hard gate; L1, L4 and L5 make it strongly advantageous. These are different
+    games. A hard gate guarantees the intended shape but removes the choice, and a crisis you cannot
+    attempt alone will read as scripted to some players.</p>
+    <p class="why">Worth deciding as a stance rather than emerging from tuning, because it sets what
+    every number in G5 is aiming at.</p>
+  </div>
+
+  <div class="gap" id="g21">
+    <span class="g">G21</span>
+    <h4>AI cooperation cannot be assumed</h4>
+    <p>How much of the coalition is scripted versus emergent, and what the player sees if the AI
+    fails to show up. Needs a floor: the minimum guaranteed help, and where it comes from.</p>
+  </div>
+
+  <div class="gap" id="g22">
+    <span class="g">G22</span>
+    <h4>Contribution tracking</h4>
+    <p>L5 needs a per-empire contribution counter, and it is the same shape as everything else here
+    &#8212; incremented from <code>on_actions</code>, cached, never totalled by scanning. It can
+    likely share plumbing with G18's damage counter, since both are measuring the same events from
+    opposite sides.</p>
+  </div>
 </section>
 
 <p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris

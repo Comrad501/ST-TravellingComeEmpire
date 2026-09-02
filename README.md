@@ -74,11 +74,32 @@ the score yields one of three verdicts:
 the galaxy indefinitely while never holding more than four worlds. The four-slot cap and
 the "collects worlds indefinitely" losing condition stop contradicting each other.
 
-Scoring inputs are an open decision (`§12` of the architecture map): empire strength alone
-is deterministic, damage-dealt alone rewards turtling, and the recommended blend uses
-strength as a baseline with damage as a multiplier. Worthiness is **maintained via
-`on_actions`, never recomputed by scanning** - the same discipline as the containment
-count.
+**Scoring basis: strength sets the floor, damage escalates it.** Strength alone is
+deterministic and punishes the leader every campaign; damage alone rewards turtling.
+Worthiness is **maintained via `on_actions`, never recomputed by scanning** - the same
+discipline as the containment count.
+
+## Getting empires to fight together
+
+Free-riding is the correct play in a crisis unless the mechanics make it wrong: everyone
+gains if the Ark dies, but each empire gains more by letting someone else pay. Lore
+asserting that doom is universal does not fix this. Five levers cut the loop (`§13`):
+
+| | Lever | Relies on |
+| --- | --- | --- |
+| `L1` | Worthiness inversion - abstaining means `SHATTER` (permanent) rather than `ASSIMILATE` (pops survive, world recoverable by boarding) | nothing; it punishes the abstainer directly |
+| `L2` | Public ledger - worthiness standings and Ark trajectory visible galaxy-wide | player attention |
+| `L3` | Containment floor `N` set above any single empire's fleet | nothing; it is a constraint |
+| `L4` | Cannon jointly funded through the Galactic Community | scripting, to be dependable |
+| `L5` | Golem awarded to the largest contributor | scripting, to be dependable |
+
+**L1 costs no new systems** - the score, the verdicts and the boarding surface all exist.
+It does need teaching, since a player who assumes capture is the worse outcome reads the
+whole mechanic backwards.
+
+**Caveat:** in single-player the coalition is mostly AI, and Stellaris AI does not reliably
+coordinate against crises. The cooperative outcome must be reachable without the AI
+choosing it (`G21`).
 
 ## Build order
 
