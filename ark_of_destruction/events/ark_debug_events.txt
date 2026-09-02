@@ -4,6 +4,10 @@ namespace = arktest
 # THE TEST SUITE
 # =============================================================================
 # Console:  event arktest.1     runs every test in order
+#
+# DESELECT FIRST (Escape, or click empty space). The console fires an event on
+# whatever is selected, and these are country_events - a selected planet gives
+# "got planet expected country". Or target it explicitly: event arktest.1 0
 # Each test leaves the world as it found it, so they can be re-run.
 # Results land in game.log as [ARK TEST] PASS / FAIL lines.
 # =============================================================================

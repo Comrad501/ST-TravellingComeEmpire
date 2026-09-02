@@ -79,7 +79,31 @@ Hovering anything now shows its internal ID, which you will want constantly.
 
 ## 4. Set up
 
-**Use `event`, never `effect`, and do not select anything first.**
+### Deselect first. This is the whole trick.
+
+The console fires an event on whatever you have **selected**. Every event here is a
+`country_event`, so with a planet selected you get:
+
+```
+got planet expected country
+```
+
+and with `effect` you get `Wrong scope for effect 'every_owned_fleet'`. Same cause, two
+messages.
+
+**Press Escape, or click empty space, so nothing is selected. Then run the commands.**
+
+If you would rather be explicit than remember to deselect, the console takes a target:
+
+```
+event arktest.1 <your country id>
+```
+
+Hover your own empire with `debugtooltip` on to read that id. It is usually `0` in a
+single-player game, so `event arktest.1 0` normally works.
+
+Use `event`, never `effect` - `effect` has no target argument and is entirely at the mercy
+of your selection.
 
 The console's `effect` verb runs in whatever you have *selected*. With a planet selected
 the scope is a planet, and `every_owned_fleet` is a country-scope effect - which produces
