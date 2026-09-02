@@ -8,6 +8,21 @@ test bed, and the save is locked to the exact mod set it was made with.
 What works instead is a deliberately tiny galaxy plus an in-game test harness. That gets
 you the same thing a debug save would, and it is repeatable.
 
+## 0. Get the mod loading first
+
+See `Installing it locally` in the README - `tools/install_local_mod.py --write`. The short
+version: the `ugc_*.mod` files already in your mod folder are Workshop pointers, not data,
+and a local mod needs its own.
+
+**If the mod does not appear in the launcher after writing the pointer:**
+
+1. Close the launcher entirely (check the tray) and reopen. It reads its mod list once at
+   startup.
+2. Confirm the `path=` in the pointer is correct and uses forward slashes, even on Windows.
+3. Confirm `descriptor.mod` exists *inside* the mod folder as well - the pointer and the
+   descriptor are two separate files and the game wants both.
+4. Check `error.log` for a parse complaint about the pointer itself.
+
 ## 1. Build the test galaxy
 
 New game, and deliberately minimal so events are easy to attribute:

@@ -81,19 +81,36 @@ technology term (`wave motion`) want replacing. "Ark of Destruction" and "travel
 empire" are generic enough to keep. Cheapest done before build step 1, since localisation
 keys are written there (`G38`).
 
-## Deploying
+## Installing it locally
 
-The mod lives in `ark_of_destruction/`. Symlink or copy that folder into
-`Documents/Paradox Interactive/Stellaris/mod/`, and copy `ark_of_destruction.mod`
-alongside it, then enable it in the launcher.
+The `ugc_<numbers>.mod` files in `Documents/Paradox Interactive/Stellaris/mod/` are Workshop
+**pointers**, not mod data - the content they point at lives under
+`steamapps/workshop/content/281990/`. A local mod needs its own pointer file, which is what
+this writes:
 
-Run `python3 tools/watchlog.py` while testing in-game - it tails the Stellaris logs and
-shows only this mod's lines, colour-coded. Stdlib only, no dependencies, no network.
+```
+python3 tools/install_local_mod.py            # dry run, shows exactly what it will do
+python3 tools/install_local_mod.py --write    # create the pointer
+```
 
-Run `python3 tools/validate.py` before every commit. It checks brace balance, quote
-parity, the localisation BOM and key form, that every `ark_*` effect and trigger called is
-also defined, and that every event an `on_action` points at exists. All of those fail
-*silently* in-game, which is why they are checked here.
+It points at this repo **in place**, so edits here are live in-game with no copying and no
+symlinks. If it cannot find your Stellaris folder it prints the exact file to create by
+hand, and `--stellaris-dir` overrides detection.
+
+Then close the Paradox launcher **completely**, reopen it, and add the mod to your playset.
+The launcher caches its mod list on startup, so a running launcher will not see a
+newly-written pointer.
+
+## Working on it
+
+```
+python3 tools/validate.py       # before every commit - catches the silent failures
+python3 tools/watchlog.py       # while testing in-game - tails the logs, filtered to this mod
+```
+
+`validate.py` checks brace balance, quote parity, the localisation BOM and key form, that
+every `ark_*` effect and trigger called is also defined, and that every event an
+`on_action` points at exists. All of those fail *silently* in-game.
 
 It cannot verify that field names are real in 4.4.6. Check those against
 `script_documentation/` in the local data folder - the game writes it, and it is the only
