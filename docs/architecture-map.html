@@ -1,0 +1,774 @@
+<title>Ark of Destruction</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{
+  --bg:#E9EEF2; --surface:#FFFFFF; --surface-2:#F2F6F8; --sunk:#DFE7EC;
+  --ink:#101A21; --ink-2:#3D4C57; --muted:#66757F;
+  --line:#C2CFD8; --line-2:#DCE5EA;
+  --accent:#00798F; --accent-soft:#D5EBF1; --accent-ink:#005E70;
+  --warn:#9C5C0C; --warn-soft:#F6E6CB;
+  --danger:#A63930; --danger-soft:#F7DEDA;
+  --ok:#2A7154; --ok-soft:#D6ECE1;
+  --font-display:'Saira Condensed','Arial Narrow',Helvetica,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1015; --surface:#111A21; --surface-2:#16212A; --sunk:#0E171D;
+    --ink:#DFE9EF; --ink-2:#AFC1CD; --muted:#7C90A0;
+    --line:#25353F; --line-2:#1B272F;
+    --accent:#4CCFE6; --accent-soft:#0F323B; --accent-ink:#7FE0F0;
+    --warn:#E4A44A; --warn-soft:#372913;
+    --danger:#F0705F; --danger-soft:#391D1A;
+    --ok:#56C395; --ok-soft:#10301F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1015; --surface:#111A21; --surface-2:#16212A; --sunk:#0E171D;
+  --ink:#DFE9EF; --ink-2:#AFC1CD; --muted:#7C90A0;
+  --line:#25353F; --line-2:#1B272F;
+  --accent:#4CCFE6; --accent-soft:#0F323B; --accent-ink:#7FE0F0;
+  --warn:#E4A44A; --warn-soft:#372913;
+  --danger:#F0705F; --danger-soft:#391D1A;
+  --ok:#56C395; --ok-soft:#10301F;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);
+  font-size:15.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px 96px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---- masthead ---- */
+.mast{padding:56px 0 38px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;
+  color:var(--accent);margin:0 0 14px}
+.mast h1{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,7vw,78px);
+  line-height:.95;letter-spacing:-.005em;margin:0;text-wrap:balance;color:var(--ink)}
+.mast .sub{font-family:var(--font-display);font-weight:500;font-size:clamp(19px,2.4vw,26px);
+  color:var(--muted);margin:10px 0 0;line-height:1.2}
+.deck{max-width:66ch;margin:24px 0 0;color:var(--ink-2)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0}
+.tag{font-family:var(--font-mono);font-size:11px;padding:4px 9px;border:1px solid var(--line);
+  border-radius:2px;color:var(--muted);background:var(--surface)}
+.tag.on{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft)}
+
+/* ---- sections ---- */
+section{padding:52px 0 0}
+.shead{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+.snum{font-family:var(--font-mono);font-size:12px;color:var(--accent);
+  letter-spacing:.08em;flex:none;padding-top:4px}
+h2{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3.4vw,36px);
+  line-height:1.06;margin:0;text-wrap:balance;letter-spacing:-.005em}
+h3{font-family:var(--font-display);font-weight:600;font-size:20px;margin:34px 0 6px;
+  letter-spacing:.005em}
+p{max-width:66ch;margin:14px 0 0;color:var(--ink-2)}
+p.lead{color:var(--ink);font-size:17px}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--sunk);
+  padding:1px 5px;border-radius:2px;color:var(--ink)}
+strong{color:var(--ink);font-weight:600}
+
+/* ---- constraint blocks ---- */
+.cons{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:26px;margin:30px 0 0}
+.con{border-top:2px solid var(--ink);padding:16px 0 0}
+.con .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.con h3{margin:6px 0 0;font-size:22px}
+.con p{margin:8px 0 0;font-size:14.5px;max-width:46ch}
+.quote{font-family:var(--font-mono);font-size:12.5px;color:var(--ink);background:var(--sunk);
+  border-left:2px solid var(--accent);padding:9px 12px;margin:12px 0 0;display:block;
+  max-width:46ch;line-height:1.5}
+
+/* ---- figures ---- */
+figure{margin:32px 0 0;padding:0}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+.scroller{overflow-x:auto;background:var(--surface);border:1px solid var(--line-2);
+  border-radius:3px;padding:18px 20px}
+.scroller>svg{min-width:820px}
+figcaption{font-size:13.5px;color:var(--muted);margin:12px 0 0;max-width:74ch;line-height:1.55}
+figcaption b{color:var(--ink-2);font-weight:600}
+
+/* ---- svg primitives ---- */
+.dg-box{fill:var(--surface);stroke:var(--line);stroke-width:1.3}
+.dg-box2{fill:var(--surface-2);stroke:var(--line);stroke-width:1.3}
+.dg-panel{fill:var(--sunk);stroke:none}
+.dg-acc{fill:var(--surface);stroke:var(--accent);stroke-width:1.8}
+.dg-t{font-family:var(--font-display);font-weight:600;font-size:16px;fill:var(--ink)}
+.dg-t2{font-family:var(--font-display);font-weight:600;font-size:14px;fill:var(--ink)}
+.dg-s{font-family:var(--font-mono);font-weight:400;font-size:10.5px;fill:var(--muted)}
+.dg-l{font-family:var(--font-body);font-weight:500;font-size:11.5px;fill:var(--ink-2)}
+.dg-h{font-family:var(--font-body);font-weight:600;font-size:11px;fill:var(--muted);letter-spacing:.14em}
+.dg-line{stroke:var(--ink-2);stroke-width:1.5;fill:none}
+.dg-rule{stroke:var(--line);stroke-width:1}
+.acc{stroke:var(--accent)} .bad{stroke:var(--danger)} .good{stroke:var(--ok)}
+.dash{stroke-dasharray:5 4}
+.f-ink{fill:var(--ink-2)} .f-acc{fill:var(--accent)} .f-bad{fill:var(--danger)} .f-ok{fill:var(--ok)}
+.t-bad{fill:var(--danger)} .t-ok{fill:var(--ok)} .t-acc{fill:var(--accent)}
+svg a{cursor:pointer}
+.ub{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.3}
+.ub-t{font-family:var(--font-mono);font-weight:500;font-size:10px;fill:var(--warn)}
+.ub.crit{fill:var(--danger-soft);stroke:var(--danger)}
+.ub-t.crit{fill:var(--danger)}
+
+/* ---- register table ---- */
+.tw{overflow-x:auto;margin:28px 0 0;border:1px solid var(--line-2);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+thead th{font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.1em;
+  color:var(--muted);text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);
+  background:var(--surface-2);white-space:nowrap}
+tbody td{padding:15px 16px;border-bottom:1px solid var(--line-2);vertical-align:top;
+  color:var(--ink-2);background:transparent}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{scroll-margin-top:24px}
+tbody tr:target td{background:var(--accent-soft)}
+td.id{font-family:var(--font-mono);font-size:12px;color:var(--ink);font-weight:500;
+  border-left:3px solid var(--line);white-space:nowrap}
+tr.sev-block td.id{border-left-color:var(--danger)}
+tr.sev-high td.id{border-left-color:var(--warn)}
+tr.sev-low td.id{border-left-color:var(--muted)}
+tr.sev-def td.id{border-left-color:var(--accent)}
+td.q{color:var(--ink);font-weight:500;min-width:270px}
+.pill{display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;
+  padding:3px 8px;border-radius:2px;white-space:nowrap;border:1px solid}
+.p-block{color:var(--danger);border-color:var(--danger);background:var(--danger-soft)}
+.p-high{color:var(--warn);border-color:var(--warn);background:var(--warn-soft)}
+.p-low{color:var(--muted);border-color:var(--line);background:var(--surface-2)}
+.p-def{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft)}
+.p-no{color:var(--danger);border:none;background:none;padding-left:0}
+.p-yes{color:var(--ok);border:none;background:none;padding-left:0}
+
+/* ---- hazards ---- */
+.hz{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;
+  margin:28px 0 0;background:var(--line-2);border:1px solid var(--line-2);border-radius:3px;overflow:hidden}
+.hz>div{background:var(--surface);padding:20px 22px}
+.hz .sig{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--danger)}
+.hz h3{margin:8px 0 0;font-size:18px}
+.hz p{margin:7px 0 0;font-size:14px;max-width:44ch}
+
+/* ---- build order ---- */
+.steps{list-style:none;padding:0;margin:28px 0 0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:0 18px;
+  padding:18px 0;border-top:1px solid var(--line-2)}
+.steps li>*{grid-column:2}
+.steps li::before{grid-column:1;grid-row:1}
+.steps li:first-child{border-top:1px solid var(--line)}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--font-mono);
+  font-size:12px;color:var(--accent);padding-top:3px}
+.steps h3{margin:0;font-size:19px}
+.steps p{margin:4px 0 0;font-size:14px;max-width:60ch}
+.steps .gate{display:inline-block;margin:8px 0 0;justify-self:start}
+.steps li.blocked h3{color:var(--ink)}
+
+.foot{margin:64px 0 0;padding:24px 0 0;border-top:1px solid var(--line);
+  font-size:13px;color:var(--muted);max-width:72ch}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">STELLARIS 4.4.6 · PEGASUS · ARCHITECTURE MAP</p>
+  <h1>Ark of Destruction</h1>
+  <p class="sub">A travelling comet empire, and the six mechanisms it actually runs on</p>
+  <p class="deck">This maps the mod's subsystems onto the Clausewitz files that back them, so the
+  dependency chains are visible before any of them are written. Two engine constraints force nearly
+  every structural decision here; five unknowns are still open, and two of those block work that
+  hasn't started yet. Everything below is drawn from the design notes — where the notes say
+  <em>unconfirmed</em>, so does this page.</p>
+  <div class="meta">
+    <span class="tag on">Base + Apocalypse + Federations + Nemesis</span>
+    <span class="tag">Nomads — not owned, stubbed</span>
+    <span class="tag">2 blocking unknowns</span>
+    <span class="tag">0 lines written</span>
+  </div>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">§1</span><h2>Two constraints shape everything else</h2></div>
+  <p class="lead">Neither is a preference. Both are engine limits, and both are already confirmed in
+  the notes. Almost every unusual choice further down exists to route around one of them.</p>
+
+  <div class="cons">
+    <div class="con">
+      <p class="k">CONSTRAINT A · MOVEMENT</p>
+      <h3>Planets cannot be relocated</h3>
+      <p>There is no mechanism to move a <code>galactic_object</code>. So the Ark never carries a
+      planet — it carries a <strong>colony that has been detached from one</strong>. Pops, jobs,
+      districts and name travel; the planet object stays where it was and becomes a husk.</p>
+    </div>
+    <div class="con">
+      <p class="k">CONSTRAINT B · SCOPE</p>
+      <h3>Situations cannot target a fleet</h3>
+      <p>A Situation lives on a country scope and its target is a planet or empire. The base-game
+      README is explicit about the target modifiers:</p>
+      <span class="quote">"Does not work on other scope types!"</span>
+      <p>This is why the Planet Catcher is <strong>load-bearing, not thematic</strong>. A captured
+      colony is the only thing on the Ark a Situation can legally hook into.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§2</span><h2>The system, both sides of it</h2></div>
+  <p>The mod is not one machine. It is an Ark-side machine and a defender-side machine that meet in
+  a shared script layer — and the fight the design wants only exists because the two sides read and
+  write the same handful of flags and counters. Every subsystem below is named by its backing
+  directory, because that is where the coupling actually lives.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 420" role="img" aria-label="Ark-side subsystems on the left and defender-side subsystems on the right, both connecting to a shared script layer in the centre made of situations, script values, scripted triggers and scripted effects.">
+      <defs>
+        <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="40" y="30">ARK SIDE</text>
+      <text class="dg-h" x="1140" y="30" text-anchor="end">DEFENDER SIDE</text>
+      <line class="dg-rule" x1="40" y1="44" x2="300" y2="44"/>
+      <line class="dg-rule" x1="880" y1="44" x2="1140" y2="44"/>
+
+      <!-- LEFT COLUMN -->
+      <rect class="dg-box" x="40" y="70" width="260" height="76" rx="3"/>
+      <text class="dg-t" x="58" y="100">Ark Hull + Comet Shell</text>
+      <text class="dg-s" x="58" y="119">common/ship_sizes/</text>
+      <text class="dg-s" x="58" y="134">regenerating damage gate</text>
+
+      <rect class="dg-box" x="40" y="186" width="260" height="76" rx="3"/>
+      <text class="dg-t" x="58" y="216">Planet Catcher</text>
+      <text class="dg-s" x="58" y="235">common/section_templates/</text>
+      <text class="dg-s" x="58" y="250">4 carried colony slots</text>
+      <a href="#u1"><circle class="ub" cx="278" cy="204" r="12"/><text class="ub-t" x="278" y="208" text-anchor="middle">U1</text></a>
+
+      <rect class="dg-box" x="40" y="302" width="260" height="76" rx="3"/>
+      <text class="dg-t" x="58" y="332">Jump Eligibility</text>
+      <text class="dg-s" x="58" y="351">fleet_event / ship_event</text>
+      <text class="dg-s" x="58" y="366">may the Ark leave?</text>
+
+      <!-- CENTRE -->
+      <rect class="dg-acc" x="460" y="70" width="260" height="308" rx="3"/>
+      <text class="dg-t2" x="478" y="98">Shared script layer</text>
+      <line class="dg-rule" x1="478" y1="110" x2="702" y2="110"/>
+
+      <text class="dg-s" x="478" y="136" style="fill:var(--ink)">common/situations/</text>
+      <text class="dg-s" x="478" y="151">country scope · planet target</text>
+
+      <text class="dg-s" x="478" y="186" style="fill:var(--ink)">common/script_values/</text>
+      <text class="dg-s" x="478" y="201">cached counters, never polls</text>
+
+      <text class="dg-s" x="478" y="236" style="fill:var(--ink)">common/scripted_triggers/</text>
+      <text class="dg-s" x="478" y="251">one shared containment test</text>
+
+      <text class="dg-s" x="478" y="286" style="fill:var(--ink)">common/scripted_effects/</text>
+      <text class="dg-s" x="478" y="301">stub seam · swappable backing</text>
+      <a href="#u4"><circle class="ub" cx="686" cy="340" r="12"/><text class="ub-t" x="686" y="344" text-anchor="middle">U4</text></a>
+
+      <!-- RIGHT COLUMN -->
+      <rect class="dg-box" x="880" y="70" width="260" height="76" rx="3"/>
+      <text class="dg-t" x="898" y="100">Shell-Stripping Cannon</text>
+      <text class="dg-s" x="898" y="119">megastructure · stub seam</text>
+      <text class="dg-s" x="898" y="134">no owned implementation yet</text>
+      <a href="#u5"><circle class="ub crit" cx="1118" cy="88" r="12"/><text class="ub-t crit" x="1118" y="92" text-anchor="middle">U5</text></a>
+
+      <rect class="dg-box" x="880" y="186" width="260" height="76" rx="3"/>
+      <text class="dg-t" x="898" y="216">Boarding Armies</text>
+      <text class="dg-s" x="898" y="235">vanilla planetary invasion</text>
+      <text class="dg-s" x="898" y="250">no new code required</text>
+
+      <rect class="dg-box" x="880" y="302" width="260" height="76" rx="3"/>
+      <text class="dg-t" x="898" y="332">Inhibitor Ships &#215;N</text>
+      <text class="dg-s" x="898" y="351">common/component_templates/</text>
+      <text class="dg-s" x="898" y="366">containment aura, radius R</text>
+
+      <!-- ARROWS: left to centre -->
+      <line class="dg-line" x1="300" y1="108" x2="452" y2="108" marker-end="url(#m1)"/>
+      <text class="dg-l" x="376" y="99" text-anchor="middle">shell up/down flag</text>
+      <line class="dg-line" x1="300" y1="224" x2="452" y2="224" marker-end="url(#m1)"/>
+      <text class="dg-l" x="376" y="215" text-anchor="middle">colony slot state</text>
+      <line class="dg-line acc" x1="452" y1="340" x2="308" y2="340" marker-end="url(#m1)"/>
+      <text class="dg-l" x="380" y="331" text-anchor="middle">containment verdict</text>
+
+      <!-- ARROWS: right to centre -->
+      <line class="dg-line" x1="880" y1="108" x2="728" y2="108" marker-end="url(#m1)"/>
+      <text class="dg-l" x="804" y="99" text-anchor="middle">opens damage window</text>
+      <line class="dg-line" x1="880" y1="224" x2="728" y2="224" marker-end="url(#m1)"/>
+      <text class="dg-l" x="804" y="215" text-anchor="middle">invades carried world</text>
+      <line class="dg-line" x1="880" y1="340" x2="728" y2="340" marker-end="url(#m1)"/>
+      <text class="dg-l" x="804" y="331" text-anchor="middle">on_action writes count</text>
+    </svg>
+    </div>
+    <figcaption><b>Nothing crosses the middle without going through script.</b> The Ark never reads
+    the defenders' ships directly and the defenders never read the Ark's hull state directly — both
+    sides talk to cached values and shared triggers. That is what keeps the containment mechanic from
+    becoming a per-tick scan, and it is why the centre column is one object rather than three.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§3</span><h2>How a world gets carried</h2></div>
+  <p>The instinct is to move the planet. The engine has no way to do that, and building anything on
+  the assumption that it might is the single most expensive mistake available here. The capture is
+  two ordinary operations instead, each with vanilla precedent, and neither one moves a planet.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 310" role="img" aria-label="Left: relocating a planet object to another system, marked impossible. Right: the working approach, where the source world is stripped to a shattered husk while its pops, name and deposits are transplanted into a colony slot carried by the Ark.">
+      <defs>
+        <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+        <marker id="m2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h t-bad" x="40" y="30">WHAT THE ENGINE CANNOT DO</text>
+      <rect class="dg-panel" x="40" y="46" width="480" height="228" rx="3"/>
+
+      <rect class="dg-box2" x="76" y="128" width="150" height="58" rx="3"/>
+      <text class="dg-t2" x="151" y="153" text-anchor="middle">Planet</text>
+      <text class="dg-s" x="151" y="171" text-anchor="middle">galactic_object</text>
+
+      <line class="dg-line bad dash" x1="226" y1="157" x2="326" y2="157" marker-end="url(#m2b)"/>
+      <rect class="dg-box2" x="334" y="128" width="150" height="58" rx="3"/>
+      <text class="dg-t2" x="409" y="153" text-anchor="middle">Another system</text>
+      <text class="dg-s" x="409" y="171" text-anchor="middle">arbitrary position</text>
+
+      <circle cx="276" cy="157" r="14" fill="var(--bg)" stroke="var(--danger)" stroke-width="1.5"/>
+      <line class="bad" x1="270" y1="151" x2="282" y2="163" stroke-width="2"/>
+      <line class="bad" x1="282" y1="151" x2="270" y2="163" stroke-width="2"/>
+
+      <text class="dg-l t-bad" x="76" y="230">No engine mechanism relocates a planet entity.</text>
+      <text class="dg-s" x="76" y="249">Any design that assumes otherwise fails at the first prototype.</text>
+
+      <text class="dg-h t-ok" x="620" y="30">WHAT THE MOD DOES INSTEAD</text>
+      <rect class="dg-panel" x="620" y="46" width="520" height="228" rx="3"/>
+
+      <rect class="dg-box" x="650" y="80" width="150" height="54" rx="3"/>
+      <text class="dg-t2" x="725" y="104" text-anchor="middle">Source world</text>
+      <text class="dg-s" x="725" y="121" text-anchor="middle">stays in its system</text>
+
+      <line class="dg-line" x1="725" y1="134" x2="725" y2="186" marker-end="url(#m2)"/>
+      <text class="dg-l" x="737" y="164">1 &#183; strip</text>
+      <rect class="dg-box2" x="650" y="194" width="150" height="54" rx="3"/>
+      <text class="dg-t2" x="725" y="218" text-anchor="middle">Shattered husk</text>
+      <text class="dg-s" x="725" y="235" text-anchor="middle">pc_shattered</text>
+
+      <line class="dg-line acc" x1="800" y1="107" x2="932" y2="107" marker-end="url(#m2)"/>
+      <text class="dg-l" x="866" y="98" text-anchor="middle">2 &#183; transplant</text>
+      <rect class="dg-acc" x="940" y="80" width="176" height="54" rx="3"/>
+      <text class="dg-t2" x="1028" y="104" text-anchor="middle">Ark colony slot</text>
+      <text class="dg-s" x="1028" y="121" text-anchor="middle">1 of 4 carried</text>
+
+      <text class="dg-s" x="940" y="160">pops</text>
+      <text class="dg-s" x="985" y="160">jobs</text>
+      <text class="dg-s" x="1025" y="160">name</text>
+      <text class="dg-s" x="1072" y="160">deposits</text>
+      <line class="dg-rule" x1="940" y1="170" x2="1116" y2="170"/>
+      <text class="dg-l t-ok" x="940" y="192">travel with the Ark</text>
+
+      <text class="dg-l" x="650" y="270">Colossus-style planet_class change, then an arkship-style colony attach.</text>
+    </svg>
+    </div>
+    <figcaption><b>Both halves already exist in vanilla.</b> Step 1 is the Colossus planet-class
+    change; step 2 is the same primitive an arkship colony uses. The insight the whole mod rests on is
+    that these two together <em>look</em> like a moving planet without any planet ever moving —
+    which also means the carried world is a real colony, with everything that follows from
+    that.</figcaption>
+  </figure>
+
+  <p>The consequence worth noticing early: a carried colony has a normal <strong>invasion
+  surface</strong>. That is not a side effect to work around — it is the boarding stage of the kill
+  sequence, free, using the planetary invasion system as shipped. Every world the Ark takes is
+  another door into it.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§4</span><h2>Containment, without a per-tick scan</h2></div>
+  <p>The containment field inverts the usual fight: defenders don't need to win, they need to survive
+  in place; the Ark doesn't need to win, it needs to thin the emitters below a threshold and jump.
+  Field strength is a function of how many inhibitor ships are alive nearby, so the mechanic lives or
+  dies on <em>how that number is obtained</em>.</p>
+  <p>Counting it by iterating the ship list is the pattern that produces late-game slowdown, and the
+  notes already record a save with <strong>6,000+ ships</strong>. The count has to be maintained, not
+  measured.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 430" role="img" aria-label="Left: the anti-pattern, a periodic pulse iterating every ship in the system to count inhibitors. Right: the chosen design, where three on_action hooks write a cached system variable, a single scripted trigger reads it, and two consumers call that one trigger.">
+      <defs>
+        <marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+        <marker id="m3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+        <marker id="m3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h t-bad" x="40" y="30">MEASURE IT &#183; DON'T</text>
+      <rect class="dg-panel" x="40" y="46" width="440" height="358" rx="3"/>
+
+      <rect class="dg-box2" x="115" y="82" width="290" height="52" rx="3"/>
+      <text class="dg-t2" x="260" y="106" text-anchor="middle">Recurring pulse</text>
+      <text class="dg-s" x="260" y="123" text-anchor="middle">monthly or daily</text>
+      <line class="dg-line bad" x1="260" y1="134" x2="260" y2="178" marker-end="url(#m3b)"/>
+
+      <rect class="dg-box2" x="115" y="186" width="290" height="60" rx="3"/>
+      <text class="dg-t2" x="260" y="210" text-anchor="middle">Iterate every ship in system</text>
+      <text class="dg-s t-bad" x="260" y="229" text-anchor="middle">6,000+ ships in a real save</text>
+      <line class="dg-line bad" x1="260" y1="246" x2="260" y2="290" marker-end="url(#m3b)"/>
+
+      <rect class="dg-box2" x="115" y="298" width="290" height="52" rx="3"/>
+      <text class="dg-t2" x="260" y="322" text-anchor="middle">Test each for the component</text>
+      <text class="dg-s" x="260" y="339" text-anchor="middle">inferred at runtime</text>
+
+      <text class="dg-l t-bad" x="115" y="378">Cost scales with fleet count, every tick, forever.</text>
+
+      <text class="dg-h t-ok" x="540" y="30">MAINTAIN IT &#183; DO</text>
+      <rect class="dg-panel" x="540" y="46" width="600" height="358" rx="3"/>
+
+      <rect class="dg-box" x="562" y="82" width="176" height="46" rx="3"/>
+      <text class="dg-l" x="650" y="103" text-anchor="middle">fleet enters system</text>
+      <text class="dg-s" x="650" y="119" text-anchor="middle">on_action</text>
+      <rect class="dg-box" x="752" y="82" width="176" height="46" rx="3"/>
+      <text class="dg-l" x="840" y="103" text-anchor="middle">fleet leaves system</text>
+      <text class="dg-s" x="840" y="119" text-anchor="middle">on_action</text>
+      <rect class="dg-box" x="942" y="82" width="176" height="46" rx="3"/>
+      <text class="dg-l" x="1030" y="103" text-anchor="middle">ship destroyed</text>
+      <text class="dg-s" x="1030" y="119" text-anchor="middle">on_action</text>
+
+      <line class="dg-line" x1="650" y1="128" x2="756" y2="166" marker-end="url(#m3)"/>
+      <line class="dg-line" x1="840" y1="128" x2="840" y2="166" marker-end="url(#m3)"/>
+      <line class="dg-line" x1="1030" y1="128" x2="924" y2="166" marker-end="url(#m3)"/>
+
+      <rect class="dg-box" x="680" y="174" width="320" height="54" rx="3"/>
+      <text class="dg-t2" x="840" y="197" text-anchor="middle">System variable</text>
+      <text class="dg-s" x="840" y="215" text-anchor="middle">ark_inhibitor_count</text>
+
+      <line class="dg-line acc" x1="840" y1="228" x2="840" y2="268" marker-end="url(#m3a)"/>
+      <text class="dg-l" x="852" y="252">read, never recounted</text>
+
+      <rect class="dg-acc" x="680" y="276" width="320" height="54" rx="3"/>
+      <text class="dg-t2" x="840" y="299" text-anchor="middle">One scripted_trigger</text>
+      <text class="dg-s" x="840" y="317" text-anchor="middle">ark_containment_holds</text>
+
+      <line class="dg-line" x1="820" y1="330" x2="700" y2="358" marker-end="url(#m3)"/>
+      <line class="dg-line" x1="860" y1="330" x2="985" y2="358" marker-end="url(#m3)"/>
+
+      <rect class="dg-box2" x="562" y="366" width="270" height="30" rx="3"/>
+      <text class="dg-l" x="697" y="386" text-anchor="middle">situation monthly_progress</text>
+      <rect class="dg-box2" x="852" y="366" width="266" height="30" rx="3"/>
+      <text class="dg-l" x="985" y="386" text-anchor="middle">Ark jump eligibility</text>
+
+      <text class="dg-s" x="562" y="256">ships are tagged on construction,</text>
+      <text class="dg-s" x="562" y="271">not inspected at runtime</text>
+    </svg>
+    </div>
+    <figcaption><b>The degrading field is free.</b> If containment strength is a plain function of the
+    cached count, losing ships weakens it progressively with no extra logic — no on/off switch to
+    write. The other half of the shape is that both consumers call <em>the same</em>
+    <code>scripted_trigger</code>: the situation's progress and the Ark's permission to jump can never
+    disagree about whether it is contained, because there is only one definition of "contained".</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§5</span><h2>The kill is a sequence, not a health bar</h2></div>
+  <p>A boss you out-build is the wrong shape, and vanilla already says so: the Contingency and the
+  Blokkat-Vester are both flatly invulnerable until a specific non-combat objective is met. The Ark
+  follows the same rule — three gates, each opened by something other than damage.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 300" role="img" aria-label="A left-to-right sequence: the Ark is invulnerable until the shell is stripped, then the hull is exposed for a limited window, then boarding a carried world reaches the throne room, then the Golem or a core overload destroys it. A branch below shows that if the cannon is never built the Ark collects worlds indefinitely.">
+      <defs>
+        <marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+        <marker id="m4b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-bad"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="40" y="30">STAGE-GATED KILL SEQUENCE</text>
+      <line class="dg-rule" x1="40" y1="44" x2="1140" y2="44"/>
+
+      <rect class="dg-box2" x="40" y="118" width="190" height="64" rx="3"/>
+      <text class="dg-t2" x="135" y="145" text-anchor="middle">Invulnerable</text>
+      <text class="dg-s" x="135" y="163" text-anchor="middle">shell regenerates</text>
+
+      <line class="dg-line" x1="230" y1="150" x2="342" y2="150" marker-end="url(#m4)"/>
+      <text class="dg-h" x="290" y="134" text-anchor="middle">STAGE 1</text>
+      <text class="dg-s" x="290" y="170" text-anchor="middle">strip the shell</text>
+      <a href="#u5"><circle class="ub crit" cx="290" cy="98" r="12"/><text class="ub-t crit" x="290" y="102" text-anchor="middle">U5</text></a>
+
+      <rect class="dg-box" x="350" y="118" width="190" height="64" rx="3"/>
+      <text class="dg-t2" x="445" y="145" text-anchor="middle">Hull exposed</text>
+      <text class="dg-s" x="445" y="163" text-anchor="middle">timed window</text>
+
+      <line class="dg-line" x1="540" y1="150" x2="652" y2="150" marker-end="url(#m4)"/>
+      <text class="dg-h" x="600" y="134" text-anchor="middle">STAGE 2</text>
+      <text class="dg-s" x="600" y="170" text-anchor="middle">board a world</text>
+
+      <rect class="dg-box" x="660" y="118" width="200" height="64" rx="3"/>
+      <text class="dg-t2" x="760" y="145" text-anchor="middle">Throne room reached</text>
+      <text class="dg-s" x="760" y="163" text-anchor="middle">vanilla invasion</text>
+
+      <line class="dg-line acc" x1="860" y1="150" x2="972" y2="150" marker-end="url(#m4)"/>
+      <text class="dg-h" x="916" y="134" text-anchor="middle">STAGE 3</text>
+      <text class="dg-s" x="916" y="170" text-anchor="middle">Golem or overload</text>
+
+      <rect class="dg-acc" x="980" y="118" width="160" height="64" rx="3"/>
+      <text class="dg-t2" x="1060" y="145" text-anchor="middle">Ark destroyed</text>
+      <text class="dg-s" x="1060" y="163" text-anchor="middle">the run ends</text>
+
+      <path class="dg-line bad dash" d="M135 182 L135 226 Q135 234 143 234 L350 234" marker-end="url(#m4b)"/>
+      <text class="dg-l t-bad" x="152" y="226">cannon never built</text>
+      <rect x="358" y="210" width="440" height="48" rx="3" fill="var(--danger-soft)" stroke="var(--danger)" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text class="dg-t2" x="578" y="232" text-anchor="middle">Ark collects worlds indefinitely</text>
+      <text class="dg-s" x="578" y="249" text-anchor="middle">no upper bound, no natural end</text>
+      <text class="dg-l" x="820" y="240">&#8592; the losing condition</text>
+    </svg>
+    </div>
+    <figcaption><b>Stage 2 is where the Planet Catcher stops being a power fantasy.</b> Because the
+    carried worlds are real colonies, they are also the boarding surface — the more the Ark takes,
+    the more ways in it has. The branch below is not decoration: a crisis that can be ignored isn't a
+    crisis, so the design needs the Ark to <em>win</em> if the cannon is never built.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§6</span><h2>The stub seam</h2></div>
+  <p class="lead">Two mechanisms — attaching a colony to the Ark, and stripping the comet shell —
+  both have a Nomads implementation and a base-game one, and the DLC isn't owned. Rather than pick
+  now, callers bind to four fixed names and the backing sits behind them.</p>
+  <p>The cost is one layer of indirection. What it buys is that the decision can be made later, or
+  reversed, without touching a single call site — and that the mod stays runnable on the install that
+  actually exists today.</p>
+
+  <figure>
+    <div class="scroller">
+    <svg viewBox="0 0 1180 390" role="img" aria-label="Three callers point down into a stub seam of four fixed script names, which in turn points down to two mutually exclusive backing implementations: a Nomads-based one and a base-game one.">
+      <defs>
+        <marker id="m5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-ink"/>
+        </marker>
+        <marker id="m5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="f-acc"/>
+        </marker>
+      </defs>
+
+      <text class="dg-h" x="90" y="34">CALLERS</text>
+      <rect class="dg-box" x="90" y="52" width="250" height="46" rx="3"/>
+      <text class="dg-l" x="215" y="73" text-anchor="middle">planet capture event</text>
+      <text class="dg-s" x="215" y="89" text-anchor="middle">events/</text>
+      <rect class="dg-box" x="430" y="52" width="320" height="46" rx="3"/>
+      <text class="dg-l" x="590" y="73" text-anchor="middle">situation on_progress_complete</text>
+      <text class="dg-s" x="590" y="89" text-anchor="middle">common/situations/</text>
+      <rect class="dg-box" x="840" y="52" width="250" height="46" rx="3"/>
+      <text class="dg-l" x="965" y="73" text-anchor="middle">kill stage 1 check</text>
+      <text class="dg-s" x="965" y="89" text-anchor="middle">common/scripted_triggers/</text>
+
+      <line class="dg-line" x1="215" y1="98" x2="215" y2="144" marker-end="url(#m5)"/>
+      <line class="dg-line" x1="590" y1="98" x2="590" y2="144" marker-end="url(#m5)"/>
+      <line class="dg-line" x1="965" y1="98" x2="965" y2="144" marker-end="url(#m5)"/>
+
+      <rect class="dg-acc" x="90" y="150" width="1000" height="94" rx="3"/>
+      <text class="dg-h t-acc" x="110" y="176">STUB SEAM &#183; THE ONLY NAMES CALLERS KNOW</text>
+
+      <text class="dg-s" x="215" y="208" text-anchor="middle" style="fill:var(--ink)">ark_attach_colony</text>
+      <text class="dg-s" x="215" y="225" text-anchor="middle">scripted_effect</text>
+      <text class="dg-s" x="465" y="208" text-anchor="middle" style="fill:var(--ink)">ark_detach_colony</text>
+      <text class="dg-s" x="465" y="225" text-anchor="middle">scripted_effect</text>
+      <text class="dg-s" x="715" y="208" text-anchor="middle" style="fill:var(--ink)">ark_shell_strip_ready</text>
+      <text class="dg-s" x="715" y="225" text-anchor="middle">scripted_trigger</text>
+      <text class="dg-s" x="965" y="208" text-anchor="middle" style="fill:var(--ink)">ark_shell_strip</text>
+      <text class="dg-s" x="965" y="225" text-anchor="middle">scripted_effect</text>
+
+      <line class="dg-line acc dash" x1="420" y1="244" x2="345" y2="286" marker-end="url(#m5a)"/>
+      <line class="dg-line acc dash" x1="760" y1="244" x2="835" y2="286" marker-end="url(#m5a)"/>
+      <text class="dg-l t-acc" x="590" y="272" text-anchor="middle">exactly one backing loaded</text>
+
+      <rect class="dg-box2" x="90" y="292" width="480" height="82" rx="3" stroke-dasharray="5 4"/>
+      <text class="dg-t2" x="112" y="318">Backing A &#183; Nomads</text>
+      <text class="dg-s" x="112" y="338">arkship colony primitive &#183; Stellar Cannon</text>
+      <text class="dg-s" x="112" y="356">DLC not currently owned &#8212; unverifiable today</text>
+      <a href="#u4"><circle class="ub" cx="546" cy="314" r="12"/><text class="ub-t" x="546" y="318" text-anchor="middle">U4</text></a>
+
+      <rect class="dg-box" x="610" y="292" width="480" height="82" rx="3"/>
+      <text class="dg-t2" x="632" y="318">Backing B &#183; base game</text>
+      <text class="dg-s" x="632" y="338">Colossus planet_class change + colony transplant</text>
+      <text class="dg-s" x="632" y="356">custom megastructure stands in for the cannon</text>
+    </svg>
+    </div>
+    <figcaption><b>The seam is four names wide.</b> Everything above it is written once; everything
+    below it is swappable. Backing B is the one that runs on the current install, so it is the one to
+    write first — Backing A becomes a drop-in later if Nomads is ever added, and if it never is,
+    nothing above the seam ever knew.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§7</span><h2>Open unknowns</h2></div>
+  <p>Badged <code>U1</code>–<code>U5</code> in the diagrams above; click a badge to land on its row.
+  The right-hand column is the honest one — <strong>this page was assembled in a container with no
+  Stellaris install</strong>, so anything needing an in-game test needs you at a keyboard, not more
+  research.</p>
+
+  <div class="tw">
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Question</th><th>What it blocks</th><th>Severity</th><th>Resolvable from here?</th></tr>
+    </thead>
+    <tbody>
+      <tr id="u1" class="sev-block">
+        <td class="id">U1</td>
+        <td class="q">Can a ship's <code>section_templates</code> slot be swapped by script, outside a shipyard refit?</td>
+        <td>Whether planet capture can render mid-flight, or whether the Ark must dock to show a new world. The core visual concept.</td>
+        <td><span class="pill p-block">BLOCKING</span></td>
+        <td><span class="pill p-no">No — needs an in-game prototype</span></td>
+      </tr>
+      <tr id="u2" class="sev-high">
+        <td class="id">U2</td>
+        <td class="q">Do <code>create_ambient_object</code>s track a moving parent fleet?</td>
+        <td>The fallback rendering path if U1 turns out to be "no". Untested in the notes.</td>
+        <td><span class="pill p-high">HIGH</span></td>
+        <td><span class="pill p-no">No — needs an in-game prototype</span></td>
+      </tr>
+      <tr id="u3" class="sev-low">
+        <td class="id">U3</td>
+        <td class="q">Can any effect available in a situation's <code>on_first_enter</code> fire a sound or music cue directly?</td>
+        <td>Music on stage change. If no, the only routes are the shuffled playlist or overwriting an ambient <code>.wav</code> the engine already triggers.</td>
+        <td><span class="pill p-low">NICE TO HAVE</span></td>
+        <td><span class="pill p-yes">Partly — docs search</span></td>
+      </tr>
+      <tr id="u4" class="sev-def">
+        <td class="id">U4</td>
+        <td class="q">Is the Nomads colony-detached-from-planet primitive directly reusable, or does it need reimplementing?</td>
+        <td>Nothing, now. This is what the stub seam defers — it decides which backing gets written, not what the callers look like.</td>
+        <td><span class="pill p-def">DEFERRED</span></td>
+        <td><span class="pill p-no">No — DLC not owned</span></td>
+      </tr>
+      <tr id="u5" class="sev-block">
+        <td class="id">U5</td>
+        <td class="q">The shell-stripping cannon is Nomads content, but Nomads isn't owned. What opens stage 1 instead?</td>
+        <td>The entire stage-1 gate, and with it the defenders' mid-game objective. Without a substitute, the kill sequence has no first step and the losing condition always fires.</td>
+        <td><span class="pill p-block">BLOCKING</span></td>
+        <td><span class="pill p-no">No — a design call, yours</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>U5 is a contradiction inside the notes rather than a gap in them: §1 records Nomads as not
+  owned, §4 builds stage 1 on a Nomads megastructure. The stub seam holds the shape of the answer, but
+  something still has to sit behind it — most likely a custom megastructure with the same role
+  (expensive, static, the Ark prioritises killing it).</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§8</span><h2>Four ways this fails silently</h2></div>
+  <p>Each of these is recorded in the notes as a known trap. None of them produce an obvious error —
+  they produce a mod that loads and then quietly misbehaves, which is far more expensive to find.</p>
+
+  <div class="hz">
+    <div>
+      <p class="sig">STATE LOSS</p>
+      <h3>Swapping the <code>ship_size</code></h3>
+      <p>Treating "shell up" and "shell down" as two hulls means transferring modules, tier, damage,
+      leaders and every attached colony on each transition. Layer a particle effect over one persistent
+      entity instead — the ship object is never destroyed.</p>
+    </div>
+    <div>
+      <p class="sig">STUCK FOREVER</p>
+      <h3>Omitting <code>destroy_situation</code></h3>
+      <p>A situation that reaches <code>on_progress_complete</code> or <code>on_fail</code> without
+      calling <code>destroy_situation = this</code> stays live permanently. Nothing warns you; it just
+      never goes away.</p>
+    </div>
+    <div>
+      <p class="sig">HARD ERROR</p>
+      <h3>Missing <code>desc</code> keys</h3>
+      <p>Every <code>modifier</code> block inside a <code>monthly_progress</code> script value needs
+      its own localisation key. Skip one and the game errors rather than degrading — cheap to fix,
+      easy to forget while iterating.</p>
+    </div>
+    <div>
+      <p class="sig">NO SOUND, NO WARNING</p>
+      <h3>Encoding on music files</h3>
+      <p>Both the <code>.asset</code> and the <code>.txt</code> need UTF-8 <em>with BOM</em>, and the
+      track must be <code>.ogg</code>. Wrong encoding fails silently. Note the ambient-overwrite route
+      wants <code>.wav</code> instead — a different pipeline entirely.</p>
+    </div>
+  </div>
+  <p>One more that isn't a trap so much as a prerequisite: EFCF is already installed, so this is a
+  multi-mod setup. The DEBCF wiki's page on overwriting specific elements is worth reading before the
+  first file is written, not after the first conflict.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">§9</span><h2>Build order</h2></div>
+  <p>Sequenced so the two blocking unknowns are hit as late as possible, and so nothing gets built on
+  top of an assumption that might not survive a prototype. Steps 1–6 need no unknown resolved.</p>
+
+  <ol class="steps">
+    <li>
+      <h3>Mod skeleton</h3>
+      <p><code>descriptor.mod</code>, directory tree, localisation stub, <code>.gitignore</code>. Loads
+      and does nothing — which is the point.</p>
+    </li>
+    <li>
+      <h3>Ark hull and comet shell</h3>
+      <p>The <code>ship_size</code>, and the shell as a high-HP, high-regen defensive layer with an
+      upkeep cost. Spawnable and lookable-at. No state swapping.</p>
+    </li>
+    <li>
+      <h3>Stub seam, empty</h3>
+      <p>The four names from §6 defined with correct signatures and no bodies. Locks the interface
+      before anything calls it, so U4 and U5 stay genuinely deferred.</p>
+    </li>
+    <li>
+      <h3>Containment counting</h3>
+      <p>Tag-on-construction, three <code>on_action</code> hooks, one cached variable, one shared
+      <code>scripted_trigger</code>. Performance-critical, so it goes in early and correct rather than
+      late and retrofitted.</p>
+    </li>
+    <li>
+      <h3>Planet capture — Backing B</h3>
+      <p>Colossus-style strip plus colony transplant, behind <code>ark_attach_colony</code>. Produces
+      a real carried colony, which unblocks both the situation layer and boarding.</p>
+    </li>
+    <li>
+      <h3>Situation layer</h3>
+      <p>Targeted at a carried colony per Constraint B. Bidirectional progress bar: contained at one
+      end, escaped at the other. Fleet-level behaviour stays in <code>fleet_event</code>.</p>
+    </li>
+    <li class="blocked">
+      <h3>Planet Catcher rendering</h3>
+      <p>Prototype U1 first. If sections can't swap live, fall back to a single mesh with all four
+      cradles modelled and per-cradle visibility flags — uglier, certain to work, and it does not
+      change anything above the seam.</p>
+      <span class="pill p-block gate">GATED ON U1 &#183; U2</span>
+    </li>
+    <li class="blocked">
+      <h3>Kill sequence</h3>
+      <p>Stages 2 and 3 can be built now — boarding is vanilla, and the Golem is a species-targeted
+      one-use weapon. Stage 1 waits on your call about what replaces the Nomads cannon.</p>
+      <span class="pill p-block gate">GATED ON U5</span>
+    </li>
+    <li>
+      <h3>Music</h3>
+      <p>Playlist entry costs almost nothing and can ship whenever. The stage-triggered cue depends on
+      U3 and is explicitly not worth blocking on.</p>
+    </li>
+  </ol>
+</section>
+
+<p class="foot">Assembled from the design notes, not from a running game — there is no Stellaris
+install in this environment, so every "confirmed" here means confirmed <em>in your notes</em>, and
+every unknown stays unknown until you test it. Repository <code>ST-TravellingComeEmpire</code> is
+currently empty; nothing has been committed yet.</p>
+
+</div>
