@@ -5,6 +5,13 @@
 # in scope. These effects are the closest thing to unit tests the engine allows:
 # each sets up a known state, asserts against it, and logs PASS or FAIL to
 # game.log. Run them in a small throwaway galaxy, not in a real campaign.
+#
+# LAUNCH WITH -logall OR THESE LIE TO YOU.
+# Stellaris logs only the FIRST occurrence of an identical string. Every
+# assertion below emits a fixed string, so on a second run of the suite the
+# whole thing appears silent - and a swallowed PASS is indistinguishable from a
+# test that never executed. -logall disables that deduplication. See
+# docs/TESTING.md.
 # =============================================================================
 
 # --- assertion helper ------------------------------------------------------

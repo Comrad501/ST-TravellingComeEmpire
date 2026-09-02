@@ -25,7 +25,24 @@ New game, and deliberately minimal so events are easy to attribute:
 Enable **only** `Ark of Destruction` if you can. If NSC3 and EFCF are loaded too, that is a
 useful second pass later - but test alone first, so a failure is unambiguous.
 
-## 2. Turn the console on
+## 2. Launch options - one of these is not optional
+
+Set these on the Stellaris executable (Steam: Properties -> Launch Options):
+
+```
+-debug_mode -debugtooltip -logall
+```
+
+| Option | Why |
+| --- | --- |
+| `-logall` | **Required.** Stellaris logs only the *first* occurrence of an identical string, so a second run of the test suite appears completely silent. A swallowed `PASS` looks exactly like a test that never executed. This disables that. |
+| `-debug_mode` | Extra logging, including things that are otherwise dropped |
+| `-debugtooltip` | Starts with debug tooltips on, so you skip typing it each session |
+
+Others that exist and are occasionally useful: `-script_debug`, `-logprefix`,
+`-logpostfix`.
+
+## 3. Turn the console on
 
 Press `` ` `` or `~`. Then:
 
@@ -35,7 +52,7 @@ debugtooltip
 
 Hovering anything now shows its internal ID, which you will want constantly.
 
-## 3. Set up
+## 4. Set up
 
 Select your own empire's capital, then:
 
@@ -49,7 +66,7 @@ effect ark_debug_dump = yes
 exercised before the real hull exists. Nothing here needs the placeholder ship size to
 work.
 
-## 4. Run the suite
+## 5. Run the suite
 
 ```
 event arktest.1
@@ -68,7 +85,7 @@ Then open `game.log` (Documents\Paradox Interactive\Stellaris\logs\game.log) and
 than a measured one, and drift between the two is its characteristic failure - silent,
 gradual, and invisible without exactly this check.
 
-## 5. Reset between runs
+## 6. Reset between runs
 
 ```
 effect ark_debug_reset = yes
@@ -84,6 +101,22 @@ So before trusting a green run, check `error.log` in the same folder for anythin
 mentioning `ark_`, and confirm the names against `script_documentation/` in the local data
 folder. The game writes that directory itself; it is the only version-accurate source, and
 every wiki is downstream of it.
+
+## Existing tooling worth having
+
+None of this replaces the harness - it does the surrounding work.
+
+| Tool | What it is |
+| --- | --- |
+| [A Debug Mod for Modders](https://steamcommunity.com/sharedfiles/filedetails/?id=1920276468) | Cheat/testing layer, load order 99999 so it sits on top of most mods |
+| [Developer Tool Kit](https://steamcommunity.com/sharedfiles/filedetails/?id=904179341) | Adds edicts intended for play-testing a mod quickly |
+| [Sandbox testing guide](https://steamcommunity.com/sharedfiles/filedetails/?id=907837096) | A community recipe for a reusable test galaxy - tiny, 1 AI, no advanced start, no FE, crisis off. Independently the same shape as the table above. |
+| [stelmod-debug](https://github.com/Swords206/stelmod-debug) | Real-time log watcher. Filters to *your* mod's messages, colour-codes errors, alerts on new ones. Windows/Linux/macOS. |
+| [Stellaris-Error-Log-Inspector](https://github.com/non-npc/Stellaris-Error-Log-Inspector) | Reads `error.log` and guesses which mod is responsible. Useful with seven mods loaded. |
+
+**There is no debug *save* on the Workshop**, and that is not an oversight - saves are
+version- and mod-locked, so a shared one would break on the next patch or the next mod
+change. The community answer is the same as ours: a small galaxy plus console setup.
 
 ## Before release
 
