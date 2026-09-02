@@ -84,3 +84,39 @@ country_event = {
 		}
 	}
 }
+
+# =============================================================================
+# SCOPE-SAFE ENTRY POINTS
+# =============================================================================
+# Use these instead of `effect ... = yes`. A country_event fired from the
+# console always lands on the player country, whatever you happen to have
+# selected - which is the failure the first test run hit.
+# =============================================================================
+
+country_event = {   # event arktest.10
+	id = arktest.10
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { ark_debug_make_ark = yes }
+}
+
+country_event = {   # event arktest.11
+	id = arktest.11
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { ark_debug_tag_all_ships = yes }
+}
+
+country_event = {   # event arktest.12
+	id = arktest.12
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { ark_debug_dump = yes }
+}
+
+country_event = {   # event arktest.13
+	id = arktest.13
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = { ark_debug_reset = yes }
+}

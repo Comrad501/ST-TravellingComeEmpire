@@ -6,6 +6,17 @@
 # each sets up a known state, asserts against it, and logs PASS or FAIL to
 # game.log. Run them in a small throwaway galaxy, not in a real campaign.
 #
+# SCOPE: every effect below expects COUNTRY scope. The console's `effect` verb
+# runs in whatever you have SELECTED - a planet if a planet is selected - which
+# is how the first run produced "Wrong scope for effect 'every_owned_fleet'".
+# Drive these through `event arktest.1x` instead: a country_event always fires
+# on the player country regardless of what is clicked. See docs/TESTING.md.
+#
+# LOGGING: do not put [This.GetName] in a log for a country or a fleet. Their
+# names are localisation-composed (key + variables) and resolve to an empty
+# string here, which is why the first run logged "ark fleet found:" with
+# nothing after it. Solar systems have literal names and do print.
+#
 # LAUNCH WITH -logall OR THESE LIE TO YOU.
 # Stellaris logs only the FIRST occurrence of an identical string. Every
 # assertion below emits a fixed string, so on a second run of the suite the
@@ -30,12 +41,21 @@ ark_assert_var_equals = {
 # Scope: a country. Select your own empire and run: effect ark_debug_dump = yes
 ark_debug_dump = {
 	log = "[ARK DEBUG] ---- state dump ----"
-	log = "[ARK DEBUG] holder flag: [This.GetName]"
+	if = {
+		limit = { has_country_flag = ark_holder }
+		log = "[ARK DEBUG] this country IS flagged as the Ark holder"
+	}
+	else = { log = "[ARK DEBUG] this country is NOT flagged as the Ark holder" }
 	every_owned_fleet = {
 		limit = { has_fleet_flag = ark_hull }
-		log = "[ARK DEBUG] ark fleet found: [This.GetName]"
+		log = "[ARK DEBUG] an Ark-flagged fleet exists"
+		if = {
+			limit = { has_fleet_flag = ark_shell_down }
+			log = "[ARK DEBUG]   shell is DOWN"
+		}
+		else = { log = "[ARK DEBUG]   shell is UP" }
 		solar_system = {
-			log = "[ARK DEBUG] system: [This.GetName]"
+			log = "[ARK DEBUG]   system: [This.GetName]"
 			ark_debug_log_inhibitors = yes
 		}
 	}
@@ -69,7 +89,7 @@ ark_debug_make_ark = {
 		limit = { NOT = { has_fleet_flag = ark_hull } }
 		set_fleet_flag = ark_hull
 		prev = { set_country_flag = ark_holder }
-		log = "[ARK DEBUG] fleet marked as the Ark: [This.GetName]"
+		log = "[ARK DEBUG] a fleet was marked as the Ark"
 	}
 }
 

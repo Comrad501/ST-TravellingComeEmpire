@@ -79,17 +79,23 @@ Hovering anything now shows its internal ID, which you will want constantly.
 
 ## 4. Set up
 
-Select your own empire's capital, then:
+**Use `event`, never `effect`, and do not select anything first.**
+
+The console's `effect` verb runs in whatever you have *selected*. With a planet selected
+the scope is a planet, and `every_owned_fleet` is a country-scope effect - which produces
+`Wrong scope for effect 'every_owned_fleet'` in `error.log` and does nothing. A
+`country_event` fired from the console always lands on the player country regardless of
+selection, so every debug action has an event wrapper:
 
 ```
-effect ark_debug_make_ark = yes
-effect ark_debug_tag_all_ships = yes
-effect ark_debug_dump = yes
+event arktest.10      set up: mark a fleet as the Ark
+event arktest.11      set up: tag every owned ship as inhibitor-fitted
+event arktest.12      dump current state
+event arktest.13      reset everything
 ```
 
-`ark_debug_make_ark` marks one of your existing fleets as the Ark, so mechanics can be
-exercised before the real hull exists. Nothing here needs the placeholder ship size to
-work.
+`arktest.10` marks one of your existing fleets, so nothing here needs the placeholder ship
+size to exist.
 
 ## 5. Run the suite
 
@@ -97,8 +103,8 @@ work.
 event arktest.1
 ```
 
-Then open `game.log` (Documents\Paradox Interactive\Stellaris\logs\game.log) and search for
-`[ARK TEST]`. Every line is `PASS` or `FAIL`.
+Then read `game.log` (or use the watcher) and search for `[ARK TEST]`. Every line is `PASS`
+or `FAIL`.
 
 | Test | What it proves |
 | --- | --- |
@@ -109,6 +115,27 @@ Then open `game.log` (Documents\Paradox Interactive\Stellaris\logs\game.log) and
 **T3 is the one that matters.** The whole containment design is a maintained counter rather
 than a measured one, and drift between the two is its characteristic failure - silent,
 gradual, and invisible without exactly this check.
+
+## Reading the log
+
+Two things learned the hard way on the first run:
+
+**Names do not print for countries or fleets.** Their names are localisation-composed (a key
+plus variables), and `[This.GetName]` resolves to an empty string in a `log` for those
+scopes. That is why the first run logged `ark fleet found:` with nothing after it. Solar
+systems have literal names and do print. The harness now logs fixed identifying strings
+instead of names.
+
+**Other mods' errors appear in the same file.** Lines like
+
+```
+Error in change_pc effect, Could not find planet or randomlist with key:
+pc_dark_fractured_unstable  file: events/EFCF_Fake_Ship_Auto_designs_events.txt
+```
+
+are EFCF referencing a planet class that is not loaded - pre-existing, unrelated to this
+mod, and present whether or not it is enabled. `tools/watchlog.py` filters to `ark_` lines
+precisely so these do not drown the signal.
 
 ## 6. Reset between runs
 
