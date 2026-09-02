@@ -25,9 +25,15 @@ the spine of the acquisition design:
   of the empire's worlds into the first carried colony, so the Ark never starts empty and
   the acquiring empire is bound to it from the first moment.
 
-The Ark was originally a **seeding vessel** - built to carry life outward to empty worlds.
-Carrying worlds is what the machine was made for; the cradles are being used in reverse.
-That makes `SHATTER` the genuinely aberrant verdict, the one thing it was never built to do.
+**There are two Archelian arks.** `Shambleau` is the seeder - an artificial planet that
+spread Archelian genes and is why human species exist. The **Ark of Destruction**, the
+White Comet, is the one with the Planet Catcher and the one this mod is about. They are
+not the same vessel.
+
+What the Ark actually is: an Archelian ark that **reshapes itself to fit its user's needs
+when awakened**. The cage is not a perversion of its design - it is the ark becoming what
+its wielder asked for. That also quietly supports `U1`'s live section swap: a vessel that
+changes its own shape is the fiction, not a rendering trick.
 
 So acquisition needs two keys rarely in one hand: a machine empire to hold it, and a
 living humanoid to start it. A Determined Exterminator disqualifies itself by purging
@@ -143,6 +149,13 @@ worthiness mechanic below.
 Captured worlds are not taken indiscriminately. Each candidate is scored on two tiers -
 empire-level (*who* the Ark preys on) and planet-level (*which of their worlds*) - and
 the score yields one of three verdicts:
+
+Structure, and why the kill sequence climbs: a gas shell (which is *both* the shield and
+the supergravity area weapon - one organ, two roles) surrounds a castle tower above a
+disk-shaped urban area above the Planet Catcher cage. The caged worlds sit at the bottom
+and the throne at the top, so boarding a captured world means climbing the whole vessel.
+`Golem` sits *beneath the throne* and kills the wielders instantly - it is the builders'
+failsafe, not loot, and it was always there.
 
 | Verdict | Effect |
 | --- | --- |
